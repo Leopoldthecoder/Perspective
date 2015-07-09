@@ -1,24 +1,4 @@
-/*function addClass(ele, className) {
-	if (ele.className.indexOf(className) === -1) {
-		ele.className += " " + className;
-	}
-}
-
-function removeClass(ele, className) {
-	var str = ele.className, index = -1;
-	if (str.indexOf(className) > -1) {
-		var nameArr = str.split(/\s+/);
-		for (var i = 0; i < nameArr.length; i++) {
-			if (nameArr[i].toString() === className) {
-				index = i;
-				break;
-			}
-		}
-		nameArr.splice(index, 1);
-		ele.className = nameArr.join(' ');
-	}
-}*/
-//将表示颜色值的#XXX或#XXXXXX字符串转换为rgb(X,X,X)
+﻿//将表示颜色值的#XXX或#XXXXXX字符串转换为rgb(X,X,X)
 String.prototype.colorToRgb = function() {
 	var colorHex = this.toLowerCase(), colorRgb = "rgb(";
 	if (colorHex.length === 4) {

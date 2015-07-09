@@ -2,6 +2,8 @@
 Parallax scrolling effect. And more.
 
 # Version updates
+## 0.0.3
+Comments added.
 ## 0.0.2
 Colors in hex values are supported. They will be converted to RGB values.
 ## 0.0.1
