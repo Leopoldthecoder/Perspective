@@ -1,7 +1,9 @@
 # Perspective.js
-Parallax scrolling effect. And more.
+Parallax scrolling/hovering effect. And more.
 
 # Version updates
+## 0.0.4
+Now Firefox is supported. 
 ## 0.0.3
 Comments added.
 ## 0.0.2

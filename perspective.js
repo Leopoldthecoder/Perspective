@@ -41,7 +41,7 @@ perspective.hover = function(container, speedArr, isHoming) {
 		}
 	}
 	function setTranslate(ele, x, y) {
-		var prefix = ['webkit', 'ms', 'o', 'moz', ''];
+		var prefix = ['webkit', 'ms', ''];
 		for (var i = 0; i < prefix.length; i++){
 			ele.style[prefix[i]+'Transform'] = "translate(" + x + "px," + y + "px)";
 		}
@@ -109,14 +109,27 @@ perspective.scroll = function() {
 
     //将16进制表示的颜色值转换为RGB表示
   	for (var j = 0; j < c[i].cssArr.length; j++) {
-  		for (var k = 0; k < c[i].cssArr[j].length; k++) {
+      var curLength = c[i].cssArr[j].length;
+  		for (var k = 0; k < curLength; k++) {
   			if (regColor.test(c[i].cssArr[j][k].toString().replace(/\s+/g, ""))) {
   				c[i].cssArr[j][k] = c[i].cssArr[j][k].toString().replace(/\s+/g, "").colorToRgb();
   			}
+        var pCSS = ["transform", "animation"];
+        pCSS.forEach(function(value) {
+          if (c[i].cssArr[j][k].toString().toLowerCase() === value) {
+            var prefix = ['webkit', 'ms'];
+            value = value.replace(/(\w)/, function(v) {return v.toUpperCase()});
+            for (var m = 0; m < prefix.length; m++) {
+              c[i].cssArr[j].push(prefix[m] + value);
+              c[i].cssArr[j].push(c[i].cssArr[j][k + 1]);
+              c[i].cssArr[j].push(c[i].cssArr[j][k + 2]);
+            }
+          }
+        });
   		}
   	}
   	c[i].layers = [];
-  	for (var j = 0; j < c[i].target.childNodes.length; j++) {
+  	for (j = 0; j < c[i].target.childNodes.length; j++) {
   		if (c[i].target.childNodes[j].nodeType == 1) {
   			c[i].layers.push(c[i].target.childNodes[j]);
   		}
@@ -134,7 +147,7 @@ perspective.scroll = function() {
   		c[i].prop[j] = []; //第i个容器中第j个元素的CSS参数数组中值所组成的数组
   		c[i].propNum[j] = []; //值中包含的数字
   		c[i].propStr[j] = []; //值中除数字以外的字符串
-  		for (var k = 0; k < c[i].cssArr[j].length; k++){
+  		for (k = 0; k < c[i].cssArr[j].length; k++){
   			switch (k % 3) {
   				case 0: {
   					c[i].attr[j].push(c[i].cssArr[j][k]);
@@ -157,7 +170,7 @@ perspective.scroll = function() {
       //计算各中间状态的CSS属性值，写入c[i].prop[j][k]数组
   		for (k = 0; k < c[i].cssArr[j].length / 3; k++) {
   			c[i].delta = [];
-  			for (var m = 0; m < c[i].propNum[j][j][0].length; m++) {
+  			for (m = 0; m < c[i].propNum[j][j][0].length; m++) {
   				c[i].delta[m] = (c[i].propNum[j][k][1][m] - c[i].propNum[j][k][0][m]) / c[i].sLength;
 
           //若属性为颜色，由于RGB表示里不能有小数，需将delta存为整数
@@ -206,43 +219,49 @@ perspective.scroll = function() {
   		inAnim = false;
   	}, 500);
   }
-  document.onmousewheel = function(e) {
-  	if (!inAnim) {
-  		if (((e.wheelDelta < 0) && (sCount === totalLength)) || ((e.wheelDelta > 0) && (sCount === 0))) {
-  			return false;
-  		}
+
+  function scrollFunc(e) {
+    if (!inAnim) {
+      var wheelDir = e.wheelDelta ? e.wheelDelta : (-e.detail);
+      if (((wheelDir < 0) && (sCount === totalLength)) || ((wheelDir > 0) && (sCount === 0))) {
+        return false;
+      }
 
       //分两种情况，执行向下和向上的换场动画
-  		for (var i = 0; i < breakPoints.length; i++) {
-  			if ((e.wheelDelta < 0) && (sCount === breakPoints[i] - 1)) {
-  				switchContainers(i, 1);
-  			}
-  			else if ((e.wheelDelta > 0) && (sCount === breakPoints[i])) {
-  				switchContainers(i, -1);
-  			}
-  		}    
-  		if (e.wheelDelta < 0) {
-  			sCount++;
-  		}
-  		if (e.wheelDelta > 0) {
-  			sCount--;
-  		}
-  		var mark = 0;
-  		for (i = 0; i < breakPoints.length; i++) {
-  			if (sCount >= breakPoints[i]) {
-  				mark++;
-  			}
-  		}
-  		var curCon = c[mark], prevCountSum = 0;
-  		for (i = 0; i < mark; i++) {
-  			prevCountSum += c[i].sLength + 1;
-  		}
-  		for (i = 0; i < curCon.childCount; i++){
-  			for (var j = 0; j < curCon.attr[i].length; j++){
-  				curCon.layers[i].style[curCon.attr[i][j]] = curCon.prop[i][j][sCount - prevCountSum];
-  			}
-  		}      
-  	}
-  	return false;
+      for (var i = 0; i < breakPoints.length; i++) {
+        if ((wheelDir < 0) && (sCount === breakPoints[i] - 1)) {
+          switchContainers(i, 1);
+        }
+        else if ((wheelDir > 0) && (sCount === breakPoints[i])) {
+          switchContainers(i, -1);
+        }
+      }    
+      if (wheelDir < 0) {
+        sCount++;
+      }
+      if (wheelDir > 0) {
+        sCount--;
+      }
+      var mark = 0;
+      for (i = 0; i < breakPoints.length; i++) {
+        if (sCount >= breakPoints[i]) {
+          mark++;
+        }
+      }
+      var curCon = c[mark], prevCountSum = 0;
+      for (i = 0; i < mark; i++) {
+        prevCountSum += c[i].sLength + 1;
+      }
+      for (i = 0; i < curCon.childCount; i++){
+        for (var j = 0; j < curCon.attr[i].length; j++){
+          curCon.layers[i].style[curCon.attr[i][j]] = curCon.prop[i][j][sCount - prevCountSum];
+        }
+      }      
+    }
+    return false;
   }
+  if (document.addEventListener) {
+    document.addEventListener('DOMMouseScroll', scrollFunc, false);
+  }
+  document.onmousewheel = scrollFunc;
 }
