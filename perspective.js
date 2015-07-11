@@ -199,16 +199,21 @@ perspective.scroll = function() {
   		}
   	}
   }
-
   //根据每个容器的动画数，判断第几次滚动时应执行换场动画
   var sCount = 0, breakPoints = [], totalLength = 0;
   for (i = 0; i < c.length - 1; i++) {
   	totalLength += c[i].sLength;
   	breakPoints.push(totalLength + i+ 1);
   }
+  console.log(breakPoints);
   totalLength += c[c.length - 1].sLength + c.length - 1;
+  function jumpTo(i) {
+    switchContainers(i, 0);
+    sCount = i ? breakPoints[i-1] : i;
+    setAnim(sCount);
+  }
   function switchContainers(i, dir) {
-  	var curCon = c[i];    
+  	var curCon = c[i], ctrl = document.getElementById("persp-controller").getElementsByTagName("li");    
   	inAnim = true;
   	if (dir === 1) {
       i++;
@@ -218,8 +223,63 @@ perspective.scroll = function() {
   	setTimeout(function() {
   		inAnim = false;
   	}, 500);
+    for (var j = 0; j < ctrl.length; j++) {
+      (function(j) {
+        var btn = ctrl[j].getElementsByTagName("div")[0];
+        if (j !== i) {
+          btn.style.backgroundColor = "transparent";
+          btn.onmouseover = function() {
+            this.style.backgroundColor = "#fff";
+            this.parentNode.getElementsByTagName("span")[0].style.display = "block";
+            this.parentNode.getElementsByTagName("span")[0].style.opacity = "1";
+          }
+          btn.onmouseout = function() {
+            this.style.backgroundColor = "transparent";
+            this.parentNode.getElementsByTagName("span")[0].style.opacity = "0";
+            setTimeout(function() {
+              this.parentNode.getElementsByTagName("span")[0].style.display = "none";
+            },200);
+          }
+          btn.onclick = function() {
+            jumpTo(j);
+          }
+        }
+        else {
+          btn.style.backgroundColor = "#fff";
+          btn.onmouseover = function() {
+            return false;
+          }
+          btn.onmouseout = function() {
+            this.style.backgroundColor = "#fff";
+            this.parentNode.getElementsByTagName("span")[0].style.opacity = "0";
+            setTimeout(function() {
+              this.parentNode.getElementsByTagName("span")[0].style.display = "none";
+            },200);
+          }
+          btn.onclick = function() {
+            return false;
+          }
+        }
+      })(j);
+    }
   }
-
+  function setAnim(sCount) {
+    var mark = 0, curCon = {}, prevCountSum = 0;
+      for (var i = 0; i < breakPoints.length; i++) {
+        if (sCount >= breakPoints[i]) {
+          mark++;
+        }
+      }
+      curCon = c[mark];
+      for (i = 0; i < mark; i++) {
+        prevCountSum += c[i].sLength + 1;
+      }
+      for (i = 0; i < curCon.childCount; i++){
+        for (var j = 0; j < curCon.attr[i].length; j++){
+          curCon.layers[i].style[curCon.attr[i][j]] = curCon.prop[i][j][sCount - prevCountSum];
+        }
+      }    
+  }
   function scrollFunc(e) {
     if (!inAnim) {
       var wheelDir = e.wheelDelta ? e.wheelDelta : (-e.detail);
@@ -242,21 +302,7 @@ perspective.scroll = function() {
       if (wheelDir > 0) {
         sCount--;
       }
-      var mark = 0;
-      for (i = 0; i < breakPoints.length; i++) {
-        if (sCount >= breakPoints[i]) {
-          mark++;
-        }
-      }
-      var curCon = c[mark], prevCountSum = 0;
-      for (i = 0; i < mark; i++) {
-        prevCountSum += c[i].sLength + 1;
-      }
-      for (i = 0; i < curCon.childCount; i++){
-        for (var j = 0; j < curCon.attr[i].length; j++){
-          curCon.layers[i].style[curCon.attr[i][j]] = curCon.prop[i][j][sCount - prevCountSum];
-        }
-      }      
+      setAnim(sCount);
     }
     return false;
   }
@@ -264,4 +310,40 @@ perspective.scroll = function() {
     document.addEventListener('DOMMouseScroll', scrollFunc, false);
   }
   document.onmousewheel = scrollFunc;
+  var ul = document.createElement("ul");
+  ul.setAttribute("id", "persp-controller");
+  for (i = 0; i < c.length; i++) {
+    var li = document.createElement("li"), btn = document.createElement("div"), span = document.createElement("span");
+    li.style.listStyle = "none";
+    li.style.display = "block";
+    li.style.position = "relative";
+    btn.style.height = "8px";
+    btn.style.width = "8px";
+    btn.style.border = "1px solid #fff";
+    btn.style.backgroundColor = "transparent";
+    btn.style.boxShadow = "0 0 1px 1px #fff";
+    btn.style.borderRadius = "50%";
+    btn.style.margin = "16px 0";
+    btn.style.transition = "0.2s";
+    span.innerHTML = c[i].target.getAttribute("id");
+    span.style.color = "#777";
+    span.style.font = "12px arial";
+    span.style.padding = "2px 10px";
+    span.style.backgroundColor = "rgba(255,255,255,0.8)";
+    span.style.borderRadius = "4px";
+    span.style.position = "absolute";
+    span.style.left = "15px";
+    span.style.top = "-4px";
+    span.style.transition = "0.2s";
+    span.style.opacity = "0";
+    li.appendChild(btn);
+    li.appendChild(span);
+    ul.appendChild(li);
+  }
+  ul.style.position = "absolute";
+  ul.style.left = "2%";
+  ul.style.top = "50%";
+  ul.style.marginTop = -1*(13*c.length + 8) +"px";
+  c[0].target.parentNode.parentNode.appendChild(ul);
+  switchContainers(0, 0);
 }
