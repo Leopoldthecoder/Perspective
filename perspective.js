@@ -21,96 +21,126 @@ String.prototype.colorToRgb = function() {
 perspective = {};
 
 //hover视差效果
-perspective.hover = function(container, speedArr, isHoming) {	
-	var layers = [];
-	for (var i = 0; i < container.childNodes.length; i++) {
-		if (container.childNodes[i].nodeType == 1) {
-			layers.push(container.childNodes[i]);
-		}
-	}
-	var l = layers.length, inAnim = false;
-	if (speedArr.length < l) {
-		for (i = speedArr.length; i < l; i++) {
-			speedArr.push(0.2);
-		}
-	}
-	isHoming = arguments[2] ? arguments[2] : true;
-	function layersFunc(fn) {
-		for (var i = 0; i < l; i++) {
-			fn(i);
-		}
-	}
-	function setTranslate(ele, x, y) {
-		var prefix = ['webkit', 'ms', ''];
-		for (var i = 0; i < prefix.length; i++){
-			ele.style[prefix[i]+'Transform'] = "translate(" + x + "px," + y + "px)";
-		}
-	}
-	function relocate(ele, x, y, v) {
-		var offsetX = Math.floor(v *(0.5 * document.body.clientWidth - x));
-		var offsetY = Math.floor(v *(0.5 * document.body.clientHeight - y));
-		setTranslate(ele, offsetX, offsetY);
-	}
-
-  //鼠标移动时对所有层重新定位
-	container.onmousemove = function(e) {
-		if (!inAnim) {
-			layersFunc(function(i){
-				relocate(layers[i], e.clientX, e.clientY, speedArr[i]);
-			});
-		}
-	}
-
-  //若isHoming为真，则在鼠标移出时将各层归位
-	container.onmouseout = function(e) {
-		if (isHoming){
-			var reg = this.compareDocumentPosition(e.relatedTarget);
-			if (!(reg == 20 || reg == 0)) {
-				layersFunc(function(i){
-					layers[i].style.transition = "0.1s";
-				})
-				if (!inAnim) {
-					layersFunc(function(i){
-						setTranslate(layers[i], 0, 0);
-					});
-				}
-			}
-		}
-	}
-
-  //鼠标移入时，为避免各层位置突变，给它们0.1s的动画效果，并在这段时间内不响应鼠标移动事件
-	container.onmouseover = function(e) {
-		var reg = this.compareDocumentPosition(e.relatedTarget);
-		if (!(reg == 20 || reg == 0)) {
-			inAnim = true;
-			layersFunc(function(i){
-				layers[i].style.transition = "0.1s";
-				relocate(layers[i], e.clientX, e.clientY, speedArr[i]);
-			});
-			setTimeout(function() {
-				inAnim = false;
-				layersFunc(function(i){
-					layers[i].style.transition = "0s";
-				});
-			},100);
-		}
-	}
+perspective.hover = function(isHoming) {
+  isHoming = arguments[0] === undefined ? true : arguments[0];
+  var containers = [], layers = [], div = document.getElementsByTagName("div");
+  for (var  i = 0; i < div.length; i++) {
+    if (div[i].getAttribute("data-perspective") === "hover") {
+      containers.push(div[i]);
+    }
+  }
+	for (i = 0; i < containers.length; i++) {
+    (function(i) {
+      var layers = [], container = containers[i], speedArr = [];
+      for (var j = 0; j < container.childNodes.length; j++) {
+        if (container.childNodes[j].nodeType == 1) {
+          layers.push(container.childNodes[j]);
+          if (container.childNodes[j].getAttribute("data-hover-speed") !== null) {
+            speedArr.push(container.childNodes[j].getAttribute("data-hover-speed"));
+          }
+        }
+      }
+      var l = layers.length, inAnim = false;
+      if (speedArr.length < l) {
+        for (j = speedArr.length; j < l; j++) {
+          speedArr.push(0.2);
+        }
+      }
+      function layersFunc(fn) {
+        for (var j = 0; j < l; j++) {
+          fn(j);
+        }
+      }
+      function setTranslate(ele, x, y) {
+        var prefix = ['webkitTransform', 'msTransform', 'transform'];
+        for (var j = 0; j < prefix.length; j++){
+          ele.style[prefix[j]] = "translate(" + x + "px," + y + "px)";
+        }
+      }
+      function relocate(ele, x, y, v) {
+        var offsetX = Math.floor(v *(0.5 * document.body.clientWidth - x));
+        var offsetY = Math.floor(v *(0.5 * document.body.clientHeight - y));
+        setTranslate(ele, offsetX, offsetY);
+      }
+      
+      //鼠标移动时对所有层重新定位
+      container.onmousemove = function(e) {
+        if (!inAnim) {
+          layersFunc(function(j){
+            relocate(layers[j], e.clientX, e.clientY, speedArr[j]);
+          });
+        }
+      }
+      
+      //若isHoming为真，则在鼠标移出时将各层归位
+      container.onmouseout = function(e) {
+        if (isHoming){
+          var reg = this.compareDocumentPosition(e.relatedTarget);
+          if (!(reg == 20 || reg == 0)) {
+            layersFunc(function(j){
+              layers[j].style.transition = "0.1s";
+            })
+            if (!inAnim) {
+              layersFunc(function(j){
+                setTranslate(layers[j], 0, 0);
+              });
+            }
+          }
+        }
+      }
+      
+      //鼠标移入时，为避免各层位置突变，给它们0.1s的动画效果，并在这段时间内不响应鼠标移动事件
+      container.onmouseover = function(e) {
+        console.log(e.relatedTarget);
+        var reg = this.compareDocumentPosition(e.relatedTarget);
+        if (!(reg == 20 || reg == 0)) {
+          inAnim = true;
+          layersFunc(function(i){
+            layers[i].style.transition = "0.1s";
+            relocate(layers[i], e.clientX, e.clientY, speedArr[i]);
+          });
+          setTimeout(function() {
+            inAnim = false;
+            layersFunc(function(i){
+              layers[i].style.transition = "0s";
+            });
+          },100);
+        }
+      }
+    })(i);
+  }
 }
 
 //scroll效果，滚轮滚动时可改变任意多个值为数字的CSS属性
 perspective.scroll = function() {
-  var c = [], cCount = arguments[0].length, regNum = /-?\d+(?:\.\d*)?/g, inAnim = false, regColor = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/; // cCount记录container个数
-  for (var i = 0; i < cCount; i++) {
+  var div = document.getElementsByTagName("div"), c = [], regNum = /-?\d+(?:\.\d*)?/g, inAnim = false, regColor = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/; // cCount记录container个数
+  for (var  i = 0; i < div.length; i++) {
+    if (div[i].getAttribute("data-perspective") === "scroll") {
+      var stage = div[i];
+      for (var j = 0; j < stage.childNodes.length; j++) {
+        if (stage.childNodes[j].nodeType == 1) {
+          var wrap = stage.childNodes[j], containers = [];
+          for (var k = 0; k < wrap.childNodes.length; k++) {
+            if (wrap.childNodes[k].nodeType == 1) {
+              containers.push(wrap.childNodes[k]);
+            }
+          }
+        }
+      }
+    }
+  }
+  var cCount = containers.length;
+  for (i = 0; i < cCount; i++) {
   	c[i] = {};
-  	c[i].target = arguments[0][i];
+  	c[i].target = containers[i];
   	c[i].target.style.transition = "0.5s";
-  	c[i].sLength = arguments[1][i];
-  	c[i].cssArr = arguments[2 + i]; //c[i].cssArr为对应第i个容器的CSS参数数组
+  	c[i].sLength = parseInt(c[i].target.getAttribute("data-scroll-number") === undefined ? 1 : c[i].target.getAttribute("data-scroll-number"));
+  	c[i].cssArr = arguments[i]; //c[i].cssArr为对应第i个容器的CSS参数数组
 
     //将16进制表示的颜色值转换为RGB表示
-  	for (var j = 0; j < c[i].cssArr.length; j++) {
+  	for (j = 0; j < c[i].cssArr.length; j++) {
       var curLength = c[i].cssArr[j].length;
-  		for (var k = 0; k < curLength; k++) {
+  		for (k = 0; k < curLength; k++) {
   			if (regColor.test(c[i].cssArr[j][k].toString().replace(/\s+/g, ""))) {
   				c[i].cssArr[j][k] = c[i].cssArr[j][k].toString().replace(/\s+/g, "").colorToRgb();
   			}
@@ -136,7 +166,7 @@ perspective.scroll = function() {
   	}
   	c[i].childCount = c[i].cssArr.length;
   	c[i].layers = c[i].layers.slice(0, c[i].childCount);
-  	c[i].sDuration = arguments[2 + i + arguments[0].length] ? arguments[2 + i + arguments[0].length] : 0.2;
+  	c[i].sDuration = arguments[cCount] ? arguments[cCount][i] : 0.2;
   	c[i].attr = [];
   	c[i].prop = [];
   	c[i].propNum = []; 
@@ -205,13 +235,16 @@ perspective.scroll = function() {
   	totalLength += c[i].sLength;
   	breakPoints.push(totalLength + i+ 1);
   }
-  console.log(breakPoints);
   totalLength += c[c.length - 1].sLength + c.length - 1;
+
+  //点击按钮时的操作
   function jumpTo(i) {
     switchContainers(i, 0);
     sCount = i ? breakPoints[i-1] : i;
     setAnim(sCount);
   }
+
+  //换场动画，同时需要对按钮进行处理
   function switchContainers(i, dir) {
   	var curCon = c[i], ctrl = document.getElementById("persp-controller").getElementsByTagName("li");    
   	inAnim = true;
@@ -229,15 +262,15 @@ perspective.scroll = function() {
         if (j !== i) {
           btn.style.backgroundColor = "transparent";
           btn.onmouseover = function() {
-            this.style.backgroundColor = "#fff";
-            this.parentNode.getElementsByTagName("span")[0].style.display = "block";
-            this.parentNode.getElementsByTagName("span")[0].style.opacity = "1";
+            btn.style.backgroundColor = "#fff";
+            btn.parentNode.getElementsByTagName("span")[0].style.display = "block";
+            btn.parentNode.getElementsByTagName("span")[0].style.opacity = "1";
           }
           btn.onmouseout = function() {
-            this.style.backgroundColor = "transparent";
-            this.parentNode.getElementsByTagName("span")[0].style.opacity = "0";
+            btn.style.backgroundColor = "transparent";
+            btn.parentNode.getElementsByTagName("span")[0].style.opacity = "0";
             setTimeout(function() {
-              this.parentNode.getElementsByTagName("span")[0].style.display = "none";
+              btn.parentNode.getElementsByTagName("span")[0].style.display = "none";
             },200);
           }
           btn.onclick = function() {
@@ -250,10 +283,10 @@ perspective.scroll = function() {
             return false;
           }
           btn.onmouseout = function() {
-            this.style.backgroundColor = "#fff";
-            this.parentNode.getElementsByTagName("span")[0].style.opacity = "0";
+            btn.style.backgroundColor = "#fff";
+            btn.parentNode.getElementsByTagName("span")[0].style.opacity = "0";
             setTimeout(function() {
-              this.parentNode.getElementsByTagName("span")[0].style.display = "none";
+              btn.parentNode.getElementsByTagName("span")[0].style.display = "none";
             },200);
           }
           btn.onclick = function() {
@@ -274,11 +307,17 @@ perspective.scroll = function() {
       for (i = 0; i < mark; i++) {
         prevCountSum += c[i].sLength + 1;
       }
-      for (i = 0; i < curCon.childCount; i++){
-        for (var j = 0; j < curCon.attr[i].length; j++){
-          curCon.layers[i].style[curCon.attr[i][j]] = curCon.prop[i][j][sCount - prevCountSum];
+      if (!inAnim) {
+        inAnim = true;
+        for (i = 0; i < curCon.childCount; i++){
+          for (var j = 0; j < curCon.attr[i].length; j++){
+            curCon.layers[i].style[curCon.attr[i][j]] = curCon.prop[i][j][sCount - prevCountSum];
+          }
         }
-      }    
+        setTimeout(function() {
+          inAnim = false;
+        }, curCon.sDuration * 1000);
+      }
   }
   function scrollFunc(e) {
     if (!inAnim) {
@@ -306,10 +345,14 @@ perspective.scroll = function() {
     }
     return false;
   }
+
+  //兼容Firefox
   if (document.addEventListener) {
     document.addEventListener('DOMMouseScroll', scrollFunc, false);
   }
   document.onmousewheel = scrollFunc;
+
+  //动态生成控制按钮
   var ul = document.createElement("ul");
   ul.setAttribute("id", "persp-controller");
   for (i = 0; i < c.length; i++) {
@@ -325,7 +368,7 @@ perspective.scroll = function() {
     btn.style.borderRadius = "50%";
     btn.style.margin = "16px 0";
     btn.style.transition = "0.2s";
-    span.innerHTML = c[i].target.getAttribute("id");
+    span.innerHTML = c[i].target.getAttribute("data-scroll-tag");
     span.style.color = "#777";
     span.style.font = "12px arial";
     span.style.padding = "2px 10px";
@@ -345,5 +388,7 @@ perspective.scroll = function() {
   ul.style.top = "50%";
   ul.style.marginTop = -1*(13*c.length + 8) +"px";
   c[0].target.parentNode.parentNode.appendChild(ul);
+
+  //初始化按钮状态
   switchContainers(0, 0);
 }
