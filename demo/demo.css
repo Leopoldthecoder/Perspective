@@ -1,0 +1,58 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+.screen {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.wrap {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.container div {
+  position: absolute;
+}
+
+#container1 .div1 {
+  height: 130%;
+  width: 100%;
+  background: url('images/universe-background.jpg') no-repeat center;
+}
+
+#container1 .div2 {
+  height: 180px;
+  width: 180px;
+  background: url('images/planet_1.png') no-repeat;
+  top: 600px;
+  left: 60%;
+  background-size: cover;
+}
+
+#container1 .div3 {
+  height: 900px;
+  width: 900px;
+  background: url('images/planet_2.png') no-repeat;
+  top: 300px;
+  left: -20%;
+  background-size: cover;
+}
