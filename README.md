@@ -2,6 +2,8 @@
 Parallax scrolling/hovering effect. And more.
 
 # Version updates
+## 0.9.1
+Fixed some bugs. Now the control panel works more reasonably.
 ## 0.9.0
 Function structure updated. Instead of passing multiple parameters to perspective.scroll/perspective.hover, now these two functions will look for `div` nodes with `data-perspective` attribute:
 ```html

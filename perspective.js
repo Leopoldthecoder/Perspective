@@ -91,7 +91,6 @@ perspective.hover = function(isHoming) {
       
       //鼠标移入时，为避免各层位置突变，给它们0.1s的动画效果，并在这段时间内不响应鼠标移动事件
       container.onmouseover = function(e) {
-        console.log(e.relatedTarget);
         var reg = this.compareDocumentPosition(e.relatedTarget);
         if (!(reg == 20 || reg == 0)) {
           inAnim = true;
@@ -113,7 +112,7 @@ perspective.hover = function(isHoming) {
 
 //scroll效果，滚轮滚动时可改变任意多个值为数字的CSS属性
 perspective.scroll = function() {
-  var div = document.getElementsByTagName("div"), c = [], regNum = /-?\d+(?:\.\d*)?/g, inAnim = false, regColor = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/; // cCount记录container个数
+  var div = document.getElementsByTagName("div"), c = [], regNum = /-?\d+(?:\.\d+)?/g, inAnim = false, regColor = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/; // cCount记录container个数
   for (var  i = 0; i < div.length; i++) {
     if (div[i].getAttribute("data-perspective") === "scroll") {
       var stage = div[i];
@@ -200,7 +199,7 @@ perspective.scroll = function() {
       //计算各中间状态的CSS属性值，写入c[i].prop[j][k]数组
   		for (k = 0; k < c[i].cssArr[j].length / 3; k++) {
   			c[i].delta = [];
-  			for (m = 0; m < c[i].propNum[j][j][0].length; m++) {
+  			for (m = 0; m < c[i].propNum[j][k][0].length; m++) {
   				c[i].delta[m] = (c[i].propNum[j][k][1][m] - c[i].propNum[j][k][0][m]) / c[i].sLength;
 
           //若属性为颜色，由于RGB表示里不能有小数，需将delta存为整数
@@ -241,7 +240,7 @@ perspective.scroll = function() {
   function jumpTo(i) {
     switchContainers(i, 0);
     sCount = i ? breakPoints[i-1] : i;
-    setAnim(sCount);
+    setAnim(sCount, true);
   }
 
   //换场动画，同时需要对按钮进行处理
@@ -296,28 +295,45 @@ perspective.scroll = function() {
       })(j);
     }
   }
-  function setAnim(sCount) {
+  function setAnim(sCount, isSwitch) {
     var mark = 0, curCon = {}, prevCountSum = 0;
-      for (var i = 0; i < breakPoints.length; i++) {
-        if (sCount >= breakPoints[i]) {
+    for (var i = 0; i < breakPoints.length; i++) {
+       if (sCount >= breakPoints[i]) {
           mark++;
-        }
-      }
-      curCon = c[mark];
-      for (i = 0; i < mark; i++) {
-        prevCountSum += c[i].sLength + 1;
-      }
-      if (!inAnim) {
+       }
+    }
+    curCon = c[mark];
+    for (i = 0; i < mark; i++) {
+      prevCountSum += c[i].sLength + 1;
+    }
+
+    //若未换场，则需等待目前动画结束再更新CSS属性；否则立即更新
+    if (((!isSwitch) && (!inAnim)) || (isSwitch)) {
+      if (!isSwitch) {
         inAnim = true;
-        for (i = 0; i < curCon.childCount; i++){
-          for (var j = 0; j < curCon.attr[i].length; j++){
-            curCon.layers[i].style[curCon.attr[i][j]] = curCon.prop[i][j][sCount - prevCountSum];
-          }
-        }
         setTimeout(function() {
           inAnim = false;
         }, curCon.sDuration * 1000);
       }
+      else {
+        for (i = 0; i < curCon.childCount; i++) {
+          curCon.layers[i].style.transition = "0s";
+          console.log(curCon.layers[i].style.transition);
+        }
+      }
+      for (i = 0; i < curCon.childCount; i++){
+        for (var j = 0; j < curCon.attr[i].length; j++){
+          curCon.layers[i].style[curCon.attr[i][j]] = curCon.prop[i][j][sCount - prevCountSum];
+        }
+      }      
+    }
+    if (isSwitch) {
+      setTimeout(function() {
+        for (i = 0; i < curCon.childCount; i++) {
+          curCon.layers[i].style.transition = curCon.sDuration + "s";
+        }
+      }, 50);
+    }
   }
   function scrollFunc(e) {
     if (!inAnim) {
@@ -334,14 +350,14 @@ perspective.scroll = function() {
         else if ((wheelDir > 0) && (sCount === breakPoints[i])) {
           switchContainers(i, -1);
         }
-      }    
+      }
       if (wheelDir < 0) {
         sCount++;
       }
       if (wheelDir > 0) {
         sCount--;
       }
-      setAnim(sCount);
+      setAnim(sCount, false);
     }
     return false;
   }
@@ -387,6 +403,7 @@ perspective.scroll = function() {
   ul.style.left = "2%";
   ul.style.top = "50%";
   ul.style.marginTop = -1*(13*c.length + 8) +"px";
+  ul.style.zIndex = 1000;
   c[0].target.parentNode.parentNode.appendChild(ul);
 
   //初始化按钮状态

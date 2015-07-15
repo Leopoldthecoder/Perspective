@@ -29,30 +29,63 @@ html, body {
   overflow: hidden;
 }
 
-.container div {
+.container * {
   position: absolute;
 }
 
 #container1 .div1 {
   height: 130%;
   width: 100%;
-  background: url('images/universe-background.jpg') no-repeat center;
+  background-image: url('images/universe-background.jpg');
 }
 
 #container1 .div2 {
   height: 180px;
   width: 180px;
-  background: url('images/planet_1.png') no-repeat;
+  background-image: url('images/planet_1.png');
   top: 600px;
   left: 60%;
+  z-index: 1;
   background-size: cover;
 }
 
 #container1 .div3 {
   height: 900px;
   width: 900px;
-  background: url('images/planet_2.png') no-repeat;
-  top: 300px;
+  background-image: url('images/planet_2.png');
+  top: 500px;
   left: -20%;
+  z-index: 1;
   background-size: cover;
+}
+
+p {
+  font: bold 70px Tahoma;
+  color: #fff;
+  text-shadow: 5px 5px 5px black;
+}
+
+#container1 p {
+  top: 40%;
+  left: 40%;
+}
+
+#container2 {
+  background-color: #de5;
+}
+
+#container2 .div1 {
+  height: 490px;
+  width: 450px;
+  background-image: url('images/cube_1.png');
+  background-repeat: no-repeat;
+  top: 50%;
+  left: 50%;
+  margin-top: -245px;
+  margin-left: -225px;
+}
+
+#container2 p {
+  top: 40%;
+  left: 65%;
 }
