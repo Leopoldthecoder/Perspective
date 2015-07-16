@@ -89,3 +89,86 @@ p {
   top: 40%;
   left: 65%;
 }
+
+#container3 .div1 {
+  height: 100%;
+  width: 100%;
+  background-image: url('images/wood.jpg');
+  background-size: cover;
+}
+
+#container3 .div2 {
+  height: 150%;
+  width: 100%;
+  background-image: url('images/text.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  top: -30%;
+}
+
+#container4 {
+  -webkit-perspective: 600px;
+  perspective: 600px;
+  background-color: #ddb;
+}
+
+#container4 .showcase {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+#container4 p {
+  font: bold 120px/150px times;
+  height: 150px;
+  width: 100%;
+  text-align: center;
+  top: 50%;
+  margin-top: -75px;
+  text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 0 0 12px #000;
+  background-color: #ddb;
+}
+
+#container4 p:nth-child(1) {
+  -webkit-transform: rotateX(0deg) translateZ(100px);
+  transform: rotateX(0deg) translateZ(100px);
+}
+
+#container4 p:nth-child(2) {
+  -webkit-transform: rotateX(-72deg) translateZ(100px);
+  transform: rotateX(-72deg) translateZ(100px);
+}
+
+#container4 p:nth-child(3) {
+  -webkit-transform: rotateX(-144deg) translateZ(100px);
+  transform: rotateX(-144deg) translateZ(100px);
+}
+
+#container4 p:nth-child(4) {
+  -webkit-transform: rotateX(-216deg) translateZ(100px);
+  transform: rotateX(-216deg) translateZ(100px);
+}
+
+#container4 p:nth-child(5) {
+  -webkit-transform: rotateX(-288deg) translateZ(100px);
+  transform: rotateX(-288deg) translateZ(100px);
+}
+
+#container5 {
+  height: 100%;;
+  width: 80%;
+  margin: 0 auto;
+}
+#container5 .div1 {
+  height: 100%;
+  width: 100%;
+  background-color: red;
+}
+
+#container5 .div2 {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,200,0,0.5);
+}

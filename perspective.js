@@ -261,8 +261,8 @@ perspective.scroll = function() {
         if (j !== i) {
           btn.style.backgroundColor = "transparent";
           btn.onmouseover = function() {
-            btn.style.backgroundColor = "#fff";
-            btn.parentNode.getElementsByTagName("span")[0].style.display = "block";
+            btn.style.backgroundColor = "#999";
+            btn.parentNode.getElementsByTagName("span")[0].style.display = "inline-block";
             btn.parentNode.getElementsByTagName("span")[0].style.opacity = "1";
           }
           btn.onmouseout = function() {
@@ -277,12 +277,12 @@ perspective.scroll = function() {
           }
         }
         else {
-          btn.style.backgroundColor = "#fff";
+          btn.style.backgroundColor = "#999";
           btn.onmouseover = function() {
             return false;
           }
           btn.onmouseout = function() {
-            btn.style.backgroundColor = "#fff";
+            btn.style.backgroundColor = "#999";
             btn.parentNode.getElementsByTagName("span")[0].style.opacity = "0";
             setTimeout(function() {
               btn.parentNode.getElementsByTagName("span")[0].style.display = "none";
@@ -303,6 +303,7 @@ perspective.scroll = function() {
        }
     }
     curCon = c[mark];
+    console.log(mark);
     for (i = 0; i < mark; i++) {
       prevCountSum += c[i].sLength + 1;
     }
@@ -318,7 +319,6 @@ perspective.scroll = function() {
       else {
         for (i = 0; i < curCon.childCount; i++) {
           curCon.layers[i].style.transition = "0s";
-          console.log(curCon.layers[i].style.transition);
         }
       }
       for (i = 0; i < curCon.childCount; i++){
@@ -337,19 +337,9 @@ perspective.scroll = function() {
   }
   function scrollFunc(e) {
     if (!inAnim) {
-      var wheelDir = e.wheelDelta ? e.wheelDelta : (-e.detail);
+      var wheelDir = e.wheelDelta ? e.wheelDelta : (-e.detail), switched = false;
       if (((wheelDir < 0) && (sCount === totalLength)) || ((wheelDir > 0) && (sCount === 0))) {
         return false;
-      }
-
-      //分两种情况，执行向下和向上的换场动画
-      for (var i = 0; i < breakPoints.length; i++) {
-        if ((wheelDir < 0) && (sCount === breakPoints[i] - 1)) {
-          switchContainers(i, 1);
-        }
-        else if ((wheelDir > 0) && (sCount === breakPoints[i])) {
-          switchContainers(i, -1);
-        }
       }
       if (wheelDir < 0) {
         sCount++;
@@ -357,7 +347,25 @@ perspective.scroll = function() {
       if (wheelDir > 0) {
         sCount--;
       }
-      setAnim(sCount, false);
+
+      //分两种情况，执行向下和向上的换场动画
+      for (var i = 0; i < breakPoints.length; i++) {
+        if ((wheelDir < 0) && (sCount === breakPoints[i])) {
+          switchContainers(i, 1);
+          setAnim(sCount, true);
+          switched = true;
+          break;
+        }
+        else if ((wheelDir > 0) && (sCount === breakPoints[i] - 1)) {
+          switchContainers(i, -1);
+          setAnim(sCount, true);
+          switched = true;
+          break;
+        }
+      }
+      if (!switched) {
+        setAnim(sCount, false);
+      }
     }
     return false;
   }
@@ -380,10 +388,11 @@ perspective.scroll = function() {
     btn.style.width = "8px";
     btn.style.border = "1px solid #fff";
     btn.style.backgroundColor = "transparent";
-    btn.style.boxShadow = "0 0 1px 1px #fff";
+    btn.style.boxShadow = "0 0 1px 1px #999";
     btn.style.borderRadius = "50%";
     btn.style.margin = "16px 0";
     btn.style.transition = "0.2s";
+    btn.style.cursor = "pointer";
     span.innerHTML = c[i].target.getAttribute("data-scroll-tag");
     span.style.color = "#777";
     span.style.font = "12px arial";

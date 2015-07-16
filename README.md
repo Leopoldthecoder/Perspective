@@ -2,6 +2,8 @@
 Parallax scrolling/hovering effect. And more.
 
 # Version updates
+## 0.9.2
+Fixed a bug concerning container switching effect.
 ## 0.9.1
 Fixed some bugs. Now the control panel works more reasonably.
 ## 0.9.0
