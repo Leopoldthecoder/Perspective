@@ -303,7 +303,6 @@ perspective.scroll = function() {
        }
     }
     curCon = c[mark];
-    console.log(mark);
     for (i = 0; i < mark; i++) {
       prevCountSum += c[i].sLength + 1;
     }

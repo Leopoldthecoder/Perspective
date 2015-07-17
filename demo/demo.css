@@ -158,17 +158,69 @@ p {
 
 #container5 {
   height: 100%;;
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
 }
 #container5 .div1 {
-  height: 100%;
-  width: 100%;
-  background-color: red;
+  height: 80%;
+  width: 80%;
+  left: 10%;
+  top: 10%;
+  background-image:  url('images/sky.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 #container5 .div2 {
-  height: 100%;
-  width: 100%;
-  background-color: rgba(0,200,0,0.5);
+  height: 150%;
+  width: 150%;
+  top: -25%;
+  left: -25%;
+  background-color: transparent;
+}
+
+#container5 .div2 div{
+  height: 300px;
+  width: 450px;
+  border-radius: 40px;
+  font: bold 70px/300px arial;
+  text-shadow: 0 0 20px #fff;
+  text-align: center;
+  color: #666;
+  opacity: 0.2;
+  transition: opacity 0.5s;
+}
+
+#container5 .div2 div:hover{
+  opacity: 1;
+}
+
+#container5 .div2 div:nth-child(1){
+  background-color: #69b;
+  top: 15%;
+  left: 15%;
+}
+
+#container5 .div2 div:nth-child(2){
+  background-color: #7aa;
+  top: 10%;
+  left: 40%;
+}
+
+#container5 .div2 div:nth-child(3){
+  background-color: #57a;
+  top: 20%;
+  right: 15%;
+}
+
+#container5 .div2 div:nth-child(4){
+  background-color: #daa78a;
+  top: 60%;
+  left: 25%;
+}
+
+#container5 .div2 div:nth-child(5){
+  background-color: #b95849;
+  top: 65%;
+  right: 20%;
 }
