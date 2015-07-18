@@ -1,21 +1,21 @@
 ﻿//将表示颜色值的#XXX或#XXXXXX字符串转换为rgb(X,X,X)
 String.prototype.colorToRgb = function() {
-	var colorHex = this.toLowerCase(), colorRgb = "rgb(";
-	if (colorHex.length === 4) {
-		var colorHexFull = "#";
-		for (var i = 1; i < 4; i++) {
-			colorHexFull += colorHex.slice(i, i + 1).concat(colorHex.slice(i, i + 1));
-		}
-		colorHex = colorHexFull;
-	}
-	for (i = 1; i < 4; i++) {
-		colorRgb += parseInt("0x" + colorHex.slice(2 * i - 1, 2 * i + 1)).toString();
-		if (i < 3) {
-			colorRgb +=",";
-		}
-	}
-	colorRgb += ")";
-	return colorRgb;
+  var colorRgb = "rgb(", colorHex = this.toLowerCase();
+  if (colorHex.length === 4) {
+    var colorHexFull = "#";
+    for (var i = 1; i < 4; i++) {
+      colorHexFull += colorHex.slice(i, i + 1).concat(colorHex.slice(i, i + 1));
+    }
+    colorHex = colorHexFull;
+  }
+  for (i = 1; i < 4; i++) {
+    colorRgb += parseInt("0x" + colorHex.slice(2 * i - 1, 2 * i + 1)).toString();
+    if (i < 3) {
+      colorRgb +=",";
+    }
+  }
+  colorRgb += ")";
+  return colorRgb;
 }
 
 perspective = {};
@@ -29,7 +29,7 @@ perspective.hover = function(isHoming) {
       containers.push(div[i]);
     }
   }
-	for (i = 0; i < containers.length; i++) {
+  for (i = 0; i < containers.length; i++) {
     (function(i) {
       var layers = [], container = containers[i], speedArr = [];
       for (var j = 0; j < container.childNodes.length; j++) {
@@ -130,19 +130,19 @@ perspective.scroll = function() {
   }
   var cCount = containers.length;
   for (i = 0; i < cCount; i++) {
-  	c[i] = {};
-  	c[i].target = containers[i];
-  	c[i].target.style.transition = "0.5s";
-  	c[i].sLength = parseInt(c[i].target.getAttribute("data-scroll-number") === undefined ? 1 : c[i].target.getAttribute("data-scroll-number"));
-  	c[i].cssArr = arguments[i]; //c[i].cssArr为对应第i个容器的CSS参数数组
+    c[i] = {};
+    c[i].target = containers[i];
+    c[i].target.style.transition = "0.5s";
+    c[i].sLength = parseInt(c[i].target.getAttribute("data-scroll-number") === undefined ? 1 : c[i].target.getAttribute("data-scroll-number"));
+    c[i].cssArr = arguments[i]; //c[i].cssArr为对应第i个容器的CSS参数数组
 
     //将16进制表示的颜色值转换为RGB表示
-  	for (j = 0; j < c[i].cssArr.length; j++) {
+    for (j = 0; j < c[i].cssArr.length; j++) {
       var curLength = c[i].cssArr[j].length;
-  		for (k = 0; k < curLength; k++) {
-  			if (regColor.test(c[i].cssArr[j][k].toString().replace(/\s+/g, ""))) {
-  				c[i].cssArr[j][k] = c[i].cssArr[j][k].toString().replace(/\s+/g, "").colorToRgb();
-  			}
+      for (k = 0; k < curLength; k++) {
+        if (regColor.test(c[i].cssArr[j][k].toString().replace(/\s+/g, ""))) {
+          c[i].cssArr[j][k] = c[i].cssArr[j][k].toString().replace(/\s+/g, "").colorToRgb();
+        }
         var pCSS = ["transform", "animation"];
         pCSS.forEach(function(value) {
           if (c[i].cssArr[j][k].toString().toLowerCase() === value) {
@@ -155,84 +155,84 @@ perspective.scroll = function() {
             }
           }
         });
-  		}
-  	}
-  	c[i].layers = [];
-  	for (j = 0; j < c[i].target.childNodes.length; j++) {
-  		if (c[i].target.childNodes[j].nodeType == 1) {
-  			c[i].layers.push(c[i].target.childNodes[j]);
-  		}
-  	}
-  	c[i].childCount = c[i].cssArr.length;
-  	c[i].layers = c[i].layers.slice(0, c[i].childCount);
-  	c[i].sDuration = arguments[cCount] ? arguments[cCount][i] : 0.2; //若未给出transition数组参数，则全部赋值为0.2s
-  	c[i].attr = [];
-  	c[i].prop = [];
-  	c[i].propNum = []; 
+      }
+    }
+    c[i].layers = [];
+    for (j = 0; j < c[i].target.childNodes.length; j++) {
+      if (c[i].target.childNodes[j].nodeType == 1) {
+        c[i].layers.push(c[i].target.childNodes[j]);
+      }
+    }
+    c[i].childCount = c[i].cssArr.length;
+    c[i].layers = c[i].layers.slice(0, c[i].childCount);
+    c[i].sDuration = arguments[cCount] ? arguments[cCount][i] : 0.2; //若未给出transition数组参数，则全部赋值为0.2s
+    c[i].attr = [];
+    c[i].prop = [];
+    c[i].propNum = []; 
     c[i].propStr = [];
-  	for (j = 0; j < c[i].childCount; j++) {
-  		c[i].layers[j].style.transition = c[i].sDuration + "s";
-  		c[i].attr[j] = []; //第i个容器中第j个元素的CSS参数数组中属性所组成的数组
-  		c[i].prop[j] = []; //第i个容器中第j个元素的CSS参数数组中值所组成的数组
-  		c[i].propNum[j] = []; //值中包含的数字
-  		c[i].propStr[j] = []; //值中除数字以外的字符串
-  		for (k = 0; k < c[i].cssArr[j].length; k++){
-  			switch (k % 3) {
-  				case 0: {
-  					c[i].attr[j].push(c[i].cssArr[j][k]);
-  					c[i].propNum[j][k / 3] = [];
-  					c[i].propStr[j][k / 3] = [];
-  					break;
-  				}
-  				case 1: {
-  					c[i].propNum[j][Math.floor(k / 3)][0] = c[i].cssArr[j][k].toString().match(regNum); //第i个容器中第j个元素的第Math.floor(k/3)个CSS名值对的初始状态         
-  					c[i].propStr[j][Math.floor(k / 3)] = c[i].cssArr[j][k].toString().split(regNum);
-  					break;
-  				}
-  				case 2: {
-  					c[i].propNum[j][Math.floor(k / 3)][1] = c[i].cssArr[j][k].toString().match(regNum);
-  					break;
-  				}
-  			}
-  		}
+    for (j = 0; j < c[i].childCount; j++) {
+      c[i].layers[j].style.transition = c[i].sDuration + "s";
+      c[i].attr[j] = []; //第i个容器中第j个元素的CSS参数数组中属性所组成的数组
+      c[i].prop[j] = []; //第i个容器中第j个元素的CSS参数数组中值所组成的数组
+      c[i].propNum[j] = []; //值中包含的数字
+      c[i].propStr[j] = []; //值中除数字以外的字符串
+      for (k = 0; k < c[i].cssArr[j].length; k++){
+        switch (k % 3) {
+          case 0: {
+            c[i].attr[j].push(c[i].cssArr[j][k]);
+            c[i].propNum[j][k / 3] = [];
+            c[i].propStr[j][k / 3] = [];
+            break;
+          }
+          case 1: {
+            c[i].propNum[j][Math.floor(k / 3)][0] = c[i].cssArr[j][k].toString().match(regNum); //第i个容器中第j个元素的第Math.floor(k/3)个CSS名值对的初始状态         
+            c[i].propStr[j][Math.floor(k / 3)] = c[i].cssArr[j][k].toString().split(regNum);
+            break;
+          }
+          case 2: {
+            c[i].propNum[j][Math.floor(k / 3)][1] = c[i].cssArr[j][k].toString().match(regNum);
+          break;
+          }
+         }
+      }
 
       //计算各中间状态的CSS属性值，写入c[i].prop[j][k]数组
-  		for (k = 0; k < c[i].cssArr[j].length / 3; k++) {
-  			c[i].delta = [];
-  			for (m = 0; m < c[i].propNum[j][k][0].length; m++) {
-  				c[i].delta[m] = (c[i].propNum[j][k][1][m] - c[i].propNum[j][k][0][m]) / c[i].sLength;
+      for (k = 0; k < c[i].cssArr[j].length / 3; k++) {
+        c[i].delta = [];
+        for (m = 0; m < c[i].propNum[j][k][0].length; m++) {
+          c[i].delta[m] = (c[i].propNum[j][k][1][m] - c[i].propNum[j][k][0][m]) / c[i].sLength;
 
           //若属性为颜色，由于RGB表示里不能有小数，需将delta存为整数
           if (c[i].propStr[j][k].join("").indexOf("rgb") > -1) { 
             c[i].delta[m] = Math.floor(c[i].delta[m]);
           }
-  			}
-  			c[i].prop[j][k] = [];        
-  			for (var l = 0; l <= c[i].sLength; l++) {
-  				if (l === 0) {
-  					c[i].prop[j][k][l] = c[i].cssArr[j][k * 3 + 1]; //第一个状态即为初始值
-  				}
-  				else {
-  					c[i].prop[j][k][l] = "";
-  					for (var n = 0; n < c[i].propNum[j][k][0].length; n++) {
+        }
+        c[i].prop[j][k] = [];        
+        for (var l = 0; l <= c[i].sLength; l++) {
+          if (l === 0) {
+            c[i].prop[j][k][l] = c[i].cssArr[j][k * 3 + 1]; //第一个状态即为初始值
+          }
+          else {
+            c[i].prop[j][k][l] = "";
+            for (var n = 0; n < c[i].propNum[j][k][0].length; n++) {
               if (l === c[i].sLength) {
                 c[i].prop[j][k][l] += c[i].propStr[j][k][n] + c[i].propNum[j][k][1][n];
               }
               else {
-  						  c[i].prop[j][k][l] += c[i].propStr[j][k][n] + (parseFloat(c[i].propNum[j][k][0][n]) + c[i].delta[n] * l);
+                c[i].prop[j][k][l] += c[i].propStr[j][k][n] + (parseFloat(c[i].propNum[j][k][0][n]) + c[i].delta[n] * l);
               }
-  					}
-  					c[i].prop[j][k][l] += c[i].propStr[j][k][n];
-  				}
-  			}
-  		}
-  	}
+            }
+            c[i].prop[j][k][l] += c[i].propStr[j][k][n];
+          }
+        }
+      }
+    }
   }
   //根据每个容器的动画数，判断第几次滚动时应执行换场动画
   var sCount = 0, breakPoints = [], totalLength = 0;
   for (i = 0; i < c.length - 1; i++) {
-  	totalLength += c[i].sLength;
-  	breakPoints.push(totalLength + i+ 1);
+    totalLength += c[i].sLength;
+    breakPoints.push(totalLength + i+ 1);
   }
   totalLength += c[c.length - 1].sLength + c.length - 1;
 
@@ -245,16 +245,16 @@ perspective.scroll = function() {
 
   //换场动画，同时需要对按钮进行处理
   function switchContainers(i, dir) {
-  	var curCon = c[i], ctrl = document.getElementById("persp-controller").getElementsByTagName("li");    
-  	inAnim = true;
-  	if (dir === 1) {
+    var curCon = c[i], ctrl = document.getElementById("persp-controller").getElementsByTagName("li");    
+    inAnim = true;
+    if (dir === 1) {
       i++;
     }
-  	curCon.target.parentNode.style.transition = "0.5s";
-  	curCon.target.parentNode.style.top = "-" + i * 100 + "%";
-  	setTimeout(function() {
-  		inAnim = false;
-  	}, 500);
+    curCon.target.parentNode.style.transition = "0.5s";
+    curCon.target.parentNode.style.top = "-" + i * 100 + "%";
+    setTimeout(function() {
+      inAnim = false;
+    }, 500);
     for (var j = 0; j < ctrl.length; j++) {
       (function(j) {
         var btn = ctrl[j].getElementsByTagName("div")[0];
