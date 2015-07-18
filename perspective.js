@@ -165,7 +165,7 @@ perspective.scroll = function() {
   	}
   	c[i].childCount = c[i].cssArr.length;
   	c[i].layers = c[i].layers.slice(0, c[i].childCount);
-  	c[i].sDuration = arguments[cCount] ? arguments[cCount][i] : 0.2;
+  	c[i].sDuration = arguments[cCount] ? arguments[cCount][i] : 0.2; //若未给出transition数组参数，则全部赋值为0.2s
   	c[i].attr = [];
   	c[i].prop = [];
   	c[i].propNum = []; 
