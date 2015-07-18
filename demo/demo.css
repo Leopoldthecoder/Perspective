@@ -188,7 +188,6 @@ p {
   text-align: center;
   color: #666;
   opacity: 0.2;
-  transition: opacity 0.5s;
 }
 
 #container5 .div2 div:hover{
