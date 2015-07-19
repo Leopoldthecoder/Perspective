@@ -1,7 +1,7 @@
 # Perspective.js
 Parallax scrolling/hovering effect. And more.
 
-[Demo](http://yangyicode.com/Perspective/Demo)
+[Demo](http://leopoldthecoder.github.io/Demos/Perspective.js)
 ## Features
 A standalone Javascript library to make dashing scrolling/hovering effects. Inspired by awesome parallax scrolling websites, but can do much more than that. Any CSS properties with number values are supported.
 ## Installation
