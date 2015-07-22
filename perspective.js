@@ -1,21 +1,21 @@
 ﻿//将表示颜色值的#XXX或#XXXXXX字符串转换为rgb(X,X,X)
 String.prototype.colorToRgb = function() {
   var colorRgb = "rgb(", colorHex = this.toLowerCase();
-  if (colorHex.length === 4) {
-    var colorHexFull = "#";
-    for (var i = 1; i < 4; i++) {
-      colorHexFull += colorHex.slice(i, i + 1).concat(colorHex.slice(i, i + 1));
+    if (colorHex.length === 4) {
+      var colorHexFull = "#";
+      for (var i = 1; i < 4; i++) {
+        colorHexFull += colorHex.slice(i, i + 1).concat(colorHex.slice(i, i + 1));
+      }
+      colorHex = colorHexFull;
     }
-    colorHex = colorHexFull;
-  }
-  for (i = 1; i < 4; i++) {
-    colorRgb += parseInt("0x" + colorHex.slice(2 * i - 1, 2 * i + 1)).toString();
-    if (i < 3) {
-      colorRgb +=",";
+    for (i = 1; i < 4; i++) {
+      colorRgb += parseInt("0x" + colorHex.slice(2 * i - 1, 2 * i + 1)).toString();
+      if (i < 3) {
+        colorRgb +=",";
+      }
     }
-  }
-  colorRgb += ")";
-  return colorRgb;
+    colorRgb += ")";
+return colorRgb;
 }
 
 perspective = {};
@@ -191,9 +191,9 @@ perspective.scroll = function() {
           }
           case 2: {
             c[i].propNum[j][Math.floor(k / 3)][1] = c[i].cssArr[j][k].toString().match(regNum);
-          break;
+            break;
           }
-         }
+        }
       }
 
       //计算各中间状态的CSS属性值，写入c[i].prop[j][k]数组
@@ -201,11 +201,6 @@ perspective.scroll = function() {
         c[i].delta = [];
         for (m = 0; m < c[i].propNum[j][k][0].length; m++) {
           c[i].delta[m] = (c[i].propNum[j][k][1][m] - c[i].propNum[j][k][0][m]) / c[i].sLength;
-
-          //若属性为颜色，由于RGB表示里不能有小数，需将delta存为整数
-          if (c[i].propStr[j][k].join("").indexOf("rgb") > -1) { 
-            c[i].delta[m] = Math.floor(c[i].delta[m]);
-          }
         }
         c[i].prop[j][k] = [];        
         for (var l = 0; l <= c[i].sLength; l++) {
@@ -219,7 +214,12 @@ perspective.scroll = function() {
                 c[i].prop[j][k][l] += c[i].propStr[j][k][n] + c[i].propNum[j][k][1][n];
               }
               else {
-                c[i].prop[j][k][l] += c[i].propStr[j][k][n] + (parseFloat(c[i].propNum[j][k][0][n]) + c[i].delta[n] * l);
+                //若属性为颜色，由于RGB表示里不能有小数，需将delta存为整数
+                if (c[i].propStr[j][k].join("").indexOf("rgb") > -1) { 
+                  c[i].prop[j][k][l] += c[i].propStr[j][k][n] + Math.floor((parseFloat(c[i].propNum[j][k][0][n]) + c[i].delta[n] * l));
+                } else {
+                  c[i].prop[j][k][l] += c[i].propStr[j][k][n] + (parseFloat(c[i].propNum[j][k][0][n]) + c[i].delta[n] * l);
+                }
               }
             }
             c[i].prop[j][k][l] += c[i].propStr[j][k][n];
@@ -298,14 +298,14 @@ perspective.scroll = function() {
   function setAnim(sCount, isSwitch) {
     var mark = 0, curCon = {}, prevCountSum = 0;
     for (var i = 0; i < breakPoints.length; i++) {
-       if (sCount >= breakPoints[i]) {
-          mark++;
-       }
+     if (sCount >= breakPoints[i]) {
+      mark++;
     }
-    curCon = c[mark];
-    for (i = 0; i < mark; i++) {
-      prevCountSum += c[i].sLength + 1;
-    }
+  }
+  curCon = c[mark];
+  for (i = 0; i < mark; i++) {
+    prevCountSum += c[i].sLength + 1;
+  }
 
     //若未换场，则需等待目前动画结束再更新CSS属性；否则立即更新
     if (((!isSwitch) && (!inAnim)) || (isSwitch)) {
