@@ -1,24 +1,4 @@
-﻿//将表示颜色值的#XXX或#XXXXXX字符串转换为rgb(X,X,X)
-String.prototype.colorToRgb = function() {
-  var colorRgb = "rgb(", colorHex = this.toLowerCase();
-    if (colorHex.length === 4) {
-      var colorHexFull = "#";
-      for (var i = 1; i < 4; i++) {
-        colorHexFull += colorHex.slice(i, i + 1).concat(colorHex.slice(i, i + 1));
-      }
-      colorHex = colorHexFull;
-    }
-    for (i = 1; i < 4; i++) {
-      colorRgb += parseInt("0x" + colorHex.slice(2 * i - 1, 2 * i + 1)).toString();
-      if (i < 3) {
-        colorRgb +=",";
-      }
-    }
-    colorRgb += ")";
-return colorRgb;
-}
-
-perspective = {};
+﻿var perspective = {};
 
 //hover视差效果
 perspective.hover = function(isHoming) {
@@ -129,6 +109,25 @@ perspective.scroll = function() {
     }
   }
   var cCount = containers.length;
+  //将表示颜色值的#XXX或#XXXXXX字符串转换为rgb(X,X,X)
+  function colorToRgb(str) {
+    var colorRgb = "rgb(", colorHex = str.toLowerCase();
+      if (colorHex.length === 4) {
+        var colorHexFull = "#";
+        for (var i = 1; i < 4; i++) {
+          colorHexFull += colorHex.slice(i, i + 1).concat(colorHex.slice(i, i + 1));
+        }
+        colorHex = colorHexFull;
+      }
+      for (i = 1; i < 4; i++) {
+        colorRgb += parseInt("0x" + colorHex.slice(2 * i - 1, 2 * i + 1)).toString();
+        if (i < 3) {
+          colorRgb +=",";
+        }
+      }
+      colorRgb += ")";
+  return colorRgb;
+  }
   for (i = 0; i < cCount; i++) {
     c[i] = {};
     c[i].target = containers[i];
@@ -141,7 +140,7 @@ perspective.scroll = function() {
       var curLength = c[i].cssArr[j].length;
       for (k = 0; k < curLength; k++) {
         if (regColor.test(c[i].cssArr[j][k].toString().replace(/\s+/g, ""))) {
-          c[i].cssArr[j][k] = c[i].cssArr[j][k].toString().replace(/\s+/g, "").colorToRgb();
+          c[i].cssArr[j][k] = colorToRgb(c[i].cssArr[j][k].toString().replace(/\s+/g, ""));
         }
         var pCSS = ["transform", "animation"];
         pCSS.forEach(function(value) {

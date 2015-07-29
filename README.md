@@ -142,6 +142,8 @@ perspective.hover();
 ## Notice
 All class names used above are not mandatory. Use whatever class names you like.
 ## Version updates
+### 1.0.2
+Color value transfer function no longer binded to `String.prototype`.
 ### 1.0.1
 Fixed a bug concerning CSS value increment in RGB noted properties.
 ### 1.0.0
