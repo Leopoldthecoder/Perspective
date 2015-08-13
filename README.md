@@ -142,6 +142,8 @@ perspective.hover();
 ## Notice
 All class names used above are not mandatory. Use whatever class names you like.
 ## Version updates
+### 1.0.3
+mouseover/mouseout replaced with mouseenter/mouseleave in Perspective.hover.
 ### 1.0.2
 Color value transfer function no longer binded to `String.prototype`.
 ### 1.0.1

@@ -53,38 +53,32 @@ perspective.hover = function(isHoming) {
       }
       
       //若isHoming为真，则在鼠标移出时将各层归位
-      container.onmouseout = function(e) {
+      container.onmouseleave = function(e) {
         if (isHoming){
-          var reg = this.compareDocumentPosition(e.relatedTarget);
-          if (!(reg == 20 || reg == 0)) {
+          layersFunc(function(j){
+            layers[j].style.transition = "0.1s";
+          });
+          if (!inAnim) {
             layersFunc(function(j){
-              layers[j].style.transition = "0.1s";
-            })
-            if (!inAnim) {
-              layersFunc(function(j){
-                setTranslate(layers[j], 0, 0);
-              });
-            }
+              setTranslate(layers[j], 0, 0);
+            });
           }
         }
       }
       
       //鼠标移入时，为避免各层位置突变，给它们0.1s的动画效果，并在这段时间内不响应鼠标移动事件
-      container.onmouseover = function(e) {
-        var reg = this.compareDocumentPosition(e.relatedTarget);
-        if (!(reg == 20 || reg == 0)) {
-          inAnim = true;
+      container.onmouseenter = function(e) {
+        inAnim = true;
+        layersFunc(function(i){
+          layers[i].style.transition = "0.1s";
+          relocate(layers[i], e.clientX, e.clientY, speedArr[i]);
+        });
+        setTimeout(function() {
+          inAnim = false;
           layersFunc(function(i){
-            layers[i].style.transition = "0.1s";
-            relocate(layers[i], e.clientX, e.clientY, speedArr[i]);
+            layers[i].style.transition = "0s";
           });
-          setTimeout(function() {
-            inAnim = false;
-            layersFunc(function(i){
-              layers[i].style.transition = "0s";
-            });
-          },100);
-        }
+        },100);
       }
     })(i);
   }
