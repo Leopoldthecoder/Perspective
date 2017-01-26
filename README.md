@@ -1,5 +1,5 @@
-# TD;DR
-The whole thing was written more than a year ago. Currently being reworked on. Check the dev branch for details.
+# TL;DR
+The whole thing was written over a year ago. Currently being reworked on.
 
 # Perspective.js
 Parallax scrolling/hovering effect. And more.
