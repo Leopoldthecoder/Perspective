@@ -1,0 +1,255 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+.screen {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.inst {
+  width: 100%;
+  position: absolute;
+  bottom: 20px;
+  font-size: 40px;
+  font-family: "Cambria";
+  text-shadow:  3px 3px 5px black;
+  cursor: default;
+  color: #fff;
+  text-align: center;
+  z-index: 100;
+  transition: opacity .4s ease-in;
+}
+
+@keyframes fla {
+  0% {
+    color: #777;
+  }
+  50% {
+    color: #fff;
+  }
+  100% {
+    color: #777;
+  }
+}
+
+.flash {
+  animation: fla 2s infinite;
+}
+
+.wrap {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.container * {
+  position: absolute;
+}
+
+#container1 .div1 {
+  height: 130%;
+  width: 100%;
+  background-image: url('http://7xiryd.com1.z0.glb.clouddn.com/perspective_universe-background.jpg');
+}
+
+#container1 .div2 {
+  height: 180px;
+  width: 180px;
+  background-image: url('http://7xiryd.com1.z0.glb.clouddn.com/perspective_planet_1.png');
+  top: 600px;
+  left: 60%;
+  z-index: 1;
+  background-size: cover;
+}
+
+#container1 .div3 {
+  height: 900px;
+  width: 900px;
+  background-image: url('http://7xiryd.com1.z0.glb.clouddn.com/perspective_planet_2.png');
+  top: 500px;
+  left: -20%;
+  z-index: 1;
+  background-size: cover;
+}
+
+p {
+  font: bold 70px "Cambria";
+  color: #fff;
+  text-shadow: 3px 3px 5px black;
+  cursor: default;
+}
+
+#container1 p {
+  top: 40%;
+  left: 40%;
+}
+
+#container2 {
+  background-color: #de5;
+}
+
+#container2 .div1 {
+  height: 490px;
+  width: 450px;
+  background-image: url('http://7xiryd.com1.z0.glb.clouddn.com/perspective_cube_1.png');
+  background-repeat: no-repeat;
+  top: 50%;
+  left: 50%;
+  margin-top: -245px;
+  margin-left: -225px;
+}
+
+#container2 p {
+  top: 40%;
+  left: 65%;
+  color: #d24820;
+}
+
+#container3 .div1 {
+  height: 100%;
+  width: 100%;
+  background-image: url('http://7xiryd.com1.z0.glb.clouddn.com/perspective_wood.jpg');
+  background-size: cover;
+}
+
+#container3 .div2 {
+  height: 150%;
+  width: 100%;
+  background-image: url('http://7xiryd.com1.z0.glb.clouddn.com/perspective_text.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  top: -30%;
+}
+
+#container4 {
+  background: -webkit-linear-gradient(left,rgba(255,221,0,0.48),rgba(0,255,0,0.28));
+  background: -moz-linear-gradient(left,rgba(255,221,0,0.48),rgba(0,255,0,0.28));
+  background: -o-linear-gradient(left,rgba(255,221,0,0.48),rgba(0,255,0,0.28));
+}
+
+#container4 .div1 {
+  height: 100px;
+  width: 100px;
+  border-radius: 10px;
+  top: 40%;
+  left: 50%;
+  margin-left: -100px;
+  background-color: #fd0;
+}
+
+#container4 .div2 {
+  background: url('http://7xiryd.com1.z0.glb.clouddn.com/perspective_battery.png') no-repeat;
+  background-size: contain;
+  height: 140px;
+  width: 280px;
+  top: 40%;
+  left: 50%;
+  margin-left: -122px;
+  margin-top: -20px;
+}
+
+#container4 p {
+  width: 600px;
+  text-align: center;
+  color: #5f0;
+  bottom: 30%;
+  left: 50%;
+  margin-left: -300px;
+}
+
+#container5 {
+  -webkit-perspective: 600px;
+  perspective: 600px;
+  background-color: #ddb;
+}
+
+#container5 .showcase {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+#container5 p {
+  font: bold 120px/150px times;
+  height: 150px;
+  width: 100%;
+  text-align: center;
+  top: 50%;
+  margin-top: -75px;
+  text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 0 0 12px #000;
+  background-color: #ddb;
+}
+
+#container5 p:nth-child(1) {
+  -webkit-transform: rotateX(0deg) translateZ(100px);
+  transform: rotateX(0deg) translateZ(100px);
+}
+
+#container5 p:nth-child(2) {
+  -webkit-transform: rotateX(-72deg) translateZ(100px);
+  transform: rotateX(-72deg) translateZ(100px);
+}
+
+#container5 p:nth-child(3) {
+  -webkit-transform: rotateX(-144deg) translateZ(100px);
+  transform: rotateX(-144deg) translateZ(100px);
+}
+
+#container5 p:nth-child(4) {
+  -webkit-transform: rotateX(-216deg) translateZ(100px);
+  transform: rotateX(-216deg) translateZ(100px);
+}
+
+#container5 p:nth-child(5) {
+  -webkit-transform: rotateX(-288deg) translateZ(100px);
+  transform: rotateX(-288deg) translateZ(100px);
+}
+
+#container6 {
+  height: 100%;;
+  width: 100%;
+  margin: 0 auto;
+}
+#container6 .div1 {
+  height: 80%;
+  width: 80%;
+  left: 10%;
+  top: 10%;
+  background-image:  url('http://7xiryd.com1.z0.glb.clouddn.com/perspective_sky.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#container6 .div2 {
+  width: 800px;
+  height: 200px;
+  text-align: center;
+  background-color: transparent;
+  left: 50%;
+  top: 50%;
+  margin-top: -100px;
+  margin-left: -400px;
+}
+
+#container6 .div2 p{
+  font-family: "Cambria";
+}
