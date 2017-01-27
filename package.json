@@ -4,7 +4,7 @@
   "description": "Parallax scrolling effect. And more.",
   "main": "perspective.min.js",
   "scripts": {
-    "dev": "rollup -c build/dev.js -w --output=perspective.min.js -- perspective.js",
+    "dev": "rollup -c build/dev.js -w --output=example/demo.min.js -- example/demo.js",
     "dist": "node build/build.js"
   },
   "repository": {
@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/Leopoldthecoder/Perspective.js#readme",
   "devDependencies": {
-    "eslint-config-doran": "^1.0.3",
+    "eslint-config-doran": "^1.0.4",
     "rollup": "^0.41.4",
     "rollup-plugin-buble": "^0.15.0",
     "rollup-plugin-commonjs": "^7.0.0",
@@ -30,5 +30,10 @@
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-plugin-uglify": "^1.0.1",
     "rollup-watch": "^3.2.2"
+  },
+  "dependencies": {
+    "dom-walk": "^0.1.1",
+    "object-assign": "^4.1.1",
+    "rollup-plugin-json": "^2.1.0"
   }
 }

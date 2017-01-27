@@ -21,7 +21,7 @@ var build = function (opts) {
 }
 
 build({
-  entry: 'perspective.js',
-  output: 'perspective.min.js',
+  entry: 'src/index.js',
+  output: 'lib/perspective.min.js',
   plugins: [eslint(), commonjs(), nodeResolve(), uglify()]
 })
