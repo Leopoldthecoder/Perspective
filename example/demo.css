@@ -5,6 +5,7 @@
 
 html, body {
   height: 100%;
+  font-family: 'Helvetica Neue',Helvetica,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',SimSun,sans-serif;
 }
 
 .screen {
@@ -20,7 +21,6 @@ html, body {
   position: absolute;
   bottom: 20px;
   font-size: 40px;
-  font-family: "Cambria";
   text-shadow:  3px 3px 5px black;
   cursor: default;
   color: #fff;
@@ -90,7 +90,8 @@ html, body {
 }
 
 p {
-  font: bold 70px "Cambria";
+  font-size: 70px;
+  font-weight: bold;
   color: #fff;
   text-shadow: 3px 3px 5px black;
   cursor: default;
@@ -248,8 +249,5 @@ p {
   top: 50%;
   margin-top: -100px;
   margin-left: -400px;
-}
-
-#container6 .div2 p{
-  font-family: "Cambria";
+  transform: translate(20px, 30px)
 }
