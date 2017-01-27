@@ -1,4 +1,4 @@
-﻿import perspective from '../src/perspective'
+﻿import perspective from '../src/index'
 import hoverConfig from './hover.json'
 var imgs = ['http://7xiryd.com1.z0.glb.clouddn.com/perspective_universe-background.jpg', 'http://7xiryd.com1.z0.glb.clouddn.com/perspective_planet_1.png', 'http://7xiryd.com1.z0.glb.clouddn.com/perspective_planet_2.png', 'http://7xiryd.com1.z0.glb.clouddn.com/perspective_cube_1.png', 'http://7xiryd.com1.z0.glb.clouddn.com/perspective_cube_2.png', 'http://7xiryd.com1.z0.glb.clouddn.com/perspective_cube_3.png', 'http://7xiryd.com1.z0.glb.clouddn.com/perspective_cube_4.png', 'http://7xiryd.com1.z0.glb.clouddn.com/perspective_cube_5.png', 'http://7xiryd.com1.z0.glb.clouddn.com/perspective_wood.jpg', 'http://7xiryd.com1.z0.glb.clouddn.com/perspective_sky.jpg']
 var iLength = imgs.length

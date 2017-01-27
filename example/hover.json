@@ -1,8 +1,10 @@
 {
   "homing": true,
   "layers": [{
-    "speed": 0.4
+    "speed": 0.06,
+    "reverse": true
   }, {
-    "speed": 0.04
+    "speed": 0.02,
+    "reverse": true
   }]
 }
