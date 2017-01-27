@@ -1,51 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Perspective.js Demo</title>
-    <link rel="stylesheet" type="text/css" href="demo.css" media="all" />    
+  <meta charset="UTF-8">
+  <title>Perspective.js Demo</title>
+  <link rel="stylesheet" type="text/css" href="demo.css" media="all" />
 </head>
 <body>
-    <div class="screen" data-perspective="scroll">
-        <div class="inst"></div>
-        <div class="wrap">
-            <div class="container" id="container1" data-scroll-tag="BASIC" data-scroll-number=30>
-                <div class="div1"></div>
-                <div class="div2"></div>
-                <div class="div3"></div>
-                <p>Basic parallax effect</p>
-            </div>
-            <div class="container" id="container2" data-scroll-tag="IMAGE" data-scroll-number=4>
-                <div class="div1"></div>
-                <p>image switching </p>
-            </div>
-            <div class="container" id="container3" data-scroll-tag="OPACITY" data-scroll-number=1>
-                <div class="div1"></div>
-                <div class="div2"></div>
-            </div>
-            <div class="container" id="container4" data-scroll-tag="COLOR" data-scroll-number=1>
-                <div class="div1"></div>
-                <div class="div2"></div>
-                <p>Color changing</p>
-            </div>
-            <div class="container" id="container5" data-scroll-tag="ANYTHING" data-scroll-number=4>
-                <div class="showcase">
-                    <p>or</p>
-                    <p>almost</p>
-                    <p>anything</p>
-                    <p>you</p>
-                    <p>want</p>
-                </div>
-            </div>
-            <div class="container" id="container6" data-scroll-tag="HOVER" data-scroll-number=0 data-perspective="hover">
-                <div class="div1" data-hover-speed=0.04></div>
-                <div class="div2" data-hover-speed=0.4>
-                    <p>And don't forget hovering effect.</p>
-                </div>
-            </div>
+  <div class="screen" data-perspective="scroll">
+    <div class="inst"></div>
+    <div class="wrap">
+      <div class="container" id="container1" data-scroll-tag="BASIC" data-scroll-number=30>
+        <div class="div1"></div>
+        <div class="div2"></div>
+        <div class="div3"></div>
+        <p>Basic parallax effect</p>
+      </div>
+      <div class="container" id="container2" data-scroll-tag="IMAGE" data-scroll-number=4>
+        <div class="div1"></div>
+        <p>image switching </p>
+      </div>
+      <div class="container" id="container3" data-scroll-tag="OPACITY" data-scroll-number=1>
+        <div class="div1"></div>
+        <div class="div2"></div>
+      </div>
+      <div class="container" id="container4" data-scroll-tag="COLOR" data-scroll-number=1>
+        <div class="div1"></div>
+        <div class="div2"></div>
+        <p>Color changing</p>
+      </div>
+      <div class="container" id="container5" data-scroll-tag="ANYTHING" data-scroll-number=4>
+        <div class="showcase">
+          <p>or</p>
+          <p>almost</p>
+          <p>anything</p>
+          <p>you</p>
+          <p>want</p>
         </div>
+      </div>
+      <div class="container" id="container6" data-scroll-tag="HOVER" data-scroll-number=0>
+        <div class="div1" data-hover-layer="2"></div>
+        <div class="div2" data-hover-layer="1">
+          <p>And don't forget hovering effect.</p>
+        </div>
+      </div>
     </div>
-    <script type="text/javascript" src="../perspective.min.js"></script>
-    <script type="text/javascript" src="demo.js"></script>
+  </div>
+  <script type="text/javascript" src="demo.min.js"></script>
 </body>
 </html>

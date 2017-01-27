@@ -1,0 +1,8 @@
+{
+  "homing": true,
+  "layers": [{
+    "speed": 0.4
+  }, {
+    "speed": 0.04
+  }]
+}
