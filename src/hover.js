@@ -8,6 +8,11 @@ const defaultConfig = {
 }
 let animating = false
 
+/**
+ * perspective.hover
+ * @param {string|Object} target - dom target to apply hover effects
+ * @param {Object} config - config object
+ */
 export default function(target, config) {
   if (typeof target === 'string') {
     target = document.querySelector(target)
@@ -48,13 +53,26 @@ export default function(target, config) {
       })
     }
   })
-
+  
+  /**
+   * actually assign the translations
+   * @param {Object} node - the dom node to apply translations
+   * @param {number} x - translationX
+   * @param {number} y - translationY
+   */
   const doTranslate = (node, x, y) => {
-    ['webkitTransform', 'msTransform', 'transform'].forEach(key => {
+    const vendors = ['webkitTransform', 'msTransform', 'mozTransform', 'transform']
+    vendors.forEach(key => {
       node.style[key] = `translate(${ x }px, ${ y }px)`
     })
   }
-
+  
+  /**
+   * calculate and assign transitions
+   * @param {Object} layer - the layer object
+   * @param {number} x - clientX of mouse event
+   * @param {number} y - clientY of mouse event
+   */
   const translateLayers = (layer, x, y) => {
     const { node, speed, reverse, originalTranslateX, originalTranslateY } = layer
     const offsetX = Math.floor(speed * (0.5 * document.body.clientWidth + (reverse ? -1 : 1) * x))
