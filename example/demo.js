@@ -35,8 +35,7 @@ function start() {
   var cssArr3 = [[], ['opacity', '0', '0.9', 'transform', 'translateY(0px)', '-50']]
   var cssArr4 = [['width', '100px', '200', 'backgroundColor', '#fd0', '#0f0'], [], ['color', '#fd0', '#0f0']]
   var cssArr5 = [['transform', 'rotateX(0deg)', '288']]
-  var cssArr6 = []
-  perspective.scroll(cssArr1, cssArr2, cssArr3, cssArr4, cssArr5, cssArr6, [0, 0.5, 2, 3, 0.5, 0])
+  perspective.scroll(cssArr1, cssArr2, cssArr3, cssArr4, cssArr5, [0, 0.5, 2, 3, 0.5])
   perspective.hover('#container6', hoverConfig)
   function removeInst() {
     inst.style.opacity = 0

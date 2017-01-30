@@ -229,6 +229,8 @@ p {
   height: 100%;;
   width: 100%;
   margin: 0 auto;
+  transform-style: preserve-3d;
+  overflow: visible;
 }
 #container6 .div1 {
   height: 80%;
@@ -249,5 +251,5 @@ p {
   top: 50%;
   margin-top: -100px;
   margin-left: -400px;
-  transform: translate(20px, 30px)
+  transform: translateZ(150px);
 }
