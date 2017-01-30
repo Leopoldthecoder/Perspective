@@ -1,10 +1,11 @@
 {
-  "homing": true,
+  "reverse": false,
+  "max": 40,
   "layers": [{
-    "speed": 0.06,
+    "speed": 0.1,
     "reverse": true
   }, {
-    "speed": 0.02,
+    "speed": 0.04,
     "reverse": true
   }]
 }

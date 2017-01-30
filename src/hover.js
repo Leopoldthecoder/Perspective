@@ -1,12 +1,176 @@
 import objectAssign from 'object-assign'
 import walk from 'dom-walk'
-import throttle from 'throttle-debounce/throttle'
 
 const defaultConfig = {
-  homing: true,
-  layers: []
+  layers: [],
+  max: 20,
+  reverse: false,
+  perspective: 1000,
+  easing: 'cubic-bezier(.03, .98, .52, .99)',
+  scale: '1',
+  speed: '300',
+  disabledAxis: null,
+  reset: true
 }
-let animating = false
+
+class Hover {
+  constructor(target, config) {
+    if (typeof target === 'string') {
+      target = document.querySelector(target)
+    }
+    if (!target || target.nodeType !== 1) {
+      throw new Error('Cannot find target dom')
+    }
+    config = objectAssign({}, defaultConfig, config)
+
+    this.target = target
+    this.config = config
+    this.layers = []
+
+    walk(target, node => {
+      if (node.nodeType !== 1) return
+      const layer = node.getAttribute('data-hover-layer')
+      if (layer) {
+        const configSpeed = config.layers[Number(layer)].speed
+        if (!configSpeed) throw new Error(`Missing translate config for ${ layer }`)
+        this.layers.push(objectAssign({
+          node,
+          speed: configSpeed === undefined ? 0.2 : configSpeed,
+          reverse: !!config.layers[Number(layer)].reverse
+        }, this.getInitialTransformMatrix(node)))
+      }
+    })
+    this.addEventHandlers()
+  }
+
+  getInitialTransformMatrix(node) {
+    const matrixMatch = (window.getComputedStyle(node).transform).match(/matrix.*\((.*)\)/)
+    let matrixArr = [1, 0, 0, 1, 0, 0]
+    let translateXIndex = 4
+    let translateYIndex = 5
+    if (matrixMatch && matrixMatch[1]) {
+      matrixArr = matrixMatch[1].split(/\s*\,\s*/)
+    }
+    if (matrixArr.length === 16) {
+      translateXIndex = 12
+      translateYIndex = 13
+    }
+    return {
+      matrixArr,
+      translateXIndex,
+      translateYIndex
+    }
+  }
+
+  addEventHandlers() {
+    this.target.addEventListener('mouseenter', this.onMouseEnter.bind(this))
+    this.target.addEventListener('mousemove', this.onMouseMove.bind(this))
+    this.target.addEventListener('mouseleave', this.onMouseLeave.bind(this))
+  }
+
+  /**
+   * actually assign the translations
+   * @param {Object} layer - the layer object that needs to be translated
+   * @param {number} offsetX - translation offset in x axis
+   * @param {number} offsetY - translation offset in y axis
+   */
+  doTranslate(layer, offsetX, offsetY) {
+    const vendors = ['webkitTransform', 'msTransform', 'mozTransform', 'transform']
+    const { node, matrixArr, translateXIndex, translateYIndex } = layer
+    const matrixArrCopy = matrixArr.slice()
+    window.requestAnimationFrame(_ => {
+      matrixArrCopy[translateXIndex] = Number(matrixArrCopy[translateXIndex]) + offsetX
+      matrixArrCopy[translateYIndex] = Number(matrixArrCopy[translateYIndex]) + offsetY
+      const matrix = matrixArrCopy.join(', ')
+      vendors.forEach(key => {
+        node.style[key] = `${ matrixArr.length === 6 ? 'matrix' : 'matrix3d' }(${ matrix })`
+      })
+    })
+  }
+
+  /**
+   * calculate and assign transitions
+   * @param {Object} layer - the layer object
+   * @param {number} x - clientX of mouse event
+   * @param {number} y - clientY of mouse event
+   */
+  translateLayers(layer, x, y) {
+    const { speed, reverse } = layer
+    const offsetX = Math.floor(speed * (0.5 * document.body.clientWidth + (reverse ? -1 : 1) * x))
+    const offsetY = Math.floor(speed * (0.5 * document.body.clientHeight + (reverse ? -1 : 1) * y))
+    this.doTranslate(layer, offsetX, offsetY)
+  }
+
+  getValues(event) {
+    let x = (event.pageX - this.left) / this.width
+    let y = (event.pageY - this.top) / this.height
+
+    x = Math.min(Math.max(x, 0), 1)
+    y = Math.min(Math.max(y, 0), 1)
+
+    const tiltX = (this.config.reverse ? -1 : 1) * (this.config.max / 2 - x * this.config.max).toFixed(2)
+    const tiltY = (this.config.reverse ? -1 : 1) * (y * this.config.max - this.config.max / 2).toFixed(2)
+    return {
+      tiltX,
+      tiltY
+    }
+  }
+
+  setTransition() {
+    clearTimeout(this.transitionTimeout)
+    this.target.style.transition = `${ this.config.speed }ms ${ this.config.easing }`
+    this.transitionTimeout = setTimeout(_ => {
+      this.target.style.transition = ''
+    }, this.config.speed)
+  }
+
+  onMouseEnter(event) {
+    this.width = this.target.offsetWidth
+    this.height = this.target.offsetHeight
+    this.left = this.target.offsetLeft
+    this.top = this.target.offsetTop
+    this.setTransition()
+
+    this.layers.forEach(layer => {
+      layer.node.style.transition = `${ this.config.speed }ms ${ this.config.easing }`
+      this.translateLayers(layer, event.clientX, event.clientY)
+    })
+    setTimeout(() => {
+      this.layers.forEach(({ node }) => {
+        node.style.transition = 'none'
+      })
+    }, this.config.speed)
+  }
+
+  onMouseMove(event) {
+    const values = this.getValues(event)
+    this.target.style.transform = `
+      perspective(${ this.config.perspective }px)
+      rotateX(${ this.config.disabledAxis === 'x' ? 0 : values.tiltY }deg)
+      rotateY(${ this.config.disabledAxis === 'y' ? 0 : values.tiltX }deg)
+      scale3d(${ this.config.scale }, ${ this.config.scale }, ${ this.config.scale })
+    `
+    this.layers.forEach(layer => {
+      this.translateLayers(layer, event.clientX, event.clientY)
+    })
+  }
+
+  onMouseLeave() {
+    if (this.config.reset !== true) return
+
+    this.setTransition()
+    this.target.style.transform = `
+      perspective(${ this.config.perspective }px)
+      rotateX(0deg)
+      rotateY(0deg)
+      scale3d(1, 1, 1)
+    `
+    this.layers.forEach(layer => {
+      layer.node.style.transition = `${ this.config.speed }ms ${ this.config.easing }`
+      this.doTranslate(layer, 0, 0)
+    })
+  }
+}
 
 /**
  * perspective.hover
@@ -14,98 +178,5 @@ let animating = false
  * @param {Object} config - config object
  */
 export default function(target, config) {
-  if (typeof target === 'string') {
-    target = document.querySelector(target)
-  }
-  if (!target || target.nodeType !== 1) {
-    throw new Error('Cannot find dom')
-  }
-  config = objectAssign({}, defaultConfig, config)
-  console.log(config)
-
-  const layers = []
-  walk(target, node => {
-    if (node.nodeType !== 1) return
-    const layer = node.getAttribute('data-hover-layer')
-    if (layer) {
-      const configSpeed = config.layers[Number(layer)].speed
-
-      let originalTranslateX = 0
-      let originalTranslateY = 0
-      const matrixMatch = (window.getComputedStyle(node).transform).match(/matrix\((.*)\)/)
-      const matrix3dMatch = (window.getComputedStyle(node).transform).match(/matrix3d\((.*)\)/)
-      if (matrixMatch && matrixMatch[1]) {
-        const matrixArr = matrixMatch[1].split(/\s*\,\s*/)
-        originalTranslateX = Number(matrixArr[4])
-        originalTranslateY = Number(matrixArr[5])
-      } else if (matrix3dMatch && matrix3dMatch[1]) {
-        const matrixArr = matrix3dMatch[1].split(/\s*\,\s*/)
-        originalTranslateX = Number(matrixArr[12])
-        originalTranslateY = Number(matrixArr[13])
-      }
-
-      layers.push({
-        node,
-        speed: configSpeed === undefined ? 0.2 : configSpeed,
-        reverse: !!config.layers[Number(layer)].reverse,
-        originalTranslateX,
-        originalTranslateY
-      })
-    }
-  })
-  
-  /**
-   * actually assign the translations
-   * @param {Object} node - the dom node to apply translations
-   * @param {number} x - translationX
-   * @param {number} y - translationY
-   */
-  const doTranslate = (node, x, y) => {
-    const vendors = ['webkitTransform', 'msTransform', 'mozTransform', 'transform']
-    vendors.forEach(key => {
-      node.style[key] = `translate(${ x }px, ${ y }px)`
-    })
-  }
-  
-  /**
-   * calculate and assign transitions
-   * @param {Object} layer - the layer object
-   * @param {number} x - clientX of mouse event
-   * @param {number} y - clientY of mouse event
-   */
-  const translateLayers = (layer, x, y) => {
-    const { node, speed, reverse, originalTranslateX, originalTranslateY } = layer
-    const offsetX = Math.floor(speed * (0.5 * document.body.clientWidth + (reverse ? -1 : 1) * x))
-    const offsetY = Math.floor(speed * (0.5 * document.body.clientHeight + (reverse ? -1 : 1) * y))
-    doTranslate(node, originalTranslateX + offsetX, originalTranslateY + offsetY)
-  }
-
-  target.addEventListener('mousemove', throttle(60, true, event => {
-    if (animating) return
-    layers.forEach(layer => {
-      translateLayers(layer, event.clientX, event.clientY)
-    })
-  }))
-
-  target.addEventListener('mouseleave', _ => {
-    if (config.homing !== true) return
-    layers.forEach(({ node, originalTranslateX, originalTranslateY }) => {
-      node.style.transition = '0.2s'
-      doTranslate(node, originalTranslateX, originalTranslateY)
-    })
-  })
-
-  target.addEventListener('mouseenter', event => {
-    animating = true
-    layers.forEach(layer => {
-      layer.node.style.transition = '0.2s'
-      translateLayers(layer, event.clientX, event.clientY)
-    })
-    setTimeout(() => {
-      animating = false
-      layers.forEach(({ node }) => {
-        node.style.transition = '0.1s'
-      })
-    }, 200)
-  })
+  new Hover(target, config)
 }
