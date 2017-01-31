@@ -1,5 +1,5 @@
 import hover from './hover'
-import scroll from './scroll'
+import scroll from './scroller'
 
 export default {
   hover,
