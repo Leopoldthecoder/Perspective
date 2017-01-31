@@ -37,13 +37,19 @@ class Hover {
           node,
           speed: configSpeed === undefined ? 0.2 : configSpeed,
           reverse: !!config.layers[Number(layer)].reverse
-        }, this.getInitialTransformMatrix(node)))
+        }, this.constructor.getInitialTransformMatrix(node)))
       }
     })
+    this.target.style.transform = `perspective(${ this.config.perspective }px)`
     this.addEventHandlers()
   }
 
-  getInitialTransformMatrix(node) {
+  /**
+   * get the CSS transform matrix of a node, also returns the indexes of the value of translateX and translateY in the matrix
+   * @param {Object} node - target node dom
+   * @returns {{matrixArr: [number,number,number,number,number,number], translateXIndex: number, translateYIndex: number}}
+   */
+  static getInitialTransformMatrix(node) {
     const matrixMatch = (window.getComputedStyle(node).transform).match(/matrix.*\((.*)\)/)
     let matrixArr = [1, 0, 0, 1, 0, 0]
     let translateXIndex = 4
