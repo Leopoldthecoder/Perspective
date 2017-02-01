@@ -1,0 +1,34 @@
+{
+  "showIndicator": true,
+  "indicatorPosition": "left",
+  "stages": [{
+    "id": "universe",
+    "tag": "BASIC",
+    "scrollNumber": 6,
+    "transition": 200,
+    "easing": "linear",
+    "items": [{
+      "id": "background",
+      "effects": [{
+        "property": "transform",
+        "start": "translateY(0px)",
+        "end": "translateY(-100px)"
+      }]
+    }, {
+      "id": "satellite",
+      "effects": [{
+        "property": "transform",
+        "start": "translateY(0px)",
+        "end": "translateY(-180px)"
+      }]
+    }, {
+      "id": "planet",
+      "effects": [{
+        "property": "transform",
+        "start": "translateY(0px)",
+        "end": "translateY(-700px)",
+        "startAt": 2
+      }]
+    }]
+  }]
+}

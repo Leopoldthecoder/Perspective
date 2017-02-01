@@ -19,7 +19,7 @@ class Hover {
       target = document.querySelector(target)
     }
     if (!target || target.nodeType !== 1) {
-      throw new Error('Cannot find target dom')
+      throw new Error('Cannot find target dom to apply hover effects')
     }
     config = objectAssign({}, defaultConfig, config)
 
@@ -84,13 +84,11 @@ class Hover {
     const vendors = ['webkitTransform', 'msTransform', 'mozTransform', 'transform']
     const { node, matrixArr, translateXIndex, translateYIndex } = layer
     const matrixArrCopy = matrixArr.slice()
-    window.requestAnimationFrame(_ => {
-      matrixArrCopy[translateXIndex] = Number(matrixArrCopy[translateXIndex]) + offsetX
-      matrixArrCopy[translateYIndex] = Number(matrixArrCopy[translateYIndex]) + offsetY
-      const matrix = matrixArrCopy.join(', ')
-      vendors.forEach(key => {
-        node.style[key] = `${ matrixArr.length === 6 ? 'matrix' : 'matrix3d' }(${ matrix })`
-      })
+    matrixArrCopy[translateXIndex] = Number(matrixArrCopy[translateXIndex]) + offsetX
+    matrixArrCopy[translateYIndex] = Number(matrixArrCopy[translateYIndex]) + offsetY
+    const matrix = matrixArrCopy.join(', ')
+    vendors.forEach(key => {
+      node.style[key] = `${ matrixArr.length === 6 ? 'matrix' : 'matrix3d' }(${ matrix })`
     })
   }
 
@@ -156,8 +154,10 @@ class Hover {
       rotateY(${ this.config.disabledAxis === 'y' ? 0 : values.tiltX }deg)
       scale3d(${ this.config.scale }, ${ this.config.scale }, ${ this.config.scale })
     `
-    this.layers.forEach(layer => {
-      this.translateLayers(layer, event.clientX, event.clientY)
+    window.requestAnimationFrame(_ => {
+      this.layers.forEach(layer => {
+        this.translateLayers(layer, event.clientX, event.clientY)
+      })
     })
   }
 
