@@ -4,8 +4,8 @@
   "stages": [{
     "id": "universe",
     "tag": "BASIC",
-    "scrollNumber": 6,
-    "transition": 200,
+    "scrollNumber": 60,
+    "transition": 0,
     "easing": "linear",
     "items": [{
       "id": "background",
@@ -26,8 +26,56 @@
       "effects": [{
         "property": "transform",
         "start": "translateY(0px)",
-        "end": "translateY(-700px)",
-        "startAt": 2
+        "end": "translateY(-700px)"
+      }]
+    }]
+  }, {
+    "id": "image",
+    "scrollNumber": 4,
+    "transition": 500,
+    "items": [{
+      "id": "cube",
+      "effects": [{
+        "property": "backgroundImage",
+        "start": "url('http://7xiryd.com1.z0.glb.clouddn.com/perspective_cube_1.png')",
+        "end": "url('http://7xiryd.com1.z0.glb.clouddn.com/perspective_cube_5.png')"
+      }]
+    }]
+  }, {
+    "id": "opacity",
+    "transition": 2000,
+    "items": [{
+      "id": "opacity",
+      "effects": [{
+        "property": "opacity",
+        "start": "0",
+        "end": "0.9"
+      }, {
+        "property": "transform",
+        "start": "translateY(0px)",
+        "end": "translateY(-50px)"
+      }]
+    }]
+  }, {
+    "id": "color",
+    "transition": 2000,
+    "items": [{
+      "id": "battery",
+      "effects": [{
+        "property": "width",
+        "start": "100px",
+        "end": "200px"
+      }, {
+        "property": "backgroundColor",
+        "start": "#fd0",
+        "end": "#0f0"
+      }]
+    }, {
+      "id": "text",
+      "effects": [{
+        "property": "color",
+        "start": "#fd0",
+        "end": "#0f0"
       }]
     }]
   }]

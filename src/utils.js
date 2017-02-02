@@ -14,29 +14,22 @@ const getObjectFromArrById = (arr, id) => {
   }
 }
 
-// 将表示颜色值的#XXX或#XXXXXX字符串转换为rgb(X,X,X)
-const colorToRgb = str => {
-  let colorRgb = 'rgb('
-  let colorHex = str.toLowerCase()
-  let i
-  if (colorHex.length === 4) {
-    let colorHexFull = '#'
-    for (i = 1; i < 4; i++) {
-      colorHexFull += colorHex.slice(i, i + 1).concat(colorHex.slice(i, i + 1))
-    }
-    colorHex = colorHexFull
+const is = color => {
+  const formats = {
+    hsl: /^hsl\(\s*\d{1,3}\s*,\s*\d{1,3}%\s*,\s*\d{1,3}%\s*(,\s*[\d\.]+)?\s*\)$/,
+    hsla: /^hsla\(\s*\d{1,3}\s*,\s*\d{1,3}%\s*,\s*\d{1,3}%\s*(,\s*[\d\.]+)?\s*\)$/,
+    hex: /^#[a-f0-9]{3}([a-f0-9]{3})?$/i
   }
-  for (i = 1; i < 4; i++) {
-    colorRgb += parseInt('0x' + colorHex.slice(2 * i - 1, 2 * i + 1)).toString()
-    if (i < 3) {
-      colorRgb += ','
+  for (const format in formats) {
+    if (formats.hasOwnProperty(format)) {
+      if (formats[format].test(color)) {
+        return format
+      }
     }
   }
-  colorRgb += ')'
-  return colorRgb
 }
 
 export {
   getObjectFromArrById,
-  colorToRgb
+  is
 }

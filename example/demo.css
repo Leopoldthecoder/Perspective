@@ -66,13 +66,13 @@ html, body {
 #container1 .div1 {
   height: 130%;
   width: 100%;
-  background-image: url('http://7xiryd.com1.z0.glb.clouddn.com/perspective_universe-background.jpg');
+  background-image: url('./assets/perspective_universe-background.jpg');
 }
 
 #container1 .div2 {
   height: 180px;
   width: 180px;
-  background-image: url('http://7xiryd.com1.z0.glb.clouddn.com/perspective_planet_1.png');
+  background-image: url('./assets/perspective_planet_1.png');
   top: 600px;
   left: 60%;
   z-index: 1;
@@ -82,7 +82,7 @@ html, body {
 #container1 .div3 {
   height: 900px;
   width: 900px;
-  background-image: url('http://7xiryd.com1.z0.glb.clouddn.com/perspective_planet_2.png');
+  background-image: url('./assets/perspective_planet_2.png');
   top: 500px;
   left: -20%;
   z-index: 1;
@@ -109,7 +109,7 @@ p {
 #container2 .div1 {
   height: 490px;
   width: 450px;
-  background-image: url('http://7xiryd.com1.z0.glb.clouddn.com/perspective_cube_1.png');
+  background-image: url('./assets/perspective_cube_1.png');
   background-repeat: no-repeat;
   top: 50%;
   left: 50%;
@@ -126,14 +126,14 @@ p {
 #container3 .div1 {
   height: 100%;
   width: 100%;
-  background-image: url('http://7xiryd.com1.z0.glb.clouddn.com/perspective_wood.jpg');
+  background-image: url('./assets/perspective_wood.jpg');
   background-size: cover;
 }
 
 #container3 .div2 {
   height: 150%;
   width: 100%;
-  background-image: url('http://7xiryd.com1.z0.glb.clouddn.com/perspective_text.png');
+  background-image: url('./assets/perspective_text.png');
   background-size: cover;
   background-repeat: no-repeat;
   top: -30%;
@@ -156,7 +156,7 @@ p {
 }
 
 #container4 .div2 {
-  background: url('http://7xiryd.com1.z0.glb.clouddn.com/perspective_battery.png') no-repeat;
+  background: url('./assets/perspective_battery.png') no-repeat;
   background-size: contain;
   height: 140px;
   width: 280px;
@@ -237,7 +237,7 @@ p {
   width: 80%;
   left: 10%;
   top: 10%;
-  background-image:  url('http://7xiryd.com1.z0.glb.clouddn.com/perspective_sky.jpg');
+  background-image:  url('./assets/perspective_sky.jpg');
   background-size: cover;
   background-repeat: no-repeat;
 }
