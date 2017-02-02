@@ -178,11 +178,4 @@ class Hover {
   }
 }
 
-/**
- * perspective.hover
- * @param {string|Object} target - dom target to apply hover effects
- * @param {Object} config - config object
- */
-export default function(target, config) {
-  new Hover(target, config)
-}
+export default Hover

@@ -1,7 +1,7 @@
-import hover from './hover'
-import scroll from './scroller'
+import PerspectiveHover from './hover'
+import PerspectiveScroll from './scroller'
 
-export default {
-  hover,
-  scroll
+export {
+  PerspectiveHover,
+  PerspectiveScroll
 }
