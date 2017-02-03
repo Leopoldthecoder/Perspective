@@ -2,7 +2,10 @@
 import scrollConfig from './scroll.json'
 
 function start() {
-  new PerspectiveScroll('#wrap', scrollConfig)
+  const scroll = new PerspectiveScroll('#wrap', scrollConfig)
+  setTimeout(_ => {
+    scroll.setActiveStage('image')
+  }, 2000)
 }
 
 window.onload = start
