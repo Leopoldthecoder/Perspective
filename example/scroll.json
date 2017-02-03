@@ -37,8 +37,8 @@
       "id": "cube",
       "effects": [{
         "property": "backgroundImage",
-        "start": "url('http://7xiryd.com1.z0.glb.clouddn.com/perspective_cube_1.png')",
-        "end": "url('http://7xiryd.com1.z0.glb.clouddn.com/perspective_cube_5.png')"
+        "start": "url('./assets/perspective_cube_1.png')",
+        "end": "url('./assets/perspective_cube_5.png')"
       }]
     }]
   }, {
@@ -58,7 +58,8 @@
     }]
   }, {
     "id": "color",
-    "transition": 2000,
+    "scrollNumber": 7,
+    "transition": 500,
     "items": [{
       "id": "battery",
       "effects": [{
@@ -67,15 +68,15 @@
         "end": "200px"
       }, {
         "property": "backgroundColor",
-        "start": "#fd0",
-        "end": "#0f0"
+        "start": "hsla(150, 100%, 50%, 1)",
+        "end": "hsla(50, 100%, 50%, 0.3)"
       }]
     }, {
       "id": "text",
       "effects": [{
         "property": "color",
-        "start": "#fd0",
-        "end": "#0f0"
+        "start": "hsl(50, 100%, 50%)",
+        "end": "hsl(150, 100%, 50%)"
       }]
     }]
   }]

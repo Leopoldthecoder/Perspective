@@ -1,7 +1,8 @@
 import walk from 'dom-walk'
 import objectAssign from 'object-assign'
-// import convert from 'color-convert'
+import convert from 'color-convert'
 import { getObjectFromArrById, is } from './utils'
+window.convert = convert
 
 const defaultConfig = {
   showIndicator: true,
@@ -18,6 +19,7 @@ const defaultStageConfig = {
   items: []
 }
 const numberRegExp = new RegExp(/-?\d+(?:\.\d+)?/, 'g')
+const vendors = ['webkit', 'ms', 'moz', '']
 
 class Scroll {
   constructor(target, config) {
@@ -114,14 +116,17 @@ class Scroll {
   }
 
   static getCurrentStyleValue(effect, step) {
-    const { startAt, endAt, startNumbers, endNumbers, strings } = effect
+    const { startAt, endAt, startNumbers, endNumbers, strings, isColor } = effect
     step = Math.max(startAt, step)
     step = Math.min(endAt, step)
     let result = strings[0]
+    let alphaIndex = -1
     if (startNumbers && startNumbers.length > 0) {
       startNumbers.forEach((startNumber, index) => {
-        const stepNumber = startNumber + (step - startAt) *
+        if ((/rgba/).test(strings[index])) alphaIndex = index + 3
+        let stepNumber = startNumber + (step - startAt) *
           (endNumbers[index] - startNumber) / (endAt - startAt)
+        if (isColor && index !== alphaIndex) stepNumber = Math.round(stepNumber)
         result += `${ stepNumber }${ strings[index + 1] }`
       })
     }
@@ -130,7 +135,25 @@ class Scroll {
 
   static processColorValues(effect) {
     ['start', 'end'].forEach(key => {
-      console.log(is(effect[key]))
+      let effectValue = effect[key]
+      const effectFormat = is(effectValue)
+      if (!effectFormat) return
+      effect.isColor = true
+      if (effectFormat === 'hex') {
+        effectValue = `
+          rgb(${ convert.hex.rgb(effectValue).join(',') })
+        `
+      } else if (effectFormat === 'hsl') {
+        const [hue, saturation, lightness, alpha] =
+          effectValue
+          .match(/hsla?\((.*)\)/)[1]
+          .split(/\s*,\s*/)
+          .map(value => parseFloat(value))
+        effectValue = `
+          rgba(${ convert.hsl.rgb([hue, saturation, lightness]).join(',') }, ${ alpha === undefined ? 1 : alpha })
+        `
+      }
+      effect[key] = effectValue
     })
   }
 
@@ -153,7 +176,10 @@ class Scroll {
 
   handleActiveStageChange() {
     this.animating = true
-    this.target.style.transform = `translateY(${ -this.activeStageIndex * 100 }%)`
+    vendors.forEach(vendor => {
+      const property = vendor.length ? `${ vendor }Transform` : 'transform'
+      this.target.style[property] = `translateY(${ -this.activeStageIndex * 100 }%)`
+    })
     setTimeout(_ => {
       this.animating = false
     }, Number(this.config.stageSwitchTransition) + Number(this.config.disableAfterSwitching))
