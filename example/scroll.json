@@ -3,7 +3,6 @@
   "indicatorPosition": "left",
   "stages": [{
     "id": "universe",
-    "tag": "BASIC",
     "scrollNumber": 60,
     "transition": 0,
     "easing": "linear",
