@@ -317,9 +317,9 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-doran@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/eslint-config-doran/-/eslint-config-doran-1.0.4.tgz#85ad31b4ba1c9a14f2e713acf522f8424ba91368"
+eslint-config-doran@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/eslint-config-doran/-/eslint-config-doran-1.0.5.tgz#9a83671f707e5ca1bb51e1016515c2d5a9a84ed6"
 
 eslint@^3.4.0:
   version "3.14.0"

@@ -16,7 +16,6 @@ const getObjectFromArrById = (arr, id) => {
 
 const is = color => {
   const formats = {
-    // hsl: new RegExp(/^hsl\(\s*\d{1,3}\s*,\s*\d{1,3}%\s*,\s*\d{1,3}%\s*(,\s*[\d\.]+)?\s*\)$/),
     hsl: new RegExp(/^hsla?\(\s*\d{1,3}\s*,\s*\d{1,3}%\s*,\s*\d{1,3}%\s*(,\s*[\d\.]+)?\s*\)$/),
     hex: new RegExp(/^#[a-f0-9]{3}([a-f0-9]{3})?$/, 'i')
   }

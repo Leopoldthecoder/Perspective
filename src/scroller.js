@@ -43,7 +43,11 @@ class Scroll {
 
     this.initStages()
     this.processStages()
+    this.defineActiveStage()
+    this.addEventListeners()
+  }
 
+  defineActiveStage() {
     let activeStage = this.stages[this.activeStageIndex]
     const self = this
     Object.defineProperty(this, 'activeStage', {
@@ -52,13 +56,23 @@ class Scroll {
       },
       set: function(value) {
         if (value === activeStage) return
+        self.target.dispatchEvent(new CustomEvent('stage-change', {
+          detail: {
+            previous: {
+              id: activeStage.id,
+              node: activeStage.node
+            },
+            current: {
+              id: value.id,
+              node: value.node
+            }
+          }
+        }))
         activeStage = value
         self.activeStageIndex = self.stages.findIndex(stage => stage === value)
         self.handleActiveStageChange()
       }
     })
-
-    this.addEventListeners()
   }
 
   addEventListeners() {
@@ -128,8 +142,7 @@ class Scroll {
 
   static getCurrentStyleValue(effect, step) {
     const { startAt, endAt, startNumbers, endNumbers, strings, isColor } = effect
-    step = Math.max(startAt, step)
-    step = Math.min(endAt, step)
+    step = Math.min(endAt, Math.max(startAt, step))
     let result = strings[0]
     let alphaIndex = -1
     if (startNumbers && startNumbers.length > 0) {
@@ -177,10 +190,10 @@ class Scroll {
       this.activeStage.step = oldIndex < newIndex
         ? 0
         : Number(this.activeStage.stageConfig.scrollNumber)
-      this.handleStepChange(false)
+      this.handleStepChange(false, false)
     } else {
       this.activeStage.step = 0
-      this.handleStepChange(false)
+      this.handleStepChange(false, false)
     }
   }
 
@@ -197,17 +210,19 @@ class Scroll {
   }
 
   setStep(step) {
-    if (typeof step !== 'number') throw new Error(`${ step } is not a number`)
+    const type = typeof step
+    if (type !== 'number') throw new Error(`step should be not a number, got ${ type }`)
     if (step < 0 || step > Number(this.activeStage.stageConfig.scrollNumber)) {
       throw new Error(`
-        ${ step } should be within [0, ${ this.activeStage.stageConfig.scrollNumber }]
+        step should be within [0, ${ this.activeStage.stageConfig.scrollNumber }], got ${ step }
       `)
     }
+    if (this.activeStage.step === step) return
     this.activeStage.step = step
     this.handleStepChange()
   }
 
-  handleStepChange(needTransition = true) {
+  handleStepChange(needTransition = true, dispatchEvent = true) {
     const step = this.activeStage.step
     const stageConfig = this.activeStage.stageConfig
     const activeIndex = this.activeStageIndex
@@ -235,6 +250,19 @@ class Scroll {
           item.node.style[effect.property] = this.constructor.getCurrentStyleValue(effect, step)
         })
       })
+
+      if (dispatchEvent) {
+        this.target.dispatchEvent(new CustomEvent('step-change', {
+          detail: {
+            activeStage: {
+              id: this.activeStage.id,
+              node: this.activeStage.node
+            },
+            current: step
+          }
+        }))
+      }
+
       this.animatingTimeout = setTimeout(_ => {
         this.animating = false
       }, needTransition ? Number(stageConfig.transition) : 0)
