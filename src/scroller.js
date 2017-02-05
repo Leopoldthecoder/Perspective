@@ -1,8 +1,8 @@
 import walk from 'dom-walk'
 import objectAssign from 'object-assign'
 import convert from 'color-convert'
+import throttle from 'throttle-debounce/throttle'
 import { getObjectFromArrById, is } from './utils'
-window.convert = convert
 
 const defaultConfig = {
   showIndicator: true,
@@ -37,29 +37,40 @@ class Scroll {
     this.target = target
     this.config = config
     this.animating = false
+    this.switching = false
     this.stages = []
-    this.activeStageIndex = -1
+    this.activeStageIndex = 0
 
-    let activeStage
+    this.initStages()
+    this.processStages()
+
+    let activeStage = this.stages[this.activeStageIndex]
     const self = this
     Object.defineProperty(this, 'activeStage', {
       get: function() {
         return activeStage
       },
       set: function(value) {
+        if (value === activeStage) return
         activeStage = value
         self.activeStageIndex = self.stages.findIndex(stage => stage === value)
         self.handleActiveStageChange()
       }
     })
 
-    this.initStages()
-    this.processStages()
-    // TODO
-    this.activeStage = this.stages[0]
+    this.addEventListeners()
+  }
 
-    document.addEventListener('mousewheel', this.handleScroll.bind(this))
-    document.addEventListener('DOMMouseScroll', this.handleScroll.bind(this))
+  addEventListeners() {
+    this.boundHandleScroll = this.handleScroll.bind(this)
+    this.throttledHandleStepChange = throttle(50, true, this.handleStepChange, true)
+    document.addEventListener('mousewheel', this.boundHandleScroll)
+    document.addEventListener('DOMMouseScroll', this.boundHandleScroll)
+  }
+
+  removeEventListeners() {
+    document.removeEventListener('mousewheel', this.boundHandleScroll)
+    document.removeEventListener('DOMMouseScroll', this.boundHandleScroll)
   }
 
   initStages() {
@@ -160,7 +171,6 @@ class Scroll {
   setActiveStage(id, changeByScroll = false) {
     if (this.activeStage.id === id) return
     const oldIndex = this.activeStageIndex
-    // if (!changeByScroll) this.activeStage.step = 0
     this.activeStage = getObjectFromArrById(this.stages, id) || this.stages[0]
     const newIndex = this.activeStageIndex
     if (changeByScroll) {
@@ -175,13 +185,14 @@ class Scroll {
   }
 
   handleActiveStageChange() {
-    this.animating = true
+    clearTimeout(this.switchingTimeout)
+    this.switching = true
     vendors.forEach(vendor => {
       const property = vendor.length ? `${ vendor }Transform` : 'transform'
       this.target.style[property] = `translateY(${ -this.activeStageIndex * 100 }%)`
     })
-    setTimeout(_ => {
-      this.animating = false
+    this.switchingTimeout = setTimeout(_ => {
+      this.switching = false
     }, Number(this.config.stageSwitchTransition) + Number(this.config.disableAfterSwitching))
   }
 
@@ -214,6 +225,7 @@ class Scroll {
       }
       this.setActiveStage(this.stages[activeIndex - 1].id, true)
     } else {
+      clearTimeout(this.animatingTimeout)
       this.animating = true
       stageConfig.items.forEach(item => {
         item.node.style.transition = needTransition
@@ -223,19 +235,20 @@ class Scroll {
           item.node.style[effect.property] = this.constructor.getCurrentStyleValue(effect, step)
         })
       })
-      setTimeout(_ => {
+      this.animatingTimeout = setTimeout(_ => {
         this.animating = false
-      }, Number(stageConfig.transition))
+      }, needTransition ? Number(stageConfig.transition) : 0)
     }
   }
 
   handleScroll(event) {
-    if (this.animating) return
+    event.preventDefault()
+    if (this.animating || this.switching) return
 
     const wheelDirection = event.wheelDelta ? event.wheelDelta : -event.detail
     this.activeStage.step += wheelDirection < 0 ? 1 : -1
 
-    window.requestAnimationFrame(this.handleStepChange.bind(this))
+    this.throttledHandleStepChange()
   }
 }
 export default Scroll
