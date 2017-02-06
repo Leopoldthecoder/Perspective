@@ -29,15 +29,15 @@
       }]
     }]
   }, {
-    "id": "image",
-    "scrollNumber": 4,
-    "transition": 500,
+    "id": "svg",
+    "scrollNumber": 10,
+    "transition": 200,
     "items": [{
-      "id": "cube",
+      "id": "dash",
       "effects": [{
-        "property": "backgroundImage",
-        "start": "url('./assets/perspective_cube_1.png')",
-        "end": "url('./assets/perspective_cube_5.png')"
+        "property": "strokeDasharray",
+        "start": "0 126",
+        "end": "126 0"
       }]
     }]
   }, {

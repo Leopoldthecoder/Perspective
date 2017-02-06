@@ -102,24 +102,30 @@ p {
 }
 
 #container2 {
-  background-color: #de5;
+  background-color: #befffd;
 }
 
-#container2 .div1 {
-  height: 490px;
-  width: 450px;
-  background-image: url('./assets/perspective_cube_1.png');
-  background-repeat: no-repeat;
-  top: 50%;
+#container2 .circular {
+  height: 500px;
+  width: 500px;
+  position: absolute;
+  top: 40%;
   left: 50%;
-  margin-top: -245px;
-  margin-left: -225px;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+#container2 .path {
+  stroke-dasharray: 0;
+  stroke-dashoffset: -32;
+  stroke-width: 2;
+  stroke: teal;
 }
 
 #container2 p {
-  top: 40%;
-  left: 65%;
-  color: #d24820;
+  bottom: 100px;
+  width: 100%;
+  text-align: center;
+  color: #00d6d6;
 }
 
 #container3 .div1 {

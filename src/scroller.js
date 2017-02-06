@@ -7,8 +7,9 @@ import { getObjectFromArrById, is } from './utils'
 const defaultConfig = {
   showIndicator: true,
   indicatorPosition: 'left',
-  stageSwitchTransition: 500,
-  stageSwitchEasing: 'ease',
+  stageSwitchTransition: 800,
+  stageSwitchDelay: 0,
+  stageSwitchEasing: 'cubic-bezier(.86, 0, .07, 1)',
   disableAfterSwitching: 500,
   stages: []
 }
@@ -31,7 +32,7 @@ class Scroll {
     }
     config = objectAssign({}, defaultConfig, config)
     target.style.transition = `
-      ${ config.stageSwitchTransition }ms ${ config.stageSwitchEasing }
+      ${ config.stageSwitchTransition }ms ${ config.stageSwitchEasing } ${ config.stageSwitchDelay }ms
     `
 
     this.target = target
@@ -78,13 +79,11 @@ class Scroll {
   addEventListeners() {
     this.boundHandleScroll = this.handleScroll.bind(this)
     this.throttledHandleStepChange = throttle(50, true, this.handleStepChange, true)
-    document.addEventListener('mousewheel', this.boundHandleScroll)
-    document.addEventListener('DOMMouseScroll', this.boundHandleScroll)
+    document.addEventListener('wheel', this.boundHandleScroll)
   }
 
   removeEventListeners() {
-    document.removeEventListener('mousewheel', this.boundHandleScroll)
-    document.removeEventListener('DOMMouseScroll', this.boundHandleScroll)
+    document.removeEventListener('wheel', this.boundHandleScroll)
   }
 
   initStages() {
@@ -170,9 +169,9 @@ class Scroll {
       } else if (effectFormat === 'hsl') {
         const [hue, saturation, lightness, alpha] =
           effectValue
-          .match(/hsla?\((.*)\)/)[1]
-          .split(/\s*,\s*/)
-          .map(value => parseFloat(value))
+            .match(/hsla?\((.*)\)/)[1]
+            .split(/\s*,\s*/)
+            .map(value => parseFloat(value))
         effectValue = `
           rgba(${ convert.hsl.rgb([hue, saturation, lightness]).join(',') }, ${ alpha === undefined ? 1 : alpha })
         `
@@ -273,9 +272,7 @@ class Scroll {
     event.preventDefault()
     if (this.animating || this.switching) return
 
-    const wheelDirection = event.wheelDelta ? event.wheelDelta : -event.detail
-    this.activeStage.step += wheelDirection < 0 ? 1 : -1
-
+    this.activeStage.step += event.deltaY > 0 ? 1 : -1
     this.throttledHandleStepChange()
   }
 }
