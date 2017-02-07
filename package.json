@@ -4,7 +4,7 @@
   "description": "Parallax scrolling effect. And more.",
   "main": "perspective.min.js",
   "scripts": {
-    "dev": "rollup -c build/dev.js -w --output=docs/demo.min.js docs/demo.js",
+    "dev": "rollup -c build/dev.js -w --output=docs/examples/demo.min.js docs/examples/demo.js",
     "dist": "node build/build.js"
   },
   "repository": {

@@ -6,7 +6,7 @@ import nodeResolve from 'rollup-plugin-node-resolve'
 import uglify from 'rollup-plugin-uglify'
 
 export default {
-  entry: 'docs/demo.js',
+  entry: 'docs/examples/demo.js',
   format: 'cjs',
   plugins: [eslint(), json(), buble(), commonjs(), nodeResolve(), uglify()]
 }

@@ -1,4 +1,4 @@
-﻿import { PerspectiveScroll } from '../src/index'
+﻿import { PerspectiveScroll } from '../../src/index'
 import scrollConfig from './scroll.json'
 
 function start() {
