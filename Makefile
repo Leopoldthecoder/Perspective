@@ -5,6 +5,3 @@ dev:
 
 dist:
 	@npm run dist
-
-test:
-	@./node_modules/.bin/nyc npm test

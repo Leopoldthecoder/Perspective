@@ -1,6 +1,4 @@
 {
-  "showIndicator": true,
-  "indicatorPosition": "left",
   "stages": [{
     "id": "universe",
     "scrollNumber": 60,
