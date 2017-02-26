@@ -1,20 +1,31 @@
 # Introduction
-Parallax scrolling/hovering effect. And more.
+Parallax scrolling / hovering effect. And more.
 
-[Demo](http://leopoldthecoder.github.io/Perspective/examples)
-## Features
-A standalone Javascript library to make dashing scrolling/hovering effects. Inspired by awesome parallax scrolling websites, but can do much more than that. Any CSS properties with number values are supported.
-## Installation
-Just include `perspective.min.js` in your HTML file:
-```html
-<script type="text/javascript" src="/path/to/perspective.min.js"></script>
+To give you an idea of what Perspective.js can do, I've prepared an [example](https://perspective.js.org/examples/).
+
+# Features
+- Parallax scroll and parallax tilt hover effects
+- Any CSS properties with number values are supported
+- Written with vanilla JavaScript
+
+# Installation
+## npm
+```bash
+npm install perspective.js
+# or
+yarn add perspective.js
 ```
-## Perspective.scroll Usage
-### How it works
+
+## CDN
+```html
+<script type="text/javascript" src="//unpkg.com/perspective.js"></script>
+```
+# Perspective.scroll
+## How it works
 Tell Perspective.scroll the initial and final CSS stats of the element you want to add scrolling effects on, and how many scrolls the effects will last. It calculates corresponding CSS values of each scroll based on scroll number of that element.
 
 So any CSS property that uses number as its value is supported, such as `height`, `top`, `transform`, `opacity` and `color`. For color values, hexadecimal notation, RGB(a) notation and HSL notation are all supported.
-### HTML structure
+## HTML structure
 ![HTML structure](HTML structure.png)
 As shown above, your HTML should look something like this:
 ```html
@@ -34,7 +45,7 @@ There are two properties you can add to `.container` tag:
 <div class="container" data-scroll-tag="container name" data-scroll-number=5>...</div>
 ```
 `data-scroll-tag` is used to generate a control panel with which you can go through each container. The value of `data-scroll-tag` shows what this container is about. `data-scroll-number` tells Perspective.scroll how many scrolls the effects will last.
-### Javascript function call
+## Javascript function call
 For each `.container` element, a two dimensional array should be passed to Perspective.scroll:
 ```javascript
 var cssArr_1 = [[CSS stats of child element 1], ..., [CSS stats of child element n]],
@@ -72,9 +83,10 @@ Perspective.scroll accepts another parameter which is also an array. Its element
 perspective.scroll(cssArr_1, ..., cssArr_n, [transition value 1, ..., transition value m]);
 ```
 This array is optional. All `.container` elements have a default `0.2s` for `transtion` property.
-## Perspective.hover Usage
+
+# Perspective.hover
 Perspective.hover is fairly easy to use compared to Perspective.scroll.
-### HTML structure
+## HTML structure
 ```html
 <div data-perspective="hover">
   <div data-hover-speed=0.04>...</div>
@@ -84,12 +96,13 @@ Perspective.hover is fairly easy to use compared to Perspective.scroll.
 Simply add `data-perspective="hover"` to the parent element and all its child element will have a parallax hover effect.
 
 `data-hover-speed` tells Perspective.hover how fast the element moves as you hover on it. This property is optional, and its default value is `0.2`.
-### Javascript function call
+## Javascript function call
 ```javascript
 perspective.hover(isHoming);
 ```
 Optional `isHoming` decided if elements go back to where they originally were when your mouse move out of them. Its default value is `true`.
-## Example
+
+# Example
 HTML:
 ```html
 <div class="stage" data-perspective="scroll">
@@ -139,11 +152,5 @@ cssArr_3 = [];
 perspective.scroll(cssArr1, cssArr2, cssArr3, [0, 0.5, 0]);
 perspective.hover();
 ```
-## Notice
+# Notice
 All class names used above are not mandatory. Use whatever class names you like.
-
-# Scroll
-TODO
-
-# Hover
-TODO

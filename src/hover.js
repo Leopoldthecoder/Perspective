@@ -1,5 +1,5 @@
-import objectAssign from 'object-assign'
 import walk from 'dom-walk'
+import { merge } from './utils'
 
 const defaultConfig = {
   layers: [],
@@ -21,7 +21,7 @@ class Hover {
     if (!target || target.nodeType !== 1) {
       throw new Error('Cannot find target dom to apply hover effects')
     }
-    config = objectAssign({}, defaultConfig, config)
+    config = merge({}, [defaultConfig, config])
 
     this.target = target
     this.config = config
@@ -33,11 +33,11 @@ class Hover {
       if (layer) {
         const configSpeed = config.layers[Number(layer)].speed
         if (!configSpeed) throw new Error(`Missing translate config for ${ layer }`)
-        this.layers.push(objectAssign({
+        this.layers.push(merge({
           node,
           speed: configSpeed === undefined ? 0.2 : configSpeed,
           reverse: !!config.layers[Number(layer)].reverse
-        }, this.constructor.getInitialTransformMatrix(node)))
+        }, [this.constructor.getInitialTransformMatrix(node)]))
       }
     })
     this.target.style.transform = `perspective(${ this.config.perspective }px)`

@@ -2,7 +2,7 @@
   "name": "perspective.js",
   "version": "0.1.0",
   "description": "Parallax scrolling effect. And more.",
-  "main": "perspective.min.js",
+  "main": "lib/perspective.min.js",
   "scripts": {
     "dev": "rollup -c build/dev.js -w --output=docs/examples/demo.min.js",
     "build:package": "node build/build.js",
@@ -37,7 +37,6 @@
   "dependencies": {
     "color-convert": "^1.9.0",
     "dom-walk": "^0.1.1",
-    "object-assign": "^4.1.1",
     "throttle-debounce": "^1.0.1"
   }
 }

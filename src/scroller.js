@@ -1,8 +1,7 @@
 import walk from 'dom-walk'
-import objectAssign from 'object-assign'
 import convert from 'color-convert'
 import throttle from 'throttle-debounce/throttle'
-import { getObjectFromArrById, is } from './utils'
+import { getObjectFromArrById, is, merge } from './utils'
 
 const defaultConfig = {
   showIndicator: true,
@@ -30,7 +29,7 @@ class Scroll {
     if (!target || target.nodeType !== 1) {
       throw new Error('Cannot find target dom to apply scroll effects')
     }
-    config = objectAssign({}, defaultConfig, config)
+    config = merge({}, [defaultConfig, config])
     target.style.overflow = 'hidden'
 
     this.target = target
@@ -100,7 +99,7 @@ class Scroll {
         `
         this.stages.push({
           node,
-          stageConfig: objectAssign({}, defaultStageConfig, stageConfig),
+          stageConfig: merge({}, [defaultStageConfig, stageConfig]),
           id: stageId,
           step: 0
         })

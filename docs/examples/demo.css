@@ -127,12 +127,12 @@ p {
 
 #container2 .battery::after {
   content: " ";
-  width: 10px;
-  height: 40px;
+  width: 13px;
+  height: 50px;
   border-radius: 4px;
   position: absolute;
-  right: -10px;
-  top: 50px;
+  right: -13px;
+  top: 45px;
   background-color: #666;
 }
 
