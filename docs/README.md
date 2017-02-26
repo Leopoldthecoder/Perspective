@@ -24,8 +24,9 @@ import { PerspectiveScroll, PerspectiveHover } from 'perspective.js'
 ## CDN
 ```html
 <script type="text/javascript" src="//unpkg.com/perspective.js"></script>
-Once loaded, Perspective.js will register `PerspectiveScroll` and `PerspectiveHover` to the `window` object.
 ```
+Once loaded, Perspective.js will register `PerspectiveScroll` and `PerspectiveHover` to the `window` object.
+
 # PerspectiveScroll
 ## How it works
 Tell Perspective.scroll the initial and final CSS stats of the element you want to add scrolling effects on, and how many scrolls the effects will last. It calculates corresponding CSS values of each scroll based on scroll number of that element.
@@ -93,23 +94,8 @@ This array is optional. All `.container` elements have a default `0.2s` for `tra
 ## Events
 | Event Name | Description | Parameters |
 |---------|--------|---------|
-| step-change | triggers each time current step changes | detail: {
-activeStage: {
-id of the active stage,
-DOM node of the active stage
-},
-current step
-} |
-| stage-change | triggers when the active stage changes | detail: {
-previous: {
-id of the previously active stage,
-DOM node of the previously active stage
-},
-current: {
-id of the currently active stage,
-DOM node of the currently active stage
-}
-} |
+| step-change | triggers each time current step changes | activeStage: { id of the active stage, DOM node of the active stage }, current step |
+| stage-change | triggers when the active stage changes | previous: { id of the previously active stage, DOM node of the previously active stage }, current: { id of the currently active stage, DOM node of the currently active stage } |
 | scroll-out | triggers when user scrolls out of all stages | detail: { direction: 'bottom' / 'top' } |
 
 # PerspectiveHover
