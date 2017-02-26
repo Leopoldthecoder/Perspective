@@ -16,7 +16,7 @@ npm install perspective.js
 yarn add perspective.js
 ```
 
-Than in your project you can
+Than in your project
 ```javascript
 import { PerspectiveScroll, PerspectiveHover } from 'perspective.js'
 ```
