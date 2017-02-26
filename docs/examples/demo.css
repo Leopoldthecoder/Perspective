@@ -5,7 +5,7 @@
 
 html, body {
   height: 100%;
-  font-family: 'Helvetica Neue',Helvetica,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',SimSun,sans-serif;
+  font-family: monospace,sans-serif;
 }
 
 .screen {
@@ -13,35 +13,6 @@ html, body {
   width: 100%;
   margin: 0 auto;
   position: relative;
-}
-
-.inst {
-  width: 100%;
-  position: absolute;
-  bottom: 20px;
-  font-size: 40px;
-  text-shadow:  3px 3px 5px black;
-  cursor: default;
-  color: #fff;
-  text-align: center;
-  z-index: 100;
-  transition: opacity .4s ease-in;
-}
-
-@keyframes fla {
-  0% {
-    color: #777;
-  }
-  50% {
-    color: #fff;
-  }
-  100% {
-    color: #777;
-  }
-}
-
-.flash {
-  animation: fla 2s infinite;
 }
 
 .wrap {
@@ -62,199 +33,180 @@ html, body {
   position: absolute;
 }
 
+p {
+  font-size: 60px;
+  font-weight: bold;
+  color: #509b35;
+  cursor: default;
+}
+
+#container1 {
+  background-color: #fffaf1;
+}
+
 #container1 .div1 {
-  height: 130%;
+  height: 200%;
   width: 100%;
-  background-image: url('./assets/perspective_universe-background.jpg');
+  background: url('./assets/backstage.svg') 0 0 repeat;
 }
 
 #container1 .div2 {
-  height: 180px;
-  width: 180px;
-  background-image: url('./assets/perspective_planet_1.png');
-  top: 600px;
-  left: 60%;
+  height: 200%;
+  width: 100%;
+  background: url('./assets/middlestage.svg') 0 0 repeat;
   z-index: 1;
-  background-size: cover;
 }
 
 #container1 .div3 {
-  height: 900px;
-  width: 900px;
-  background-image: url('./assets/perspective_planet_2.png');
-  top: 500px;
-  left: -20%;
+  height: 200%;
+  width: 100%;
+  background: url('./assets/frontstage.svg') 0 0 repeat;
   z-index: 1;
-  background-size: cover;
-}
-
-p {
-  font-size: 70px;
-  font-weight: bold;
-  color: #fff;
-  text-shadow: 3px 3px 5px black;
-  cursor: default;
 }
 
 #container1 p {
   top: 40%;
-  left: 40%;
+  font-size: 80px;
+  width: 100%;
+  text-align: center;
+}
+
+#container3 {
+  background-color: #fffaf1;
+}
+
+#container3 svg {
+  fill: none;
+  stroke: #666;
+  stroke-width: 2;
+  width: 40%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 100px;
+}
+
+#container3 p {
+  position: static;
+}
+
+#container3 .text-wrapper {
+  width: 100%;
+  height: 80px;
+  overflow: hidden;
+  position: absolute;
+  bottom: 100px;
+  text-align: center;
+}
+
+#container3 .shadow {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(90deg, transparent, #fffaf1 10%, #fffaf1);
 }
 
 #container2 {
-  background-color: #befffd;
+  background-color: #fffaf1;
 }
 
-#container2 .circular {
-  height: 500px;
-  width: 500px;
+#container2 .battery {
+  width: 300px;
+  height: 150px;
+  background-color: transparent;
+  border-radius: 20px;
+  border: solid 5px #666;
+  padding: 20px;
+  left: 50%;
+  top: 50%;
+  box-sizing: border-box;
+  transform: translateX(-50%) translateY(-80%);
+}
+
+#container2 .battery::after {
+  content: " ";
+  width: 10px;
+  height: 40px;
+  border-radius: 4px;
   position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate3d(-50%, -50%, 0);
+  right: -10px;
+  top: 50px;
+  background-color: #666;
 }
 
-#container2 .path {
-  stroke-dasharray: 0;
-  stroke-dashoffset: -32;
-  stroke-width: 2;
-  stroke: teal;
-}
-
-#container2 p {
-  bottom: 100px;
-  width: 100%;
-  text-align: center;
-  color: #00d6d6;
-}
-
-#container3 .div1 {
-  height: 100%;
-  width: 100%;
-  background-image: url('./assets/perspective_wood.jpg');
-  background-size: cover;
-}
-
-#container3 .div2 {
-  height: 150%;
-  width: 100%;
-  background-image: url('./assets/perspective_text.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  top: -30%;
-}
-
-#container4 {
-  background: -webkit-linear-gradient(left,rgba(255,221,0,0.48),rgba(0,255,0,0.28));
-  background: -moz-linear-gradient(left,rgba(255,221,0,0.48),rgba(0,255,0,0.28));
-  background: -o-linear-gradient(left,rgba(255,221,0,0.48),rgba(0,255,0,0.28));
-}
-
-#container4 .div1 {
+#container2 .div1 {
   height: 100px;
-  width: 100px;
+  width: 125px;
   border-radius: 10px;
-  top: 40%;
-  left: 50%;
-  margin-left: -100px;
   background-color: #fd0;
 }
 
-#container4 .div2 {
-  background: url('./assets/perspective_battery.png') no-repeat;
-  background-size: contain;
-  height: 140px;
-  width: 280px;
-  top: 40%;
-  left: 50%;
-  margin-left: -122px;
-  margin-top: -20px;
-}
-
-#container4 p {
-  width: 600px;
+#container2 p {
   text-align: center;
-  color: #5f0;
-  bottom: 30%;
+  width: 100%;
+  color: #209b35;
+  bottom: 100px;
   left: 50%;
-  margin-left: -300px;
+  transform: translate(-50%);
 }
 
-#container5 {
-  -webkit-perspective: 600px;
-  perspective: 600px;
-  background-color: #ddb;
+#container4 {
+  perspective: 150px;
+  background-color: #fffaf1;
 }
 
-#container5 .showcase {
+#container4 .showcase {
   transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
   width: 100%;
   height: 100%;
   position: relative;
 }
 
-#container5 p {
-  font: bold 120px/150px times;
+#container4 p {
+  font: bold 60px/150px monospace;
   height: 150px;
   width: 100%;
   text-align: center;
   top: 50%;
   margin-top: -75px;
-  text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 0 0 12px #000;
-  background-color: #ddb;
+  background-color: transparent;
+  backface-visibility: hidden;
 }
 
-#container5 p:nth-child(1) {
-  -webkit-transform: rotateX(0deg) translateZ(100px);
+#container4 p:nth-child(1) {
   transform: rotateX(0deg) translateZ(100px);
 }
 
-#container5 p:nth-child(2) {
-  -webkit-transform: rotateX(-72deg) translateZ(100px);
-  transform: rotateX(-72deg) translateZ(100px);
+#container4 p:nth-child(2) {
+  transform: rotateX(-40deg) translateZ(100px);
 }
 
-#container5 p:nth-child(3) {
-  -webkit-transform: rotateX(-144deg) translateZ(100px);
-  transform: rotateX(-144deg) translateZ(100px);
+#container4 p:nth-child(3) {
+  transform: rotateX(-80deg) translateZ(100px);
 }
 
-#container5 p:nth-child(4) {
-  -webkit-transform: rotateX(-216deg) translateZ(100px);
-  transform: rotateX(-216deg) translateZ(100px);
+#container4 p:nth-child(4) {
+  transform: rotateX(-120deg) translateZ(100px);
 }
 
-#container5 p:nth-child(5) {
-  -webkit-transform: rotateX(-288deg) translateZ(100px);
-  transform: rotateX(-288deg) translateZ(100px);
+#container4 p:nth-child(5) {
+  transform: rotateX(-160deg) translateZ(100px);
 }
 
-#container6 {
-  height: 100%;;
-  width: 100%;
-  margin: 0 auto;
-  transform-style: preserve-3d;
-  overflow: visible;
-}
-#container6 .div1 {
-  height: 80%;
-  width: 80%;
-  left: 10%;
-  top: 10%;
-  background-image:  url('./assets/perspective_sky.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
+#container4 p:nth-child(6) {
+  transform: rotateX(-200deg) translateZ(100px);
 }
 
-#container6 .div2 {
-  width: 800px;
-  height: 200px;
-  text-align: center;
-  background-color: transparent;
-  left: 50%;
-  top: 50%;
-  margin-top: -100px;
-  margin-left: -400px;
-  transform: translateZ(150px);
+#container4 p:nth-child(7) {
+  transform: rotateX(-240deg) translateZ(100px);
+}
+
+#container4 p:nth-child(8) {
+  transform: rotateX(-280deg) translateZ(100px);
+}
+
+#container4 p:nth-child(9) {
+  transform: rotateX(-320deg) translateZ(100px);
 }

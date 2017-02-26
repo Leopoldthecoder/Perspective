@@ -1,25 +1,25 @@
 {
   "stages": [{
-    "id": "universe",
-    "scrollNumber": 60,
+    "id": "basic",
+    "scrollNumber": 120,
     "transition": 0,
     "easing": "linear",
     "items": [{
-      "id": "background",
+      "id": "backstage",
       "effects": [{
         "property": "transform",
         "start": "translateY(0px)",
         "end": "translateY(-100px)"
       }]
     }, {
-      "id": "satellite",
+      "id": "middlestage",
       "effects": [{
         "property": "transform",
         "start": "translateY(0px)",
         "end": "translateY(-180px)"
       }]
     }, {
-      "id": "planet",
+      "id": "frontstage",
       "effects": [{
         "property": "transform",
         "start": "translateY(0px)",
@@ -28,52 +28,323 @@
     }]
   }, {
     "id": "svg",
-    "scrollNumber": 10,
-    "transition": 200,
-    "items": [{
-      "id": "dash",
-      "effects": [{
-        "property": "strokeDasharray",
-        "start": "0 126",
-        "end": "126 0"
-      }]
-    }]
-  }, {
-    "id": "opacity",
+    "scrollNumber": 1,
     "transition": 2000,
+    "easing": "linear",
     "items": [{
-      "id": "opacity",
+      "id": "offset1",
+      "effects": [{
+        "property": "strokeDashoffset",
+        "start": "2098",
+        "end": "0"
+      }]
+    }, {
+      "id": "offset2",
+      "effects": [{
+        "property": "strokeDashoffset",
+        "start": "406",
+        "end": "0"
+      }]
+    }, {
+      "id": "offset3",
+      "effects": [{
+        "property": "strokeDashoffset",
+        "start": "540",
+        "end": "0"
+      }]
+    }, {
+      "id": "offset4",
+      "effects": [{
+        "property": "strokeDashoffset",
+        "start": "485",
+        "end": "0"
+      }]
+    }, {
+      "id": "offset5",
+      "effects": [{
+        "property": "strokeDashoffset",
+        "start": "81",
+        "end": "0"
+      }]
+    }, {
+      "id": "offset6",
+      "effects": [{
+        "property": "strokeDashoffset",
+        "start": "25",
+        "end": "0"
+      }]
+    }, {
+      "id": "offset7",
+      "effects": [{
+        "property": "strokeDashoffset",
+        "start": "41",
+        "end": "0"
+      }]
+    }, {
+      "id": "offset8",
+      "effects": [{
+        "property": "strokeDashoffset",
+        "start": "224",
+        "end": "0"
+      }]
+    }, {
+      "id": "offset9",
+      "effects": [{
+        "property": "strokeDashoffset",
+        "start": "66",
+        "end": "0"
+      }]
+    }, {
+      "id": "offset10",
+      "effects": [{
+        "property": "strokeDashoffset",
+        "start": "53",
+        "end": "0"
+      }]
+    }, {
+      "id": "offset11",
+      "effects": [{
+        "property": "strokeDashoffset",
+        "start": "192",
+        "end": "0"
+      }]
+    }, {
+      "id": "offset12",
+      "effects": [{
+        "property": "strokeDashoffset",
+        "start": "263",
+        "end": "0"
+      }]
+    }, {
+      "id": "offset13",
+      "effects": [{
+        "property": "strokeDashoffset",
+        "start": "353",
+        "end": "0"
+      }]
+    }, {
+      "id": "offset14",
+      "effects": [{
+        "property": "strokeDashoffset",
+        "start": "80",
+        "end": "0"
+      }]
+    }, {
+      "id": "offset15",
+      "effects": [{
+        "property": "strokeDashoffset",
+        "start": "80",
+        "end": "0"
+      }]
+    }, {
+      "id": "offset16",
+      "effects": [{
+        "property": "strokeDashoffset",
+        "start": "81",
+        "end": "0"
+      }]
+    }, {
+      "id": "offset17",
+      "effects": [{
+        "property": "strokeDashoffset",
+        "start": "80",
+        "end": "0"
+      }]
+    }, {
+      "id": "offset18",
+      "effects": [{
+        "property": "strokeDashoffset",
+        "start": "358",
+        "end": "0"
+      }]
+    }, {
+      "id": "offset19",
+      "effects": [{
+        "property": "strokeDashoffset",
+        "start": "149",
+        "end": "0"
+      }]
+    }, {
+      "id": "offset20",
+      "effects": [{
+        "property": "strokeDashoffset",
+        "start": "40",
+        "end": "0"
+      }]
+    }, {
+      "id": "offset21",
+      "effects": [{
+        "property": "strokeDashoffset",
+        "start": "32",
+        "end": "0"
+      }]
+    }, {
+      "id": "offset22",
+      "effects": [{
+        "property": "strokeDashoffset",
+        "start": "49",
+        "end": "0"
+      }]
+    }, {
+      "id": "offset23",
+      "effects": [{
+        "property": "strokeDashoffset",
+        "start": "101",
+        "end": "0"
+      }]
+    }, {
+      "id": "offset24",
+      "effects": [{
+        "property": "strokeDashoffset",
+        "start": "113",
+        "end": "0"
+      }]
+    }, {
+      "id": "offset25",
+      "effects": [{
+        "property": "strokeDashoffset",
+        "start": "91",
+        "end": "0"
+      }]
+    }, {
+      "id": "opacity1",
       "effects": [{
         "property": "opacity",
         "start": "0",
-        "end": "0.9"
-      }, {
+        "end": "1"
+      }]
+    }, {
+      "id": "opacity2",
+      "effects": [{
+        "property": "opacity",
+        "start": "0",
+        "end": "1"
+      }]
+    }, {
+      "id": "opacity3",
+      "effects": [{
+        "property": "opacity",
+        "start": "0",
+        "end": "1"
+      }]
+    }, {
+      "id": "opacity4",
+      "effects": [{
+        "property": "opacity",
+        "start": "0",
+        "end": "1"
+      }]
+    }, {
+      "id": "opacity5",
+      "effects": [{
+        "property": "opacity",
+        "start": "0",
+        "end": "1"
+      }]
+    }, {
+      "id": "opacity6",
+      "effects": [{
+        "property": "opacity",
+        "start": "0",
+        "end": "1"
+      }]
+    }, {
+      "id": "opacity7",
+      "effects": [{
+        "property": "opacity",
+        "start": "0",
+        "end": "1"
+      }]
+    }, {
+      "id": "opacity8",
+      "effects": [{
+        "property": "opacity",
+        "start": "0",
+        "end": "1"
+      }]
+    }, {
+      "id": "opacity9",
+      "effects": [{
+        "property": "opacity",
+        "start": "0",
+        "end": "1"
+      }]
+    }, {
+      "id": "opacity10",
+      "effects": [{
+        "property": "opacity",
+        "start": "0",
+        "end": "1"
+      }]
+    }, {
+      "id": "opacity11",
+      "effects": [{
+        "property": "opacity",
+        "start": "0",
+        "end": "1"
+      }]
+    }, {
+      "id": "opacity12",
+      "effects": [{
+        "property": "opacity",
+        "start": "0",
+        "end": "1"
+      }]
+    }, {
+      "id": "opacity13",
+      "effects": [{
+        "property": "opacity",
+        "start": "0",
+        "end": "1"
+      }]
+    }, {
+      "id": "opacity14",
+      "effects": [{
+        "property": "opacity",
+        "start": "0",
+        "end": "1"
+      }]
+    }, {
+      "id": "shadow",
+      "effects": [{
         "property": "transform",
-        "start": "translateY(0px)",
-        "end": "translateY(-50px)"
+        "start": "translateX(0%)",
+        "end": "translateX(100%)"
       }]
     }]
   }, {
     "id": "color",
     "scrollNumber": 7,
-    "transition": 500,
+    "transition": 200,
     "items": [{
       "id": "battery",
       "effects": [{
         "property": "width",
-        "start": "100px",
-        "end": "200px"
+        "start": "125px",
+        "end": "250px"
       }, {
         "property": "backgroundColor",
-        "start": "hsla(150, 100%, 50%, 1)",
-        "end": "hsla(50, 100%, 50%, 0.3)"
+        "start": "#fd0",
+        "end": "#209b35"
       }]
     }, {
       "id": "text",
       "effects": [{
         "property": "color",
-        "start": "hsl(50, 100%, 50%)",
-        "end": "hsl(150, 100%, 50%)"
+        "start": "#fd0",
+        "end": "#209b35"
+      }]
+    }]
+  }, {
+    "id": "transform",
+    "scrollNumber": 8,
+    "transition": 500,
+    "items": [{
+      "id": "showcase",
+      "effects": [{
+        "property": "transform",
+        "start": "rotateX(0deg)",
+        "end": "rotateX(320deg)"
       }]
     }]
   }]

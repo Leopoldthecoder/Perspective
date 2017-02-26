@@ -31,9 +31,7 @@ class Scroll {
       throw new Error('Cannot find target dom to apply scroll effects')
     }
     config = objectAssign({}, defaultConfig, config)
-    target.style.transition = `
-      ${ config.stageSwitchTransition }ms ${ config.stageSwitchEasing } ${ config.stageSwitchDelay }ms
-    `
+    target.style.overflow = 'hidden'
 
     this.target = target
     this.config = config
@@ -97,6 +95,9 @@ class Scroll {
             Missing scrolling config for stage id: ${ stageId }
           `)
         }
+        node.style.transition = `
+          ${ this.config.stageSwitchTransition }ms ${ this.config.stageSwitchEasing } ${ this.config.stageSwitchDelay }ms
+        `
         this.stages.push({
           node,
           stageConfig: objectAssign({}, defaultStageConfig, stageConfig),
@@ -199,9 +200,11 @@ class Scroll {
   handleActiveStageChange() {
     clearTimeout(this.switchingTimeout)
     this.switching = true
-    vendors.forEach(vendor => {
-      const property = vendor.length ? `${ vendor }Transform` : 'transform'
-      this.target.style[property] = `translateY(${ -this.activeStageIndex * 100 }%)`
+    this.stages.forEach(stage => {
+      vendors.forEach(vendor => {
+        const property = vendor.length ? `${ vendor }Transform` : 'transform'
+        stage.node.style[property] = `translateY(${ -this.activeStageIndex * 100 }%)`
+      })
     })
     this.switchingTimeout = setTimeout(_ => {
       this.switching = false
@@ -228,12 +231,18 @@ class Scroll {
 
     if (step > Number(stageConfig.scrollNumber)) {
       if (activeIndex === this.stages.length - 1) {
+        this.target.dispatchEvent(new CustomEvent('scroll-out', {
+          detail: { direction: 'bottom' }
+        }))
         this.activeStage.step = Number(stageConfig.scrollNumber)
         return
       }
       this.setActiveStage(this.stages[activeIndex + 1].id, true)
     } else if (step < 0) {
       if (activeIndex === 0) {
+        this.target.dispatchEvent(new CustomEvent('scroll-out', {
+          detail: { direction: 'top' }
+        }))
         this.activeStage.step = 0
         return
       }

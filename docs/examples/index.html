@@ -6,42 +6,143 @@
   <link rel="stylesheet" type="text/css" href="demo.css">
 </head>
 <body>
-  <!--<div class="container" id="container6" data-scroll-tag="HOVER" data-scroll-number=0>-->
-    <!--<div class="div1" data-hover-layer="1"></div>-->
-    <!--<div class="div2" data-hover-layer="0">-->
-      <!--<p>And don't forget hovering effect.</p>-->
-    <!--</div>-->
-  <!--</div>-->
   <div class="screen">
     <div class="wrap" id="wrap">
-      <div class="container" id="container1" data-scroll-stage-id="universe">
-        <div class="div1" data-scroll-item-id="background"></div>
-        <div class="div2" data-scroll-item-id="satellite"></div>
-        <div class="div3" data-scroll-item-id="planet"></div>
-        <p>Basic parallax effect</p>
+      <div class="container" id="container1" data-scroll-stage-id="basic">
+        <div class="div1" data-scroll-item-id="backstage"></div>
+        <div class="div2" data-scroll-item-id="middlestage"></div>
+        <div class="div3" data-scroll-item-id="frontstage"></div>
+        <p>GOOD OLD PARALLAX EFFECT</p>
       </div>
-      <div class="container" id="container2" data-scroll-stage-id="svg">
-        <svg class="circular" viewBox="25 25 50 50">
-          <circle class="path" cx="50" cy="50" r="20" fill="none" data-scroll-item-id="dash"/>
+      <div class="container" id="container2" data-scroll-stage-id="color">
+        <div class="battery">
+          <div class="div1" data-scroll-item-id="battery"></div>
+        </div>
+        <p data-scroll-item-id="text">CHARGE BATTERIES</p>
+      </div>
+      <div class="container" id="container3" data-scroll-stage-id="svg">
+        <svg class="wire-wrapper" x="0px" y="0px" viewBox="0 0 679.47 589.214" enable-background="new 0 0 679.47 589.214" style="display: block;">
+          <!-- Outline -->
+          <g>
+            <path d="M179.406,411.909
+              c-14,134.558-82,143.443-82,143.443c-28-3-32-35-32-35c-7-35,24-104,24-104c10-16,32-19,32-19h176c72,3,85,25,85,25
+              c138,131,177.012,158.865,198,165c10.361,3.028,123,7,93-158c0,0-50-203-84-269c0,0-7-23-6-33c0,0-2-22-18-32
+              c0,0-61.668-61.001-152.335-74.334c0,0-13.334-2-24.667,0c-11.333,2-19.333,10-29.333,22c-10,12-51.333,58-51.333,58
+              s-12.668,13.333-21.334,13.333c-8.666,0-86,10-86,10s-18.667,4.667-28-10.666c-9.333-15.334-22.666-44-22.666-44
+              s-10.668-16-29.334-6s-46.666,32.666-53.333,48s-6.667,15.333-6.667,15.333" style="stroke-dasharray: 2098, 2098; stroke-dashoffset: 0;" data-scroll-item-id="offset1"></path>
+            <line x1="370.651" y1="412.91" x2="142.391" y2="409.907" data-scroll-item-id="opacity1"></line>
+            <path d="M97.406,555.353c0,0-110-10-95-180
+              c0,0,20.858-157.807,38.455-174.876" style="stroke-dasharray: 406, 406; stroke-dashoffset: 0;" data-scroll-item-id="offset2"></path>
+            <path d="M545.742,78.804
+              c0,0,103.33,283.548,107.996,370.215c0.78,14.494,16.074,95.234-46.002,137.193" style="stroke-dasharray: 540, 540; stroke-dashoffset: 0;" data-scroll-item-id="offset3"></path>
+            <path d="M524.292,63.859l-3.889-18.84c0,0-2-4.667-6-6.667
+              c-4-2-62.666-47.333-132.666-35.333c0,0-15.874,5.755-29.334,17.111c-6.336,5.346-22.666,7.555-22.666,7.555l-140.667,22
+              c0,0-9.333,0.667-17.333-3.333c0,0-12.668-12-33.334-3.333c-20.666,8.666-45.258,28.913-44.962,39.123" style="stroke-dasharray: 485, 485; stroke-dashoffset: 0;" data-scroll-item-id="offset4"></path>
+            <path d="M521.504,50.352c0,0,24.953-4.304,31.567,0
+              c13.317,8.667,12.334,45.001,12.334,45.001" style="stroke-dasharray: 81, 81; stroke-dashoffset: 0;" data-scroll-item-id="offset5"></path>
+            <path d="M343.763,24.446c0,0,8.641,15.907,15.308,18.573" style="stroke-dasharray: 25, 25; stroke-dashoffset: 0;" data-scroll-item-id="offset6"></path>
+            <path d="M177.378,48.439c0,0-11.707,28.16-21.674,33.703" style="stroke-dasharray: 41, 41; stroke-dashoffset: 0;" data-scroll-item-id="offset7"></path>
+          </g>
+    
+          <!-- Left Thumbstick -->
+          <g>
+            <ellipse transform="matrix(0.9729 0.2312 -0.2312 0.9729 39.4696 -7.5851)" cx="52.102" cy="164.635" rx="21.044" ry="27.989" data-scroll-item-id="opacity2"></ellipse>
+            <ellipse transform="matrix(0.9729 0.2312 -0.2312 0.9729 40.3936 -9.8749)" cx="62.334" cy="167.425" rx="32.188" ry="40.733" data-scroll-item-id="opacity3"></ellipse>
+            <path d="M77.276,129.805
+              c6.116-2.059,12.511-2.503,18.794-1.011c22.715,5.398,35.355,34.083,28.229,64.071c-7.126,29.987-31.317,49.921-54.036,44.522
+              c-15.59-3.706-26.435-18.377-29.402-36.91" style="stroke-dasharray: 224, 224; stroke-dashoffset: 0;" data-scroll-item-id="offset8"></path>
+            <path d="M52.102,206.845c0,0,15.971,43.507,50.637,4.507" style="stroke-dasharray: 66, 66; stroke-dashoffset: 0;" data-scroll-item-id="offset9"></path>
+            <path d="M86.268,136.968c0,0,29.137-6.949,33.471,32.051" style="stroke-dasharray: 53, 53; stroke-dashoffset: 0;" data-scroll-item-id="offset10"></path>
+          </g>
+    
+          <!-- Right Thumbstick -->
+          <g>
+            <path d="M294.733,271.561
+              c-4.384,18.449-19.468,30.666-33.695,27.284c-14.224-3.38-22.205-21.074-17.82-39.524c4.385-18.45,19.472-30.665,33.698-27.285
+              C291.138,235.415,299.117,253.112,294.733,271.561z" style="stroke-dasharray: 192, 192; stroke-dashoffset: 0;" data-scroll-item-id="offset11"></path>
+            <ellipse transform="matrix(0.9729 0.2312 -0.2312 0.9729 69.4354 -56.9732)" cx="277.827" cy="267.8" rx="35.873" ry="45.396" data-scroll-item-id="opacity4"></ellipse>
+            <path d="M280.592,222.883
+              c10.417-7.883,22.46-11.308,34.103-8.542c25.322,6.017,39.164,39.051,30.909,73.783c-8.253,34.73-35.472,58.008-60.8,51.99
+              c-15.539-3.694-26.756-17.56-31.195-35.748" style="stroke-dasharray: 263, 263; stroke-dashoffset: 0;" data-scroll-item-id="offset12"></path>
+            <path d="M304.424,213.038
+              c14.561-4.777,30.611-5.343,43.715,1.433c30.929,15.994,39.302,61.255,18.702,101.093c-20.6,39.839-62.373,59.168-93.304,43.175
+              c-22.683-11.73-33.233-39.202-29.122-68.73" style="stroke-dasharray: 353, 353; stroke-dashoffset: 0;" data-scroll-item-id="offset13"></path>
+          </g>
+    
+          <!-- Menu and View Buttons -->
+          <g>
+            <ellipse transform="matrix(0.9746 0.224 -0.224 0.9746 42.6403 -37.7651)" cx="187.739" cy="169.019" rx="12.667" ry="15.169" data-scroll-item-id="opacity5"></ellipse>
+            <ellipse transform="matrix(0.9746 0.2241 -0.2241 0.9746 43.1668 -38.1771)" cx="189.807" cy="171.122" rx="14.178" ry="16.979" data-scroll-item-id="opacity6"></ellipse>
+            <ellipse transform="matrix(0.9746 0.224 -0.224 0.9746 42.3938 -57.8288)" cx="276.03" cy="157.901" rx="12.667" ry="15.169" data-scroll-item-id="opacity7"></ellipse>
+            <ellipse transform="matrix(0.9746 0.2241 -0.2241 0.9746 42.9204 -58.2419)" cx="278.098" cy="160.004" rx="14.178" ry="16.979" data-scroll-item-id="opacity8"></ellipse>
+          </g>
+    
+          <!-- X Button -->
+          <ellipse transform="matrix(0.9746 0.224 -0.224 0.9746 42.5615 -75.9855)" cx="356.132" cy="149.566" rx="20.704" ry="24.793" data-scroll-item-id="opacity9"></ellipse>
+          <path d="M364.731,126.959
+            c12.475,2.868,20.801,16.3,17.367,31.237c-3.433,14.938-16.329,24.722-28.804,21.854" style="stroke-dasharray: 80, 80; stroke-dashoffset: 0;" data-scroll-item-id="offset14"></path>
+    
+          <!-- A Button -->
+          <ellipse transform="matrix(0.9746 0.224 -0.224 0.9746 55.7721 -84.2301)" cx="399.065" cy="203.658" rx="20.704" ry="24.793" data-scroll-item-id="opacity10"></ellipse>
+          <path d="M407.664,181.05
+            c12.475,2.868,20.801,16.3,17.367,31.237c-3.433,14.938-16.329,24.722-28.804,21.855" style="stroke-dasharray: 80, 80; stroke-dashoffset: 0;" data-scroll-item-id="offset15"></path>
+    
+          <!-- B Button -->
+          <ellipse transform="matrix(0.9746 0.224 -0.224 0.9746 43.7091 -98.7996)" cx="457.244" cy="143.217" rx="20.815" ry="24.793" data-scroll-item-id="opacity11"></ellipse>
+          <path d="M465.962,119.636
+            c12.541,2.883,20.824,17.307,17.391,32.244c-3.432,14.938-16.383,24.709-28.924,21.826" style="stroke-dasharray: 81, 81; stroke-dashoffset: 0;" data-scroll-item-id="offset16"></path>
+    
+          <!-- Y Button -->
+          <ellipse transform="matrix(0.9746 0.224 -0.224 0.9746 30.4767 -88.8081)" cx="406.592" cy="89.898" rx="20.704" ry="24.793" data-scroll-item-id="opacity12"></ellipse>
+          <path d="M415.191,67.291
+            c12.475,2.868,20.801,16.3,17.367,31.237c-3.433,14.938-16.329,24.722-28.804,21.854" style="stroke-dasharray: 80, 80; stroke-dashoffset: 0;" data-scroll-item-id="offset17"></path>
+    
+          <!-- Directional Pad -->
+          <g>
+            <path d="M154.906,275.353c0,0-0.5,4.166,3.875,3.875
+              c5.113-0.341,17.625-2,17.625-2s4.5-1.125,4.5,6.125s0,23.25,0,23.25s0.607,6.696-6.696,6.696c-7.304,0-19.439,1.304-19.439,1.304
+              s-5.433,1.115-5.433,5.433c0,4.317,0,26.567,0,26.567s0.038,5.75-6.947,5.75c-6.985,0-14.985,0-14.985,0s-4.5,0.5-4.5-4.5
+              s3.381-28,3.381-28s-0.381-5.75-6.631-5.75s-16.917,0-16.917,0s-4.083,1-4.083-6.25s1-20.967,1-20.967s0-4.783,6.75-4.783
+              s16.498-0.75,16.498-0.75s7.125-0.75,7.125-7.125s0-26.375,0-26.375s1.627-3.75,7.377-3.75h13.5c0,0,4.375-0.666,4.375,4.375
+              C155.281,253.519,154.906,275.353,154.906,275.353z" style="stroke-dasharray: 358, 358; stroke-dashoffset: 0;" data-scroll-item-id="offset18"></path>
+            <ellipse transform="matrix(0.9822 0.1876 -0.1876 0.9822 58.7775 -22.2587)" cx="146.979" cy="299.385" rx="49.817" ry="63.622" data-scroll-item-id="opacity13"></ellipse>
+            <path d="M123.967,351.13c0,0,6.252,6.678,9.104,6.983
+              c5.157,0.554,15.667-0.009,15.667-0.009s8.667,0.748,8.667-10.252v-22.5c0-5.25,5.25-5.25,5.25-5.25s16,0,20.5,0
+              s6.318-4.707,6.917-7.357c1.514-6.709,1.083-27.51,1.083-27.51c-2.25-2.375-13.457-8.008-13.457-8.008" style="stroke-dasharray: 149, 149; stroke-dashoffset: 0;" data-scroll-item-id="offset19"></path>
+            <path d="M153.457,244.582l7.781,4.77
+              c0,0,4.001,1.113,4.001,5.779c0,5.469,0,4.695,0,23.334" style="stroke-dasharray: 40, 40; stroke-dashoffset: 0;" data-scroll-item-id="offset20"></path>
+            <path d="M99.749,312.745l4.489,7.441c0,0,2,2.667,4.5,2.667
+              s17.115,0,17.115,0" style="stroke-dasharray: 32, 32; stroke-dashoffset: 0;" data-scroll-item-id="offset21"></path>
+          </g>
+    
+          <!-- Logo -->
+          <g class="xb1-logo" style="fill: rgba(159, 159, 159, 0.298039);" data-scroll-item-id="opacity14">
+            <path stroke-linejoin="bevel" d="M239.573,54.353
+              l8.666,4.167c0,0,7.666-6.5,14-6.5C262.239,52.019,246.907,47.686,239.573,54.353z" style="stroke-dasharray: 49, 49; stroke-dashoffset: 0;" data-scroll-item-id="offset22"></path>
+            <path stroke-linejoin="bevel" d="M265.406,54.577
+              l-12,10.713c0,0,13.833,18.396,10,33.062C263.406,98.353,286.073,70.802,265.406,54.577z" style="stroke-dasharray: 101, 101; stroke-dashoffset: 0;" data-scroll-item-id="offset23"></path>
+            <path stroke-linejoin="bevel" d="M224.406,103.686
+              c4.466,14.287,36.257,7,35.833-3c-0.571-13.489-13.166-27.333-13.166-27.333S222.739,98.353,224.406,103.686z" style="stroke-dasharray: 113, 113; stroke-dashoffset: 0;" data-scroll-item-id="offset24"></path>
+            <path stroke-linejoin="bevel" d="M239.573,67.853
+              c-12.533,12.114-17.5,32.666-17.5,32.666s-6.166-24.333,10.5-39.667L239.573,67.853z" style="stroke-dasharray: 91, 91; stroke-dashoffset: 0;" data-scroll-item-id="offset25"></path>
+          </g>
         </svg>
-        <p>SVG animation</p>
+        <div class="text-wrapper">
+          <p>DRAW A JOYSTICK</p>
+          <div class="shadow" data-scroll-item-id="shadow"></div>
+        </div>
       </div>
-      <div class="container" id="container3" data-scroll-stage-id="opacity">
-        <div class="div1"></div>
-        <div class="div2" data-scroll-item-id="opacity"></div>
-      </div>
-      <div class="container" id="container4" data-scroll-stage-id="color">
-        <div class="div1" data-scroll-item-id="battery"></div>
-        <div class="div2"></div>
-        <p data-scroll-item-id="text">Color changing</p>
-      </div>
-      <div class="container" id="container5">
-        <div class="showcase">
-          <p>or</p>
-          <p>almost</p>
-          <p>anything</p>
-          <p>you</p>
-          <p>want</p>
+      <div class="container" id="container4" data-scroll-stage-id="transform">
+        <div class="showcase" data-scroll-item-id="showcase">
+          <p>ROTATE</p>
+          <p>TILL</p>
+          <p>YOU</p>
+          <p>SEE</p>
+          <p>THE</p>
+          <p>END</p>
+          <p>OF</p>
+          <p>THIS</p>
+          <p>SENTENCE</p>
         </div>
       </div>
     </div>
