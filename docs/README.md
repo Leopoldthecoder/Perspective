@@ -1,7 +1,7 @@
 # Introduction
-Parallax scrolling / hovering effect. And more.
+Perspective.js is designed for making dashing parallax scrolling effects. Besides the good old parallax scrolling, where different layers move in different speeds, it provides a far wider range of effects for you. To give you an idea of what Perspective.js can do, I've prepared an [example](https://perspective.js.org/examples/).
 
-To give you an idea of what Perspective.js can do, I've prepared an [example](https://perspective.js.org/examples/).
+More than that, parallax tilting is also supported.
 
 # Features
 - Parallax scroll and parallax tilt hover effects
@@ -10,17 +10,23 @@ To give you an idea of what Perspective.js can do, I've prepared an [example](ht
 
 # Installation
 ## npm
-```bash
+```shell
 npm install perspective.js
 # or
 yarn add perspective.js
 ```
 
+Than in your project you can
+```javascript
+import { PerspectiveScroll, PerspectiveHover } from 'perspective.js'
+```
+
 ## CDN
 ```html
 <script type="text/javascript" src="//unpkg.com/perspective.js"></script>
+Once loaded, Perspective.js will register `PerspectiveScroll` and `PerspectiveHover` to the `window` object.
 ```
-# Perspective.scroll
+# PerspectiveScroll
 ## How it works
 Tell Perspective.scroll the initial and final CSS stats of the element you want to add scrolling effects on, and how many scrolls the effects will last. It calculates corresponding CSS values of each scroll based on scroll number of that element.
 
@@ -82,9 +88,31 @@ Perspective.scroll accepts another parameter which is also an array. Its element
 ```javascript
 perspective.scroll(cssArr_1, ..., cssArr_n, [transition value 1, ..., transition value m]);
 ```
-This array is optional. All `.container` elements have a default `0.2s` for `transtion` property.
+This array is optional. All `.container` elements have a default `0.2s` for `transition` property.
 
-# Perspective.hover
+## Events
+| Event Name | Description | Parameters |
+|---------|--------|---------|
+| step-change | triggers each time current step changes | detail: {
+activeStage: {
+id of the active stage,
+DOM node of the active stage
+},
+current step
+} |
+| stage-change | triggers when the active stage changes | detail: {
+previous: {
+id of the previously active stage,
+DOM node of the previously active stage
+},
+current: {
+id of the currently active stage,
+DOM node of the currently active stage
+}
+} |
+| scroll-out | triggers when user scrolls out of all stages | detail: { direction: 'bottom' / 'top' } |
+
+# PerspectiveHover
 Perspective.hover is fairly easy to use compared to Perspective.scroll.
 ## HTML structure
 ```html
