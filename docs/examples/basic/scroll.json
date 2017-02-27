@@ -1,29 +1,22 @@
 {
   "stages": [{
-    "id": "universe",
+    "id": "basic",
     "scrollNumber": 60,
     "transition": 0,
     "easing": "linear",
     "items": [{
-      "id": "background",
+      "id": "slow",
       "effects": [{
         "property": "transform",
         "start": "translateY(0px)",
         "end": "translateY(-50px)"
       }]
     }, {
-      "id": "satellite",
+      "id": "fast",
       "effects": [{
         "property": "transform",
         "start": "translateY(0px)",
         "end": "translateY(-180px)"
-      }]
-    }, {
-      "id": "planet",
-      "effects": [{
-        "property": "transform",
-        "start": "translateY(0px)",
-        "end": "translateY(-700px)"
       }]
     }]
   }]

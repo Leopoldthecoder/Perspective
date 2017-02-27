@@ -1,7 +1,7 @@
 # Introduction
-Perspective.js is designed for making dashing parallax scrolling effects. Besides the good old parallax scrolling, where different layers move in different speeds, it provides a far wider range of effects for you. To give you an idea of what Perspective.js can do, I've prepared an [example](https://perspective.js.org/examples/).
+Perspective.js is designed for making dashing parallax scroll effects. Besides the good old parallax scroll, where different layers move in different speeds, it provides a far wider range of effects for you. To have an idea of what Perspective.js can do, check out this [example](https://perspective.js.org/examples/).
 
-More than that, parallax tilting is also supported.
+More than that, parallax tilt hover is also supported.
 
 # Features
 - Parallax scroll and parallax tilt hover effects
@@ -28,7 +28,56 @@ import { PerspectiveScroll, PerspectiveHover } from 'perspective.js'
 Once loaded, Perspective.js will register `PerspectiveScroll` and `PerspectiveHover` to the `window` object.
 
 # PerspectiveScroll
-## How it works
+
+PerspectiveScroll is in charge of parallax scroll effects. It lets you set CSS animations on DOM elements, and play them as you scroll your mouse.
+
+## Example
+Let's start with an example. Say we have the following markup:
+
+```html
+<div class="container" data-scroll-stage-id="basic">
+  <p class="slow" data-scroll-item-id="slow">SLOW</p>
+  <p class="fast" data-scroll-item-id="fast">FAST</p>
+</div>
+```
+
+Just ignore `data-scroll-stage-id` and `data-scroll-item-id` for a minute, we'll come back for them later. Now if we want some parallax effects, we just need to:
+
+```javascript
+  import PerspectiveScroll from 'perspective.js'
+  // you don't need to import PerspectiveScroll if you are using CDN
+
+  new PerspectiveScroll('.wrap', {
+    stages: [{
+      id: 'basic',
+      scrollNumber: 60,
+      transition: 0,
+      easing: 'linear',
+      items: [{
+        id: 'slow',
+        effects: [{
+          property: 'transform',
+          start: 'translateY(0px)',
+          end: 'translateY(-50px)'
+        }]
+      }, {
+        id: 'fast',
+        effects: [{
+        property: 'transform',
+        start: 'translateY(0px)',
+        end: 'translateY(-180px)'
+        }]
+      }]
+    }]
+  })
+```
+
+You can probably see that we created a PerspectiveScroll instance with two parameters: a string `.wrap` and an object. The first parameter tells PerspectiveScroll which DOM element to apply parallax scroll effects, and the second one is a configuration of how you wish the effects should look like.
+
+See this little example in motion here. Then let's dive deeply into how this works.
+
+## Concepts
+
 Tell Perspective.scroll the initial and final CSS stats of the element you want to add scrolling effects on, and how many scrolls the effects will last. It calculates corresponding CSS values of each scroll based on scroll number of that element.
 
 So any CSS property that uses number as its value is supported, such as `height`, `top`, `transform`, `opacity` and `color`. For color values, hexadecimal notation, RGB(a) notation and HSL notation are all supported.

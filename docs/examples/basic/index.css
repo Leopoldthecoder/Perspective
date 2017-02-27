@@ -2,69 +2,30 @@
   margin: 0;
   padding: 0;
 }
-
 html, body {
   height: 100%;
   font-family: 'Helvetica Neue',Helvetica,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',SimSun,sans-serif;
 }
-
-.screen {
-  height: 100%;
-  width: 100%;
-  margin: 0 auto;
-  position: relative;
-}
-
 .wrap {
   height: 100%;
   width: 100%;
-  position: absolute;
-  top: 0;
 }
-
 .container {
   height: 100%;
   width: 100%;
-  position: relative;
+  position: absolute;
   overflow: hidden;
 }
-
-.container * {
-  position: absolute;
-}
-
-.background {
-  height: 130%;
-  width: 100%;
-  background-image: url('../assets/perspective_universe-background.jpg');
-}
-
-.satellite {
-  height: 180px;
-  width: 180px;
-  background-image: url('../assets/perspective_planet_1.png');
-  top: 600px;
-  left: 60%;
-  z-index: 1;
-  background-size: cover;
-}
-
-.planet {
-  height: 900px;
-  width: 900px;
-  background-image: url('../assets/perspective_planet_2.png');
-  top: 500px;
-  left: -20%;
-  z-index: 1;
-  background-size: cover;
-}
-
 p {
-  top: 40%;
-  left: 40%;
-  font-size: 70px;
-  font-weight: bold;
-  color: #fff;
-  text-shadow: 3px 3px 5px black;
-  cursor: default;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-size: 50px;
+}
+.slow {
+  top: 30%;
+}
+
+.fast {
+  top: 60%;
 }

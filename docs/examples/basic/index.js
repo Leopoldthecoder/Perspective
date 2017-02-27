@@ -2,7 +2,7 @@
 import scrollConfig from './scroll.json'
 
 function start() {
-  new PerspectiveScroll('#wrap', scrollConfig)
+  new PerspectiveScroll('.wrap', scrollConfig)
 }
 
 window.onload = start
