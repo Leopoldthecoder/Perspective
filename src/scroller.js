@@ -4,8 +4,6 @@ import throttle from 'throttle-debounce/throttle'
 import { getObjectFromArrById, is, merge } from './utils'
 
 const defaultConfig = {
-  showIndicator: true,
-  indicatorPosition: 'left',
   stageSwitchTransition: 800,
   stageSwitchDelay: 0,
   stageSwitchEasing: 'cubic-bezier(.86, 0, .07, 1)',
