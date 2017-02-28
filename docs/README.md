@@ -18,18 +18,18 @@ yarn add perspective.js
 
 Than in your project
 ```javascript
-import { PerspectiveScroll, PerspectiveHover } from 'perspective.js'
+import { Scroll, Hover } from 'perspective.js'
 ```
 
 ## CDN
 ```html
-<script type="text/javascript" src="//unpkg.com/perspective.js"></script>
+<script type="text/javascript" src="//unpkg.com/perspective.js/lib/perspective.js"></script>
 ```
-Once loaded, Perspective.js will register `PerspectiveScroll` and `PerspectiveHover` to the `window` object.
+Once loaded, Perspective.js will register `perspective` to the `window` object, and it has two attributes: `Scroll` and `Hover`
 
-# PerspectiveScroll
+# Scroll
 
-PerspectiveScroll is in charge of parallax scroll effects. It lets you set CSS animations on DOM elements, and play them as you scroll your mouse.
+`Scroll` is in charge of parallax scroll effects. It lets you set CSS animations on DOM elements, and play them as you scroll your mouse.
 
 ## Example
 Let's start with an example. Say we have the following markup:
@@ -46,10 +46,13 @@ Let's start with an example. Say we have the following markup:
 Just ignore `data-scroll-stage-id` and `data-scroll-item-id` for a minute, we'll come back for them later. Now if we want some parallax effects, we just need to:
 
 ```javascript
-import PerspectiveScroll from 'perspective.js'
-// you don't need to import PerspectiveScroll if you are using CDN
+// using npm
+import { Scroll } from 'perspective.js'
 
-new PerspectiveScroll('.wrap', {
+// using CDN
+const Scroll = perspective.Scroll
+
+new Scroll('.wrap', {
   stages: [{
     id: 'basic',
     scrollNumber: 60,
@@ -74,14 +77,14 @@ new PerspectiveScroll('.wrap', {
 })
 ```
 
-See this little example in motion here.
+See this little example in motion [here](http://jsfiddle.net/leopoldthecuber/wfzo69ug/).
 
-You can probably see that we created a PerspectiveScroll instance with two parameters: a string `.wrap` and an object. The first parameter tells PerspectiveScroll which DOM element to apply parallax scroll effects, and it can be a DOM element or a string. If it's a string, PerspectiveScroll will try to find the DOM by calling `document.querySelector(string)`, so make sure it returns an existing DOM element.
+You can probably see that we created a Scroll instance with two parameters: a string `.wrap` and an object. The first parameter tells Scroll which DOM element to apply parallax scroll effects, and it can be a DOM element or a string. If it's a string, Scroll will try to find the DOM by calling `document.querySelector(string)`, so make sure it returns an existing DOM element.
 
 The second parameter is a configuration object for you to define how you wish the effects to look like. It has the following keys.
 
 ## stage
-Stage is an important concept in PerspectiveScroll. Take a look at our first [example](https://perspective.js.org/examples/). Obviously it has four parts, the first part being 'Good Old Parallax Effect', the second 'Charge Batteries', the third 'Draw a Joystick', and the fourth 'Rotate the Sentence'. Each part is defined as a `stage`.
+Stage is an important concept in Scroll. Take a look at our first [example](https://perspective.js.org/examples/). Obviously it has four parts, the first part being 'Good Old Parallax Effect', the second 'Charge Batteries', the third 'Draw a Joystick', and the fourth 'Rotate the Sentence'. Each part is defined as a `stage`.
 
 As mentioned above, we have a configuration object with a key named `stages`, and the value for that key is an object array, each object represents a stage and defines its scroll behaviour. Things you can define for a stage are as follows.
 
@@ -176,7 +179,7 @@ This array is optional. All `.container` elements have a default `0.2s` for `tra
 | stage-change | triggers when the active stage changes | previous: { id of the previously active stage, DOM node of the previously active stage }, current: { id of the currently active stage, DOM node of the currently active stage } |
 | scroll-out | triggers when user scrolls out of all stages | detail: { direction: 'bottom' / 'top' } |
 
-# PerspectiveHover
+# Hover
 Perspective.hover is fairly easy to use compared to Perspective.scroll.
 ## HTML structure
 ```html
