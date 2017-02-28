@@ -2,7 +2,7 @@
   "name": "perspective.js",
   "version": "0.1.1",
   "description": "Parallax scrolling effect. And more.",
-  "main": "lib/perspective.min.js",
+  "main": "lib/perspective.common.js",
   "scripts": {
     "dev": "rollup -c build/dev.js -w --output=docs/examples/demo.min.js",
     "build:package": "node build/build.js",

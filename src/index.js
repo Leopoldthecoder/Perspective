@@ -1,9 +1,7 @@
-import PerspectiveHover from './hover'
-import PerspectiveScroll from './scroller'
+import Hover from './hover'
+import Scroll from './scroller'
 
-window.PerspectiveHover = PerspectiveHover
-window.PerspectiveScroll = PerspectiveScroll
 export {
-  PerspectiveHover,
-  PerspectiveScroll
+  Hover,
+  Scroll
 }

@@ -1,4 +1,4 @@
-﻿import { PerspectiveScroll } from '../../src/index'
+﻿import { Scroll } from '../../src/index'
 import scrollConfig from './scroll.json'
 
 function start() {
@@ -9,7 +9,7 @@ function start() {
   // target.addEventListener('step-change', ({ detail }) => {
   //   console.log('step:', detail)
   // })
-  new PerspectiveScroll('#wrap', scrollConfig)
+  new Scroll('#wrap', scrollConfig)
 }
 
 window.onload = start

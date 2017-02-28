@@ -8,11 +8,11 @@ var uglify = require('rollup-plugin-uglify')
 var build = function (opts) {
   rollup.rollup({
     entry: opts.entry,
-    plugins: [eslint(), buble(), commonjs(), nodeResolve(), uglify()]
+    plugins: opts.plugins
   }).then(function (bundle) {
     bundle.write({
-      format: 'cjs',
-      moduleName: 'perspective.js',
+      format: opts.format,
+      moduleName: 'perspective',
       dest: opts.output
     })
   }).catch(function (err) {
@@ -22,5 +22,14 @@ var build = function (opts) {
 
 build({
   entry: 'src/index.js',
-  output: 'lib/perspective.min.js'
+  output: 'lib/perspective.common.js',
+  format: 'cjs',
+  plugins: [eslint(), buble(), commonjs(), nodeResolve(), uglify()]
+})
+
+build({
+  entry: 'src/index.js',
+  output: 'lib/perspective.js',
+  format: 'umd',
+  plugins: [eslint(), buble(), commonjs(), nodeResolve(), uglify()]
 })
