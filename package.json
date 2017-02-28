@@ -1,6 +1,6 @@
 {
   "name": "perspective.js",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Parallax scrolling effect. And more.",
   "main": "lib/perspective.common.js",
   "scripts": {
