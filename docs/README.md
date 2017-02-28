@@ -57,7 +57,6 @@ new Scroll('.wrap', {
     id: 'basic',
     scrollNumber: 60,
     transition: 0,
-    easing: 'linear',
     items: [{
       id: 'slow',
       effects: [{
@@ -77,9 +76,9 @@ new Scroll('.wrap', {
 })
 ```
 
-See this little example in motion [here](http://jsfiddle.net/leopoldthecuber/wfzo69ug/).
+See this little example in motion [here](https://jsfiddle.net/leopoldthecuber/tqeakbsm/).
 
-You can probably see that we created a Scroll instance with two parameters: a string `.wrap` and an object. The first parameter tells Scroll which DOM element to apply parallax scroll effects, and it can be a DOM element or a string. If it's a string, Scroll will try to find the DOM by calling `document.querySelector(string)`, so make sure it returns an existing DOM element.
+You can probably see that we created a Scroll instance with two parameters: a string `.wrap` and an object. The first parameter tells Scroll which DOM element to apply parallax scroll effects, and it can be a DOM element or a string. If it's a string, Scroll will try to find the DOM by calling `document.querySelector`, so make sure it returns an existing DOM element.
 
 The second parameter is a configuration object for you to define how you wish the effects to look like. It has the following keys.
 
@@ -102,13 +101,13 @@ As mentioned above, we have a configuration object with a key named `stages`, an
 
 #### effects
 
-### stageSwitchTransition
+## stageSwitchTransition
 
-### stageSwitchDelay
+## stageSwitchDelay
 
-### stageSwitchEasing
+## stageSwitchEasing
 
-### disableAfterSwitching
+## disableAfterSwitching
 
 Tell Perspective.scroll the initial and final CSS stats of the element you want to add scrolling effects on, and how many scrolls the effects will last. It calculates corresponding CSS values of each scroll based on scroll number of that element.
 
