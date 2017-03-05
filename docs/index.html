@@ -6,7 +6,23 @@
   <link rel="stylesheet" type="text/css" href="//unpkg.com/docsify/lib/themes/vue.css">
 </head>
 <body>
+  <nav data-cloak>
+    <a href="#/">EN</a>
+    <a href="#/zh-cn/">中文</a>
+  </nav>
   <div id="app"></div>
+  <script>
+    window.$docsify = {
+      basePath: '/md/',
+      homepage: 'intro.md',
+      loadSidebar: 'nav.md',
+      repo: 'Leopoldthecoder/Perspective',
+      subMaxLevel: 3,
+      auto2top: true,
+      name: 'Perspective.js',
+      executeScript: true
+    }
+  </script>
   <script type="text/javascript" src="//unpkg.com/docsify"></script>
 </body>
 </html>

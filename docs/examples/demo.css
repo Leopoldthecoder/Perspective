@@ -47,7 +47,7 @@ p {
 #container1 .div1 {
   height: 200%;
   width: 100%;
-  background: url('./assets/backstage.svg') 0 0 repeat;
+  background: url('https://raw.githubusercontent.com/Leopoldthecoder/Perspective/master/docs/examples/assets/backstage.svg') 0 0 repeat;
 }
 
 #container1 .div2 {

@@ -1,0 +1,5 @@
+body:not(.ready) {
+  .app-nav {
+    opacity: 0;
+  }
+}
