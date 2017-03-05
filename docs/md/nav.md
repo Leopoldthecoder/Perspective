@@ -7,4 +7,6 @@
  - [HTML structure](/html)
  - [Events and methods](/events-and-methods)
 - Hover
+ - [An example](/hover-example)
  - [Configurations](/hover-configurations)
+ - [Playground](/hover-playground)
