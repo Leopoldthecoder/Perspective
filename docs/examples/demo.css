@@ -47,20 +47,20 @@ p {
 #container1 .div1 {
   height: 200%;
   width: 100%;
-  background: url('https://raw.githubusercontent.com/Leopoldthecoder/Perspective/master/docs/examples/assets/backstage.svg') 0 0 repeat;
+  background: url('./assets/backstage.png') 0 0 repeat;
 }
 
 #container1 .div2 {
   height: 200%;
   width: 100%;
-  background: url('./assets/middlestage.svg') 0 0 repeat;
+  background: url('./assets/middlestage.png') 0 0 repeat;
   z-index: 1;
 }
 
 #container1 .div3 {
   height: 200%;
   width: 100%;
-  background: url('./assets/frontstage.svg') 0 0 repeat;
+  background: url('./assets/frontstage.png') 0 0 repeat;
   z-index: 1;
 }
 

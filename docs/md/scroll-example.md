@@ -56,9 +56,9 @@ See this little example in motion:
     createEmbedFrame = function() {
       var currentSlug, iframe, listeners, setHeight, target, uid, uriEmbedded, uriOriginal, uriOriginalNoProtocol;
       uid = "JSFEMB_" + (~~(new Date().getTime() / 86400000));
-      uriOriginal = "http://jsfiddle.net/leopoldthecuber/tqeakbsm/embed/result/";
+      uriOriginal = "https://jsfiddle.net/leopoldthecuber/tqeakbsm/embed/result/";
       uriOriginalNoProtocol = uriOriginal.split("//").pop();
-      uriEmbedded = "http://jsfiddle.net/leopoldthecuber/tqeakbsm/embedded/result/";
+      uriEmbedded = "https://jsfiddle.net/leopoldthecuber/tqeakbsm/embedded/result/";
       currentSlug = "tqeakbsm";
       target = document.querySelector("script[src*='" + uriOriginalNoProtocol + "']");
       iframe = document.createElement("iframe");

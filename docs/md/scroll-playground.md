@@ -9,9 +9,9 @@ With all the configurations we picked up in the last section in mind, let's try 
     createEmbedFrame = function() {
       var currentSlug, iframe, listeners, setHeight, target, uid, uriEmbedded, uriOriginal, uriOriginalNoProtocol;
       uid = "JSFEMB_" + (~~(new Date().getTime() / 86400000));
-      uriOriginal = "http://jsfiddle.net/leopoldthecuber/hkfprgrh/embed/result/";
+      uriOriginal = "https://jsfiddle.net/leopoldthecuber/hkfprgrh/embed/result/";
       uriOriginalNoProtocol = uriOriginal.split("//").pop();
-      uriEmbedded = "http://jsfiddle.net/leopoldthecuber/hkfprgrh/embedded/result/";
+      uriEmbedded = "https://jsfiddle.net/leopoldthecuber/hkfprgrh/embedded/result/";
       currentSlug = "hkfprgrh";
       target = document.querySelector("script[src*='" + uriOriginalNoProtocol + "']");
       iframe = document.createElement("iframe");

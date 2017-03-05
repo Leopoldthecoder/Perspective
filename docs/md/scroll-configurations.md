@@ -103,9 +103,9 @@ Thanks to `startAt` and `endAt`, not all items have to animate simultaneously. C
     createEmbedFrame = function() {
       var currentSlug, iframe, listeners, setHeight, target, uid, uriEmbedded, uriOriginal, uriOriginalNoProtocol;
       uid = "JSFEMB_" + (~~(new Date().getTime() / 86400000));
-      uriOriginal = "http://jsfiddle.net/leopoldthecuber/88wmq2qm/1/embed/result/";
+      uriOriginal = "https://jsfiddle.net/leopoldthecuber/88wmq2qm/1/embed/result/";
       uriOriginalNoProtocol = uriOriginal.split("//").pop();
-      uriEmbedded = "http://jsfiddle.net/leopoldthecuber/88wmq2qm/1/embedded/result/";
+      uriEmbedded = "https://jsfiddle.net/leopoldthecuber/88wmq2qm/1/embedded/result/";
       currentSlug = "88wmq2qm";
       target = document.querySelector("script[src*='" + uriOriginalNoProtocol + "']");
       iframe = document.createElement("iframe");
