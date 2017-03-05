@@ -1,4 +1,7 @@
 # Perspective.js
+
+[Documentation](http://leopoldthecoder.github.io/Perspective)
+
 [Demo](http://leopoldthecoder.github.io/Perspective/examples)
 
 Parallax scrolling/hovering effect. And more.
