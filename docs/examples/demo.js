@@ -9,7 +9,13 @@ function start() {
   // target.addEventListener('step-change', ({ detail }) => {
   //   console.log('step:', detail)
   // })
-  new Scroll('#wrap', scrollConfig)
+  const scroll = new Scroll('#wrap', scrollConfig)
+  document.querySelector('#wrap').addEventListener('stage-change', event => {
+    console.log(event)
+  })
+  setTimeout(_ => {
+    scroll.setActiveStage('color')
+  }, 3000)
 }
 
 window.onload = start
