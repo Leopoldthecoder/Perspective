@@ -20,7 +20,7 @@ var build = function (opts) {
   })
 }
 
-var examples = ['basic']
+var examples = []
 examples.forEach(example => {
   build({
     entry: `docs/examples/${ example }/index.js`,
