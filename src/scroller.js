@@ -185,15 +185,17 @@ class Scroll {
   setActiveStage(id, changeByScroll = false) {
     if (this.activeStage.id === id) return
     const oldIndex = this.activeStageIndex
-    this.activeStage = getObjectFromArrById(this.stages, id) || this.stages[0]
-    const newIndex = this.activeStageIndex
+    this.activeStage.step = 0
+    const newStage = getObjectFromArrById(this.stages, id) || this.stages[0]
+    const newIndex = this.stages.findIndex(stage => stage === newStage)
     if (changeByScroll) {
-      this.activeStage.step = oldIndex < newIndex
+      newStage.step = oldIndex < newIndex
         ? 0
-        : Number(this.activeStage.stageConfig.scrollNumber)
+        : Number(newStage.stageConfig.scrollNumber)
+      this.activeStage = newStage
       this.handleStepChange(false, false)
     } else {
-      this.activeStage.step = 0
+      this.activeStage = newStage
       this.handleStepChange(false, false)
     }
   }
