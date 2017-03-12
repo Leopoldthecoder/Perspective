@@ -56,11 +56,13 @@ class Scroll {
           detail: {
             previous: {
               id: activeStage.id,
-              node: activeStage.node
+              node: activeStage.node,
+              config: activeStage.stageConfig
             },
             current: {
               id: value.id,
-              node: value.node
+              node: value.node,
+              config: value.stageConfig
             }
           }
         }))
@@ -261,7 +263,8 @@ class Scroll {
           detail: {
             activeStage: {
               id: this.activeStage.id,
-              node: this.activeStage.node
+              node: this.activeStage.node,
+              config: stageConfig
             },
             current: step
           }
