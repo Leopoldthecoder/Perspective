@@ -11,11 +11,9 @@ function start() {
   // })
   const scroll = new Scroll('#wrap', scrollConfig)
   document.querySelector('#wrap').addEventListener('stage-change', event => {
+    console.log(scroll.getActiveStage())
     console.log(event)
   })
-  setTimeout(_ => {
-    scroll.setActiveStage('color')
-  }, 3000)
 }
 
 window.onload = start

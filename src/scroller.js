@@ -52,13 +52,17 @@ class Scroll {
       },
       set: function(value) {
         if (value === activeStage) return
+        const oldActiveStage = JSON.parse(JSON.stringify(activeStage))
+        activeStage = value
+        self.activeStageIndex = self.stages.findIndex(stage => stage === value)
+        self.handleActiveStageChange()
         self.target.dispatchEvent(new CustomEvent('stage-change', {
           detail: {
             previous: {
-              id: activeStage.id,
-              node: activeStage.node,
-              config: activeStage.stageConfig,
-              step: activeStage.step
+              id: oldActiveStage.id,
+              node: oldActiveStage.node,
+              config: oldActiveStage.stageConfig,
+              step: oldActiveStage.step
             },
             current: {
               id: value.id,
@@ -67,9 +71,6 @@ class Scroll {
             }
           }
         }))
-        activeStage = value
-        self.activeStageIndex = self.stages.findIndex(stage => stage === value)
-        self.handleActiveStageChange()
       }
     })
   }
@@ -222,6 +223,14 @@ class Scroll {
     if (this.activeStage.step === step) return
     this.activeStage.step = step
     this.handleStepChange()
+  }
+
+  getActiveStage() {
+    return this.activeStage
+  }
+
+  getStep() {
+    return this.activeStage.step
   }
 
   handleStepChange(needTransition = true, dispatchEvent = true) {
