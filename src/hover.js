@@ -4,12 +4,12 @@ import { merge } from './utils'
 const defaultConfig = {
   layers: [],
   max: 20,
-  reverse: false,
+  reverseTilt: false,
   perspective: 1000,
   easing: 'cubic-bezier(.03, .98, .52, .99)',
-  scale: '1',
-  speed: '300',
-  disabledAxis: null,
+  scale: 1,
+  speed: 300,
+  disabledAxis: '',
   reset: true
 }
 
@@ -31,12 +31,12 @@ class Hover {
       if (node.nodeType !== 1) return
       const layer = node.getAttribute('data-hover-layer')
       if (layer) {
-        const configSpeed = config.layers[Number(layer)].speed
-        if (!configSpeed) throw new Error(`Missing translate config for ${ layer }`)
+        const configMultiple = config.layers[Number(layer)].multiple
+        if (!configMultiple) throw new Error(`Missing translate config for ${ layer }`)
         this.layers.push(merge({
           node,
-          speed: configSpeed === undefined ? 0.2 : configSpeed,
-          reverse: !!config.layers[Number(layer)].reverse
+          multiple: configMultiple === undefined ? 0.2 : configMultiple,
+          reverseTranslate: !!config.layers[Number(layer)].reverseTranslate
         }, [this.constructor.getInitialTransformMatrix(node)]))
       }
     })
@@ -99,9 +99,9 @@ class Hover {
    * @param {number} y - clientY of mouse event
    */
   translateLayers(layer, x, y) {
-    const { speed, reverse } = layer
-    const offsetX = Math.floor(speed * (0.5 * document.body.clientWidth + (reverse ? -1 : 1) * x))
-    const offsetY = Math.floor(speed * (0.5 * document.body.clientHeight + (reverse ? -1 : 1) * y))
+    const { multiple, reverseTranslate } = layer
+    const offsetX = Math.floor(multiple * (0.5 * document.body.clientWidth + (reverseTranslate ? -1 : 1) * x))
+    const offsetY = Math.floor(multiple * (0.5 * document.body.clientHeight + (reverseTranslate ? -1 : 1) * y))
     this.doTranslate(layer, offsetX, offsetY)
   }
 
@@ -112,8 +112,8 @@ class Hover {
     x = Math.min(Math.max(x, 0), 1)
     y = Math.min(Math.max(y, 0), 1)
 
-    const tiltX = (this.config.reverse ? -1 : 1) * (this.config.max / 2 - x * this.config.max).toFixed(2)
-    const tiltY = (this.config.reverse ? -1 : 1) * (y * this.config.max - this.config.max / 2).toFixed(2)
+    const tiltX = (this.config.reverseTilt ? -1 : 1) * (this.config.max / 2 - x * this.config.max).toFixed(2)
+    const tiltY = (this.config.reverseTilt ? -1 : 1) * (y * this.config.max - this.config.max / 2).toFixed(2)
     return {
       tiltX,
       tiltY

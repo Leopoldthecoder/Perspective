@@ -216,7 +216,7 @@ class Scroll {
 
   setStep(step) {
     const type = typeof step
-    if (type !== 'number') throw new Error(`step should be not a number, got ${ type }`)
+    if (type !== 'number') throw new Error(`step should be a number, got ${ type }`)
     if (step < 0 || step > Number(this.activeStage.stageConfig.scrollNumber)) {
       throw new Error(`
         step should be within [0, ${ this.activeStage.stageConfig.scrollNumber }], got ${ step }
@@ -295,6 +295,14 @@ class Scroll {
 
     this.activeStage.step += event.deltaY > 0 ? 1 : -1
     this.throttledHandleStepChange()
+  }
+  
+  destroy() {
+    this.removeEventListeners()
+  }
+  
+  restore() {
+    this.addEventListeners()
   }
 }
 export default Scroll
