@@ -1,5 +1,5 @@
 # An example
-`Hover` manages parallax tilting. Just like Scroll, let's begin with an example.
+`Hover` manages parallax tilt and parallax translate. Just like Scroll, let's begin with an example.
 
 ## Example
 Say we have the following markup:
@@ -18,7 +18,7 @@ import { Hover } from 'perspective.js'
 const Hover = perspective.Hover
 
 new Hover('#wrap', {
-  max: 40,
+  max: 0,
   scale: 1.1,
   perspective: 500,
   layers: [{
@@ -32,4 +32,6 @@ new Hover('#wrap', {
 ```
 
 Finally we get:
-<script async src="//jsfiddle.net/j0scdvsb/embed/result/"></script>
+<script async src="//jsfiddle.net/leopoldthecuber/4amva0hf/3/embed/result/"></script>
+
+This is an example of parallax translate. For parallax tilt and detailed configuration, please read the next section.
