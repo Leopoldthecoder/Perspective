@@ -6,6 +6,6 @@ Perspective.js is designed for making dashing parallax scroll effects. Besides t
 More than that, parallax tilt and parallax translate are also supported.
 
 ## Features
-- Parallax scroll, parallax tile and parallax translate effects
+- Parallax scroll, parallax tilt and parallax translate effects
 - For parallax scroll, any CSS properties with number values are supported
 - Written with vanilla JavaScript

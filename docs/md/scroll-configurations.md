@@ -36,15 +36,15 @@ The second parameter is a configuration object for you to define how you wish th
 
 Stage is an important concept in Scroll. Take a look at our first [example](https://perspective.js.org/examples/). Obviously it has four parts, the first part being 'Good Old Parallax Effect', the second 'Charge Batteries', the third 'Draw a Joystick', and the fourth 'Rotate the Sentence'. Each part is defined as a `stage`.
 
-As mentioned above, we have a configuration object with a key named `stages`, and the value for that key is an object array, each object represents a stage and defines its scroll behavior. You can have as many DOM elements (we call them `items` in Perspective) in one stage as you want, and their scroll behavior is described in the `items` path. `items` and other paths of a stage are as follows.
+As mentioned above, we have a configuration object with a key named `stages`, and the value for that key is an object array, each object represents a stage and defines its scroll behavior. You can have as many DOM elements (we call them `items` in Perspective.js) in one stage as you want, and their scroll behavior is described in the `items` path. `items` and other paths of a stage are as follows.
 
 ### id
 - Type: `String`
 - Default: `N/A`
 
-ID of the stage. After defining a stage, you need to add `data-scroll-stage-id` with the same value to a DOM element. Perspective will bind the DOM element and perform defined stage animations on it.
+ID of the stage. After defining a stage, you need to add `data-scroll-stage-id` with the same value to a DOM element. Perspective.js will bind the DOM element and perform defined stage animations on it.
 
-?> It's a little ambiguous to say Perspective performs animation on a stage. In fact, a stage does not animate, it's the `items` in the stage that do the actual animations.
+?> It's a little ambiguous to say Perspective.js performs animation on a stage. In fact, a stage does not animate, it's the `items` in the stage that do the actual animations.
 
 ### scrollNumber
 - Type: `Number`
@@ -74,7 +74,7 @@ Animating items. Each item represents a DOM element, and when you scroll, these 
 - Type: `String`
 - Default: `N/A`
 
-ID of the item. Just like `id` of a stage, after defining an item, you need to add `data-scroll-item-id` with the same value to a DOM element. Perspective looks the DOM tree for that ID and add animations on it.
+ID of the item. Just like `id` of a stage, after defining an item, you need to add `data-scroll-item-id` with the same value to a DOM element. Perspective.js looks the DOM tree for that ID and add animations on it.
 
 #### effects
 - Type: `Object[]`
@@ -108,7 +108,7 @@ Defines how many milliseconds the transition lasts when switching between two st
 - Type: `Number`
 - Default: `0`
 
-When you scroll to the edge of a stage, Perspective will will this amount of time before switching to the next stage. Also in milliseconds.
+When you scroll to the edge of a stage, Perspective.js will wait this amount of time before switching to the next stage. Also in milliseconds.
 
 ## stageSwitchEasing
 - Type: `String`
@@ -120,4 +120,4 @@ Transition timing function when switching stages.
 - Type: `Number`
 - Default: `500`
 
-Defines how many milliseconds the stage will freeze after switching. During this time, Perspective will not respond to mouse scroll.
+Defines how many milliseconds the stage will freeze after switching. During this time, Perspective.js will not respond to mouse scroll.

@@ -17,7 +17,7 @@ npm install perspective.js
 yarn add perspective.js
 ```
 
-Than in your project
+Then in your project
 ```javascript
 import { Scroll, Hover } from 'perspective.js'
 ```
@@ -37,7 +37,7 @@ import { Scroll } from 'perspective.js'
 // using CDN
 const Scroll = perspective.Scroll
 
-new Scroll('.wrap', {
+new Scroll('#wrap', {
   stages: [{
     id: 'basic',
     scrollNumber: 60,

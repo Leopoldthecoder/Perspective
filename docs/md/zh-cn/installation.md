@@ -1,4 +1,4 @@
-# Installation
+# 安装
 ## npm
 ```shell
 npm install perspective.js
@@ -6,7 +6,7 @@ npm install perspective.js
 yarn add perspective.js
 ```
 
-Then in your project
+接下来即可
 ```javascript
 import { Scroll, Hover } from 'perspective.js'
 ```
@@ -15,4 +15,4 @@ import { Scroll, Hover } from 'perspective.js'
 ```html
 <script type="text/javascript" src="//unpkg.com/perspective.js/lib/perspective.js"></script>
 ```
-Once loaded, Perspective.js will register `perspective` to the `window` object, and it has two attributes: `Scroll` and `Hover`.
+加载成功后，Perspective.js 会在 `window` 对象上注册 `perspective`，它有两个属性：`Scroll` 和 `Hover`。

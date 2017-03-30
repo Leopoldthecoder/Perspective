@@ -1,4 +1,4 @@
-# Events and methods
+# 事件与方法
 
 To give you more control over the animations, Perspective.js provides several events and methods.
 
