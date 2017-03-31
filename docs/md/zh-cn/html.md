@@ -1,8 +1,8 @@
 # HTML 结构
-For Perspective.js to work properly, there are some restrictions regarding HTML structure. But don't worry, because the required HTML structure is pretty intuitive.
+Perspective.js 的正常工作对页面的 HTML 结构有一定的要求。别担心，这些要求都是符合直觉的。
 
-- All stages should be wrapped inside a container, and it's strongly recommended that the size of each stage be equal to that of the container
-- All stages should be a direct child of the container, meaning they are siblings to each other
-- All stages should stay in the normal flow, so they cannot be absolutely positioned nor fixed
+- 所有舞台都必须由同一个容器包裹。同时，建议每个舞台都能够撑满它们的容器
+- 所有舞台都必须是容器的直接子元素，即舞台之间互为兄弟节点A
+- 所有舞台都不能脱离文档流，因此它们不能被绝对定位或固定定位
 
-That's pretty much all you should remember when writing your HTML.
+请在编写 HTML 时遵循以上要求。
