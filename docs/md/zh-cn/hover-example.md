@@ -1,20 +1,20 @@
 # 一个例子
-`Hover` manages parallax tilt and parallax translate. Just like Scroll, let's begin with an example.
+`Hover` 负责视差转动和视差位移。让我们也从一个例子开始。
 
-## Example
-Say we have the following markup:
+## 示例
+有如下 HTML：
 ```HTML
 <div id="wrap">
   <section data-hover-layer="0"></section>
   <p data-hover-layer="1">Perspective.js</p>
 </div>
 ```
-And in the script:
+在 JS 文件中：
 ```javascript
-// using npm
+// 若使用 npm 引入
 import { Hover } from 'perspective.js'
 
-// using CDN
+// 若使用 CDN 引入
 const Hover = perspective.Hover
 
 new Hover('#wrap', {
@@ -31,7 +31,7 @@ new Hover('#wrap', {
 })
 ```
 
-Finally we get:
+最终效果：
 <script async src="//jsfiddle.net/leopoldthecuber/4amva0hf/3/embed/result/"></script>
 
-This is an example of parallax translate. For parallax tilt and detailed configuration, please read the next section.
+这个例子展示了视差位移。视差转动和更多参数详解，请参阅下一节。

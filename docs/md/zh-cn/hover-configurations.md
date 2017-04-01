@@ -1,68 +1,68 @@
 # 配置项
-Compared to Scroll, Hover has much simpler configs.
+和 Scroll 相比，Hover 的配置要简单许多。
 
 ## max
-- Type: `Number`
-- Default: `20`
+- 类型：`Number`
+- 默认值：`20`
 
-Max `rotateX` and `rotateY` for parallax tilt.
+视差转动的最大 `rotateX` 和 `rotateY`。
 
 ## reverseTilt
-- Type: `Boolean`
-- Default: `false`
+- 类型：`Boolean`
+- 默认值：`false`
 
-By default, the elements float up as your mouse hovers over them. If `reverseTilt` is `true`, they will look like being pressed down instead.
+默认情况下，鼠标移动到的位置会有一个浮起的效果。若将 `reverseTilt` 设置为 `true`，它们会有一个被按下的效果。
 
 ## perspective
-- Type: `Number`
-- Default: `1000`
+- 类型：`Number`
+- 默认值：`1000`
 
-`perspective` for the CSS `transform` of the DOM element with which you called `new Hover`.
+初始化 Hover 时传入的 DOM 节点 CSS `transform` 属性中 `perspective` 的值。
 
 ## easing
-- Type: `String`
-- Default: `cubic-bezier(.03, .98, .52, .99)`
+- 类型：`String`
+- 默认值：`cubic-bezier(.03, .98, .52, .99)`
 
-Transition timing function of the DOM element with which you called `new Hover`.
+初始化 Hover 时传入的 DOM 节点的动画时间函数。
 
 ## scale
-- Type: `Number`
-- Default: `1`
+- 类型：`Number`
+- 默认值：`1`
 
-`scale` for the CSS `transform` of the DOM element with which you called `new Hover`.
+初始化 Hover 时传入的 DOM 节点 CSS `transform` 属性中 `scale` 的值。
 
 ## speed
-- Type: `Number`
-- Default: `300`
+- 类型：`Number`
+- 默认值：`300`
 
-Transition duration of the DOM element with which you called `new Hover`.
+初始化 Hover 时传入的 DOM 节点的动画时长，单位为毫秒。
 
 ## disabledAxis
-- Type: `String`
-- Default: `''`
+- 类型：`String`
+- 默认值：`''`
 
-Can be `x` or `y`. Disables a certain axis from tilting.
+为 `x` 或 `y`，会禁止相应轴的转动。
 
 ## reset
-- Type: `Boolean`
-- Default: `true`
+- 类型：`Boolean`
+- 默认值：`true`
 
-Defines if everything returns to its original state when your mouse hovers out of them.
+定义在鼠标移出后各元素是否复位。
 
 ## layers
-- Type: `Object[]`
-- Default: `[]`
+- 类型：`Object[]`
+- 默认值：`[]`
 
-To activate parallax translate, you need to configure `layers`. `layers` is an object array, and each object describes how a DOM element translates. The object must be bound to a DOM element by adding a `data-hover-layer` attribute to the element with a value of the index of its corresponding object in the `layers` array. Each object has the following keys:
+对于视差位移，你需要设置 `layers`。它是一个对象数组，每个对象定义了一个 DOM 节点的位移行为。为了将对象和 DOM 节点对应起来，需要为 DOM 节点添加 `data-hover-layer` 属性，其值为对应对象在 `layers` 中的索引。每个对象拥有以下字段：
 
 ### multiple
-- Type: `Number`
-- Default: `0.2`
+- 类型：`Number`
+- 默认值：`0.2`
 
-Describes how fast the element translates. Defined as the ratio of the distance the element travels and the distance the mouse moves.
+定义节点位移的速度，其值的含义为节点真实移动的距离与鼠标移动距离之比。
 
 ### reverseTranslate
-- Type: `Boolean`
-- Default: `false`
+- 类型：`Boolean`
+- 默认值：`false`
 
-Defines if the layer goes where your mouse leads or takes the opposite direction.
+默认情况下，节点移动的方向和鼠标移动的方向相反。若 `reverseTranslate` 为 `true`，则节点会反向移动。
