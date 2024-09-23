@@ -26,7 +26,7 @@
   "homepage": "https://github.com/Leopoldthecoder/Perspective.js#readme",
   "devDependencies": {
     "eslint-config-doran": "^1.0.5",
-    "rollup": "^0.41.4",
+    "rollup": "^3.29.5",
     "rollup-plugin-buble": "^0.15.0",
     "rollup-plugin-commonjs": "^7.0.0",
     "rollup-plugin-eslint": "^3.0.0",
