@@ -1,6 +1,6 @@
 {
   "name": "perspective.js",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Parallax scrolling effect. And more.",
   "type": "module",
   "main": "dist/perspective.cjs.js",
