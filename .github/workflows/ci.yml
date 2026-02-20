@@ -1,0 +1,118 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20, 22]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Type check
+        run: pnpm run typecheck
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Test
+        run: pnpm test
+
+      - name: Build
+        run: pnpm run build
+
+  release:
+    needs: test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Determine version bump from conventional commits
+        id: version
+        run: |
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -z "$LAST_TAG" ]; then
+            echo "No previous tag found, skipping release"
+            echo "bump=none" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          SUBJECTS=$(git log "$LAST_TAG"..HEAD --format=%s)
+          BODIES=$(git log "$LAST_TAG"..HEAD --format=%B)
+
+          if [ -z "$SUBJECTS" ]; then
+            echo "No new commits since $LAST_TAG"
+            echo "bump=none" >> $GITHUB_OUTPUT
+          elif echo "$BODIES" | grep -qE "^BREAKING CHANGE:" || \
+               echo "$SUBJECTS" | grep -qE "^[a-z]+(\(.+\))?!:"; then
+            echo "bump=major" >> $GITHUB_OUTPUT
+          elif echo "$SUBJECTS" | grep -qE "^feat(\(.+\))?:"; then
+            echo "bump=minor" >> $GITHUB_OUTPUT
+          elif echo "$SUBJECTS" | grep -qE "^fix(\(.+\))?:"; then
+            echo "bump=patch" >> $GITHUB_OUTPUT
+          else
+            echo "No conventional commit triggers found, skipping release"
+            echo "bump=none" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Bump version
+        if: steps.version.outputs.bump != 'none'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          npm version ${{ steps.version.outputs.bump }} -m "chore(release): v%s [skip ci]"
+
+      - name: Publish to npm
+        if: steps.version.outputs.bump != 'none'
+        run: npm publish --provenance
+
+      - name: Push tag and create GitHub release
+        if: steps.version.outputs.bump != 'none'
+        run: |
+          git push --follow-tags
+          VERSION=$(node -p "require('./package.json').version")
+          gh release create "v$VERSION" --generate-notes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

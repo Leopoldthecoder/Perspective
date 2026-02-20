@@ -8,4 +8,5 @@ More than that, parallax tilt and parallax translate are also supported.
 ## Features
 - Parallax scroll, parallax tilt and parallax translate effects
 - For parallax scroll, any CSS properties with number values are supported
-- Written with vanilla JavaScript
+- Written in TypeScript with full type definitions
+- Zero runtime dependencies

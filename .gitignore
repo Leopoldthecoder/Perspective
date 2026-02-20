@@ -2,5 +2,5 @@ node_modules
 .idea
 npm-debug.log
 lib
+dist
 .DS_Store
-example/demo.min.js
