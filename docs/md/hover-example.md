@@ -32,6 +32,6 @@ new Hover('#wrap', {
 ```
 
 Finally we get:
-<script async src="//jsfiddle.net/leopoldthecuber/4amva0hf/3/embed/result/"></script>
+<script async src="//jsfiddle.net/leopoldthecuber/jgeb183v/embed/result/"></script>
 
 This is an example of parallax translate. For parallax tilt and detailed configuration, please read the next section.

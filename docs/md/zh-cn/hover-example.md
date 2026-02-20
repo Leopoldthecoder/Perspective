@@ -32,6 +32,6 @@ new Hover('#wrap', {
 ```
 
 最终效果：
-<script async src="//jsfiddle.net/leopoldthecuber/4amva0hf/3/embed/result/"></script>
+<script async src="//jsfiddle.net/leopoldthecuber/jgeb183v/embed/result/"></script>
 
 这个例子展示了视差位移。视差转动和更多参数详解，请参阅下一节。

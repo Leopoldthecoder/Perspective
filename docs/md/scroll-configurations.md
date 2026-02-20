@@ -135,7 +135,7 @@ CSS transitions for an item. For each effect, you can define `property`, `start`
 
 Thanks to `startAt` and `endAt`, not all items have to animate simultaneously. Check this out:
 
-<script async src="//jsfiddle.net/leopoldthecuber/88wmq2qm/1/embed/result/"></script>
+<script async src="//jsfiddle.net/leopoldthecuber/vqe8Luh2/embed/result/"></script>
 
 ## stageSwitchTransition
 - Type: `Number`

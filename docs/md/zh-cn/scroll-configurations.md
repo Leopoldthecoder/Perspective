@@ -135,7 +135,7 @@ CSS 动画效果。对于每一个效果（effect），你可以定义 `property
 
 因为 `startAt` 和 `endAt` 的存在，并不是所有 `item` 的动画都必须是同步的，比如：
 
-<script async src="//jsfiddle.net/leopoldthecuber/88wmq2qm/1/embed/result/"></script>
+<script async src="//jsfiddle.net/leopoldthecuber/vqe8Luh2/embed/result/"></script>
 
 ## stageSwitchTransition
 - 类型：`Number`

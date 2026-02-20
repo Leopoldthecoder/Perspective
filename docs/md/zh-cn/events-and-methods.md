@@ -65,4 +65,4 @@ Perspective.js 内部监听 `wheel` 事件，并在事件回调中执行了 `pre
 
 在一个视差滚动的页面里，经常会有一组指示器和一个进度条。用户可以通过点击指示器切换不同的舞台；进度条则能够提示用户前方还有多少动画未播放。使用本节介绍的事件和方法，就可以写出这样一个视差滚动页：
 
-<script async src="//jsfiddle.net/leopoldthecuber/m22mypy5/1/embed/result/"></script>
+<script async src="//jsfiddle.net/leopoldthecuber/hb4wxn6p/embed/result/"></script>

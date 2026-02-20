@@ -65,4 +65,4 @@ With all these events and methods in hand, let's see what we can do.
 
 In a parallax page, it's common to have a set of indicators and a progress bar. The indicators enables the user to navigate through different stages, while the progress bar shows how many more animations are ahead. The following is an example:
 
-<script async src="//jsfiddle.net/leopoldthecuber/m22mypy5/1/embed/result/"></script>
+<script async src="//jsfiddle.net/leopoldthecuber/hb4wxn6p/embed/result/"></script>

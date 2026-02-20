@@ -49,4 +49,4 @@ new Scroll('.wrap', {
 
 于是你就得到了一个带有视差滚动的页面：
 
-<script async src="//jsfiddle.net/leopoldthecuber/tqeakbsm/embed/result/"></script>
+<script async src="//jsfiddle.net/leopoldthecuber/9q5ztfax/embed/result/"></script>

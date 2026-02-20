@@ -49,4 +49,4 @@ new Scroll('.wrap', {
 
 See this little example in motion:
 
-<script async src="//jsfiddle.net/leopoldthecuber/tqeakbsm/embed/result/"></script>
+<script async src="//jsfiddle.net/leopoldthecuber/9q5ztfax/embed/result/"></script>
