@@ -10,7 +10,7 @@ Say we have the following markup:
 </div>
 ```
 And in the script:
-```javascript
+```typescript
 // using npm
 import { Hover } from 'perspective.js'
 

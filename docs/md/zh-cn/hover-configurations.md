@@ -1,4 +1,32 @@
 # 配置项
+
+## TypeScript 类型
+
+所有配置类型均已导出，可直接导入使用：
+
+```typescript
+import type { HoverConfig, HoverLayerConfig } from 'perspective.js'
+```
+
+```typescript
+interface HoverConfig {
+  layers: HoverLayerConfig[]
+  max?: number            // 默认值：20
+  reverseTilt?: boolean   // 默认值：false
+  perspective?: number    // 默认值：1000
+  easing?: string         // 默认值：'cubic-bezier(.03, .98, .52, .99)'
+  scale?: number          // 默认值：1
+  speed?: number          // 默认值：300
+  disabledAxis?: '' | 'x' | 'y'  // 默认值：''
+  reset?: boolean         // 默认值：true
+}
+
+interface HoverLayerConfig {
+  multiple: number
+  reverseTranslate?: boolean  // 默认值：false
+}
+```
+
 和 Scroll 相比，Hover 的配置要简单许多。
 
 ## max

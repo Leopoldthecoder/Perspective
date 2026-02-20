@@ -1,4 +1,32 @@
 # Configurations
+
+## TypeScript interfaces
+
+All configuration types are exported and can be imported directly:
+
+```typescript
+import type { HoverConfig, HoverLayerConfig } from 'perspective.js'
+```
+
+```typescript
+interface HoverConfig {
+  layers: HoverLayerConfig[]
+  max?: number            // default: 20
+  reverseTilt?: boolean   // default: false
+  perspective?: number    // default: 1000
+  easing?: string         // default: 'cubic-bezier(.03, .98, .52, .99)'
+  scale?: number          // default: 1
+  speed?: number          // default: 300
+  disabledAxis?: '' | 'x' | 'y'  // default: ''
+  reset?: boolean         // default: true
+}
+
+interface HoverLayerConfig {
+  multiple: number
+  reverseTranslate?: boolean  // default: false
+}
+```
+
 Compared to Scroll, Hover has much simpler configs.
 
 ## max

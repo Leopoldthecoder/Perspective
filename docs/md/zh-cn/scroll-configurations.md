@@ -1,7 +1,46 @@
 # 配置项
 
+## TypeScript 类型
+
+所有配置类型均已导出，可直接导入使用：
+
+```typescript
+import type { ScrollConfig, ScrollStageConfig, ScrollItemConfig, ScrollEffect } from 'perspective.js'
+```
+
+```typescript
+interface ScrollConfig {
+  stages: ScrollStageConfig[]
+  stageSwitchTransition?: number  // 默认值：800
+  stageSwitchDelay?: number       // 默认值：0
+  stageSwitchEasing?: string      // 默认值：'cubic-bezier(.86, 0, .07, 1)'
+  disableAfterSwitching?: number  // 默认值：500
+}
+
+interface ScrollStageConfig {
+  id: string
+  items: ScrollItemConfig[]
+  scrollNumber?: number   // 默认值：1
+  transition?: number     // 默认值：200
+  easing?: string         // 默认值：'ease'
+}
+
+interface ScrollItemConfig {
+  id: string
+  effects: ScrollEffect[]
+}
+
+interface ScrollEffect {
+  property: string
+  start: string
+  end: string
+  startAt?: number   // 默认值：0
+  endAt?: number     // 默认值：当前舞台的 scrollNumber
+}
+```
+
 在前一节中，我们用以下代码定义了视差滚动：
-```javascript
+```typescript
 new Scroll('.wrap', {
   stages: [{
     id: 'basic',

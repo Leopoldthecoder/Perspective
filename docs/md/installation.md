@@ -11,6 +11,9 @@ yarn add perspective.js
 Then in your project:
 ```typescript
 import { Scroll, Hover } from 'perspective.js'
+
+// Type-only imports are also available
+import type { ScrollConfig, HoverConfig } from 'perspective.js'
 ```
 
 ## CDN

@@ -11,6 +11,9 @@ yarn add perspective.js
 接下来即可：
 ```typescript
 import { Scroll, Hover } from 'perspective.js'
+
+// 也可以单独导入类型
+import type { ScrollConfig, HoverConfig } from 'perspective.js'
 ```
 
 ## CDN

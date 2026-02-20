@@ -16,7 +16,7 @@ Let's start with an example. Say we have the following markup:
 
 Just ignore `data-scroll-stage-id` and `data-scroll-item-id` for a minute, we'll come back for them later. Now if we want some parallax effects, we just need to:
 
-```javascript
+```typescript
 // using npm
 import { Scroll } from 'perspective.js'
 

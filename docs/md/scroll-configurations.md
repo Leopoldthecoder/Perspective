@@ -1,7 +1,46 @@
 # Configurations
 
+## TypeScript interfaces
+
+All configuration types are exported and can be imported directly:
+
+```typescript
+import type { ScrollConfig, ScrollStageConfig, ScrollItemConfig, ScrollEffect } from 'perspective.js'
+```
+
+```typescript
+interface ScrollConfig {
+  stages: ScrollStageConfig[]
+  stageSwitchTransition?: number  // default: 800
+  stageSwitchDelay?: number       // default: 0
+  stageSwitchEasing?: string      // default: 'cubic-bezier(.86, 0, .07, 1)'
+  disableAfterSwitching?: number  // default: 500
+}
+
+interface ScrollStageConfig {
+  id: string
+  items: ScrollItemConfig[]
+  scrollNumber?: number   // default: 1
+  transition?: number     // default: 200
+  easing?: string         // default: 'ease'
+}
+
+interface ScrollItemConfig {
+  id: string
+  effects: ScrollEffect[]
+}
+
+interface ScrollEffect {
+  property: string
+  start: string
+  end: string
+  startAt?: number   // default: 0
+  endAt?: number     // default: scrollNumber of current stage
+}
+```
+
 In the previous section, we initiated the scroll effects like this:
-```javascript
+```typescript
 new Scroll('.wrap', {
   stages: [{
     id: 'basic',

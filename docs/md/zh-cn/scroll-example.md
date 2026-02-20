@@ -16,7 +16,7 @@
 
 暂时可以忽略上面的 `data-scroll-stage-id` 和 `data-scroll-item-id`，稍后会对它们进行说明。现在在 JavaScript 中写入以下代码：
 
-```javascript
+```typescript
 // 若使用 npm 引入
 import { Scroll } from 'perspective.js'
 

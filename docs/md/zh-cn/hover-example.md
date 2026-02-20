@@ -10,7 +10,7 @@
 </div>
 ```
 在 JS 文件中：
-```javascript
+```typescript
 // 若使用 npm 引入
 import { Hover } from 'perspective.js'
 
