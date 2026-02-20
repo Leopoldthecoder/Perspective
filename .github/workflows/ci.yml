@@ -61,13 +61,15 @@ jobs:
         with:
           node-version: 22
           cache: 'pnpm'
-          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Build
         run: pnpm run build
+
+      - name: Configure npm for trusted publishing
+        run: npm config set registry https://registry.npmjs.org/
 
       - name: Determine version bump from conventional commits
         id: version
