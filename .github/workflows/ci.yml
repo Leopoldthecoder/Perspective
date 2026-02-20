@@ -61,6 +61,7 @@ jobs:
         with:
           node-version: 22
           cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -68,8 +69,8 @@ jobs:
       - name: Build
         run: pnpm run build
 
-      - name: Configure npm for trusted publishing
-        run: npm config set registry https://registry.npmjs.org/
+      - name: Remove auth token placeholder for trusted publishing
+        run: npm config delete '//registry.npmjs.org/:_authToken' 2>/dev/null || true
 
       - name: Determine version bump from conventional commits
         id: version
