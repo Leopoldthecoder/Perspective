@@ -63,14 +63,14 @@ jobs:
           cache: 'pnpm'
           registry-url: 'https://registry.npmjs.org'
 
+      - name: Upgrade npm for trusted publishing
+        run: npm install -g npm@latest
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Build
         run: pnpm run build
-
-      - name: Remove auth token placeholder for trusted publishing
-        run: npm config delete '//registry.npmjs.org/:_authToken' 2>/dev/null || true
 
       - name: Determine version bump from conventional commits
         id: version
@@ -109,7 +109,7 @@ jobs:
 
       - name: Publish to npm
         if: steps.version.outputs.bump != 'none'
-        run: npm publish --provenance
+        run: npm publish --provenance --access public
 
       - name: Push tag and create GitHub release
         if: steps.version.outputs.bump != 'none'

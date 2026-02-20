@@ -34,7 +34,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Leopoldthecoder/Perspective.js.git"
+    "url": "git+https://github.com/Leopoldthecoder/Perspective.git"
   },
   "keywords": [
     "parallax",
@@ -43,9 +43,9 @@
   "author": "leopoldthecuber@gmail.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Leopoldthecoder/Perspective.js/issues"
+    "url": "https://github.com/Leopoldthecoder/Perspective/issues"
   },
-  "homepage": "https://github.com/Leopoldthecoder/Perspective.js#readme",
+  "homepage": "https://github.com/Leopoldthecoder/Perspective#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
     "provenance": true
