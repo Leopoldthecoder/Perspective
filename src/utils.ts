@@ -116,6 +116,7 @@ export const hexToRgb = (hex: string): [number, number, number] => {
     h = h[0] + h[0] + h[1] + h[1] + h[2] + h[2]
   }
   const num = parseInt(h, 16)
+  // Extract RGB components using bitwise operations
   return [(num >> 16) & 255, (num >> 8) & 255, num & 255]
 }
 
