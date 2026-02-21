@@ -3,4 +3,5 @@ node_modules
 npm-debug.log
 lib
 dist
+dist-site
 .DS_Store

@@ -30,7 +30,8 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint src/",
     "test": "vitest run",
-    "dist": "pnpm run typecheck && pnpm run build"
+    "dist": "pnpm run typecheck && pnpm run build",
+    "build:site": "vite build docs/examples --outDir ../../dist-site/examples --emptyOutDir --base /examples/ && cp -r docs/index.html docs/index.css docs/CNAME docs/md dist-site/"
   },
   "repository": {
     "type": "git",
